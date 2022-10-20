@@ -404,7 +404,7 @@
 				"navigationBarTitleText": "报告列表"
 			}
 		}
-	],
+    ],
 	// 全局导航样式
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

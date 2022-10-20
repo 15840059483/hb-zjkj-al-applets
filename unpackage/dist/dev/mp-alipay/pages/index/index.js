@@ -586,22 +586,6 @@ var _default = {
     // this.jiazai()
   },
   onShow: function onShow() {
-    // my.showToast({
-    //       type: '',
-    //       content: '<img src="../../static/xa5TWq.png" />操作成功',
-    //       duration: 3000,
-    //       success: () => {
-
-    //       },
-    //     });
-
-    // uni.showToast({
-    // 	title: '能量发放成功',
-    // 	//icon:'success',
-    // 	image:'../../static/xa5TWq.pßng',
-    // 	duration: 2000,
-    // 	mask:false,
-    // });
     // this.jiazai()
     var _this = this;
     my.getStorage({

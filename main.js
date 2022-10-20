@@ -14,13 +14,18 @@ import {
 
 import '@/style/style.scss'
 
+
 // #ifndef VUE3
 import Vue from 'vue'
+
+// import EnergySuccess from '@/components/energy-success/energy-success.vue'
+// Vue.componemt('EnergySuccess', EnergySuccess)
+
 Vue.config.productionTip = false
 Vue.prototype.$store = store
 Vue.prototype.$api = api; // 将api挂载到vue的原型上
 Vue.prototype.$axios = axios; // 将$axios挂载到vue的原型上
-Vue.prototype.$hospitalId = '1'; 
+Vue.prototype.$hospitalId = '1';
 
 // 将封装好的Request挂载到全局
 Vue.prototype.$myRequest = myRequest

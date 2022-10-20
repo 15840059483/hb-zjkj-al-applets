@@ -26,8 +26,13 @@ var _api2 = __webpack_require__(/*! ./http/api.js */ 62);
 __webpack_require__(/*! @/style/style.scss */ 63);
 
 
+
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 4));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} // @ts-ignore
-my.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;_vue.default.config.productionTip = false;
+my.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
+// import EnergySuccess from '@/components/energy-success/energy-success.vue'
+// Vue.componemt('EnergySuccess', EnergySuccess)
+
+_vue.default.config.productionTip = false;
 _vue.default.prototype.$store = _store.default;
 _vue.default.prototype.$api = _api.default; // 将api挂载到vue的原型上
 _vue.default.prototype.$axios = _http.default; // 将$axios挂载到vue的原型上

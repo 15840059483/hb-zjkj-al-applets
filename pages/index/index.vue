@@ -10,7 +10,7 @@
 			<Header :title="title" :shouye="shouye"></Header>
 		</view> -->
 		<div style="padding: .2rem;">
-			
+
 			<uni-card shadow="never" v-if="dfltPatientInfo.cardNumber">
 				<view class="jiuzhenren">
 					<view :span="12" class="patient-name">
@@ -167,7 +167,7 @@
 				showAddPatient: false,
 				cardNo: '',
 				loading: false, // 加载动画
-				alUserInfo:{},
+				alUserInfo: {},
 				isToken: true,
 			}
 		},
@@ -190,7 +190,7 @@
 						return str.substring(0, 0) + star + str.substring(str.length - 1, str.length);
 					}
 				}
-			
+
 			},
 			processingcardNumber(str) {
 				if (!str) {
@@ -203,7 +203,7 @@
 				}
 				// substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
 				return str.substring(0, 3) + star + str.substring(str.length - 2, str.length)
-			
+
 			},
 		},
 		methods: {
@@ -329,8 +329,8 @@
 					success: (res) => {
 						const _this = this;
 						let aliUser = my.getStorageSync({
-								key: 'alUserInfo'
-							}).data
+							key: 'alUserInfo'
+						}).data
 						let userInfo = JSON.parse(res.response).response // 以下方的报文格式解析两层 response
 						console.log(userInfo)
 						console.log(aliUser)
@@ -348,7 +348,7 @@
 							gender: userInfo.gender === 'M' ? 1 : 2,
 							birthday: '2022-02-03',
 						}
-						
+
 						this.$myRequest({
 							url: "/wechat/register/normal",
 							data: params,
@@ -398,22 +398,6 @@
 			// this.jiazai()
 		},
 		onShow() {
-			// my.showToast({
-			//       type: '',
-			//       content: '<img src="../../static/xa5TWq.png" />操作成功',
-			//       duration: 3000,
-			//       success: () => {
-			        
-			//       },
-			//     });
-			
-			// uni.showToast({
-			// 	title: '能量发放成功',
-			// 	//icon:'success',
-			// 	image:'../../static/xa5TWq.pßng',
-			// 	duration: 2000,
-			// 	mask:false,
-			// });
 			// this.jiazai()
 			let _this = this
 			my.getStorage({
@@ -432,7 +416,7 @@
 										method: 'get'
 									})
 									.then((data) => {
-										
+
 										this.alUserInfo = data.data.aliUserInfo;
 										console.log(this.alUserInfo)
 										console.log(this.alUserInfo.userName)

@@ -39,10 +39,15 @@
   color: #fff;
   border-radius: .1rem;
   padding: .2rem .4rem;
+  white-space: nowrap;
 }
 .energy_wrap image.data-v-563878f8 {
   width: 0.5rem;
   height: 0.5rem;
   margin-right: .2rem;
+}
+.energy_wrap ._span.data-v-563878f8 {
+  color: greenyellow;
+  margin-left: .1rem;
 }
 

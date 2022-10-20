@@ -431,7 +431,7 @@ var _default = { filters: { dateStr: function dateStr(val) {if (!val) {return "-
     };}, // 这是uni的生命周期
   // 在uniapp中如果要使用路由传参必须使用onload(路由传参中的参数值)
   onLoad: function onLoad(e) {var _this2 = this;console.log(e, 'regiser-success');clearTimeout(this.timer); //清除延迟执行
-    this.orderDetail = JSON.parse(e.orderDetail);console.log(this.orderDetail);this.timer = setTimeout(function () {//设置延迟10秒执行弹出提示框
+    this.orderDetail = JSON.parse(e.orderDetail);console.log(this.orderDetail);console.log(e.authCode, "regiser-success");if (e.authCode) {my.getAuthCode({ scopes: 'mfrstre', success: function success(item) {if (item.authCode) {var datas = { code: item.authCode, scene: 'horegister' };_this2.$myRequest({ url: "/al/auth/al/sendCity", method: "GET", data: datas }).then(function (data) {console.log(data);my.alert({ content: '本次挂号得到能量为' + data.data.totalEnergy });});}} });}this.timer = setTimeout(function () {//设置延迟10秒执行弹出提示框
       _this2.open();}, 10000);}, onShow: function onShow() {var _this3 = this;clearTimeout(this.timer); //清除延迟执行
     this.timer = setTimeout(function () {//设置延迟10秒执行弹出提示框
       _this3.open();}, 10000);}, methods: { // 返回主页

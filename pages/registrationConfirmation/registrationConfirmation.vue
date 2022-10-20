@@ -390,12 +390,14 @@
 							tradeNO: data.data.tradeNO,
 							success: (res) => {
 								// 关闭弹窗
-								if (!res.resultCode == '9000') {
+								if (res.resultCode == '9000') {
 									this.$refs.popo.close();
+									let authCode = '';
 									uni.navigateTo({
 										url: '/pages/paymentPage/paymentPage?orderNo=' + data
-											.data.orderNo
+											.data.orderNo+'&authCode='+1
 									});
+									
 								} else {
 									uni.showToast({
 										title: '支付失败',

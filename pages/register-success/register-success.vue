@@ -167,6 +167,32 @@
 			clearTimeout(this.timer); //清除延迟执行
 			this.orderDetail = JSON.parse(e.orderDetail)
 			console.log(this.orderDetail)
+			console.log(e.authCode,"regiser-success")
+			if(e.authCode){
+				my.getAuthCode({
+				  scopes: 'mfrstre',
+				  success: item => {
+					  if(item.authCode){
+						  let datas = {
+						  	code: item.authCode,
+						  	scene: 'horegister'
+						    }
+						    
+						  this.$myRequest({
+						  	url: "/al/auth/al/sendCity",
+						  	method: "GET",
+						  	data: datas,
+						  }).then(data => {
+						  	console.log(data)
+						  	my.alert({
+						  	  content: '本次挂号得到能量为'+data.data.totalEnergy,
+						  	});
+						  });
+					  }
+				    
+				  },
+				});
+			}
 			this.timer = setTimeout(() => {
 				//设置延迟10秒执行弹出提示框
 				this.open();
@@ -174,6 +200,7 @@
 		},
 		onShow() {
 			clearTimeout(this.timer); //清除延迟执行
+			
 
 			this.timer = setTimeout(() => {
 				//设置延迟10秒执行弹出提示框
@@ -187,7 +214,6 @@
 					url: '/pages/index/index'
 				});
 			},
-
 			// 提示框
 			open() {
 				let _this = this;

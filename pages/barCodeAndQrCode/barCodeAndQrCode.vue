@@ -40,9 +40,18 @@
 			// header,
 		},
 		filters: {
-			processingcardNumber(val) {
-				if (!val) return '-'
-				return val.substr(0, 2) + '******' + val.substr(val.length - 2)
+			processingcardNumber(str) {
+			if (!str) {
+				return '-';
+			}
+			let star = '' //存放就诊号中间的*
+			// 长度减2是因为后面要保留两位
+			for (var i = 0; i < str.length - 2; i++) {
+				star = star + '*'
+			}
+			// substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+			return str.substring(0, 3) + star + str.substring(str.length - 2, str.length)
+						
 			}
 		},
 		data() {

@@ -247,10 +247,19 @@ __webpack_require__(/*! ../payment-details/payment-details.scss */ 122); //
 // import header from '@/components/header/header.vue'
 var _default = { // 注册使用导航栏组件
   components: {// header,
-  }, filters: { processingcardNumber: function processingcardNumber(val) {if (!val) return '-';return val.substr(0, 2) + '******' + val.substr(val.length - 2);} }, data: function data() {return { title: "就诊码", // 页面标题
+  }, filters: { processingcardNumber: function processingcardNumber(str) {if (!str) {return '-';}var star = ''; //存放就诊号中间的*
+      // 长度减2是因为后面要保留两位
+      for (var i = 0; i < str.length - 2; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+      return str.substring(0, 3) + star + str.substring(str.length - 2, str.length);} }, data: function data() {return { title: "就诊码", // 页面标题
       shouye: "no", // 是否是首页，不是首页显示返回上一层箭头
       dfltPatientInfo: {}, baseUrl: _api.BASE_URL, loading: true, // 加载动画
-      isShowCardNumber: false };}, methods: { getDfltPtCardInfo: function getDfltPtCardInfo() {var _this = this;this.$myRequest({ url: "/wechat/user/dfltPtCard/info" }).then(function (data) {_this.dfltPatientInfo = data.data || null;_this.loading = false;}).catch(function (err) {_this.loading = false;});} },
+      isShowCardNumber: false };}, methods: { getDfltPtCardInfo: function getDfltPtCardInfo() {var _this = this;this.$myRequest({ url: "/wechat/user/dfltPtCard/info" }).then(function (data) {_this.dfltPatientInfo = data.data || null;
+        _this.loading = false;
+      }).catch(function (err) {
+        _this.loading = false;
+      });
+    } },
+
   mounted: function mounted() {
     this.getDfltPtCardInfo();
   } };exports.default = _default;

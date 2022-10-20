@@ -128,14 +128,37 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var f0 = _vm.formData.patientRelationship
-    ? _vm._f("patientRelationship")(_vm.formData.patientRelationship)
-    : null
+  var f0 =
+    _vm.formData.patientRelationship === "1030"
+      ? _vm._f("processingName")(_vm.val.userName)
+      : null
+  var f1 =
+    _vm.formData.patientRelationship === "1030"
+      ? _vm._f("processingcardID")(_vm.val.certNo)
+      : null
+  var f2 =
+    _vm.formData.patientRelationship === "1030" &&
+    _vm.formData.patientRelationship
+      ? _vm._f("patientRelationship")(_vm.formData.patientRelationship)
+      : null
+  var f3 =
+    _vm.formData.patientRelationship === "1030"
+      ? _vm._f("processingcardNumber")(_vm.val.mobile)
+      : null
+  var f4 =
+    !(_vm.formData.patientRelationship === "1030") &&
+    _vm.formData.patientRelationship
+      ? _vm._f("patientRelationship")(_vm.formData.patientRelationship)
+      : null
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
-        f0: f0
+        f0: f0,
+        f1: f1,
+        f2: f2,
+        f3: f3,
+        f4: f4
       }
     }
   )
@@ -173,6 +196,34 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -345,6 +396,34 @@ __webpack_require__(/*! ./add-patient.scss */ 112); //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // 引入导航栏组件
 // import header from '@/components/header/header.vue'
 // 引入scss样式
@@ -352,13 +431,60 @@ var _default = { // 注册使用导航栏组件
   components: {// header,
   }, data: function data() {return { title: "添加就诊人", // 页面标题
       shouye: "no", // 是否是首页，不是首页显示返回上一层箭头
-      loading: false, patientRelationshipList: [{ label: '本人', value: '1030' }, { label: '家属', value: '1031' }, { label: '同事', value: '1032' }, { label: '其他', value: '1033' }], formData: { patientName: '', patientCardId: '', patientBirthday: '', patientRelationship: '1030', patientPhone: '', cardNo: '' } };}, filters: { patientRelationship: function patientRelationship(val) {if (!val) return '';var arr = [{ label: '本人', value: '1030' }, { label: '家属', value: '1031' }, { label: '同事', value: '1032' }, { label: '其他', value: '1033' }];var obj = arr.filter(function (item) {return item.value === val;});return obj[0].label;} }, methods: { // Picker选择器的方法
-    listPicker: function listPicker(e) {this.formData.patientRelationship = this.patientRelationshipList[e.target.value].value;}, idCardBlur: function idCardBlur() {var _IDRe18 = /^([1-6][1-9]|50)\d{4}(18|19|20)\d{2}((0[1-9])|10|11|12)(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;if (_IDRe18.test(this.formData.patientCardId)) {this.formData.patientBirthday = this.formData.patientCardId.slice(6, 10) + '-' + this.formData.patientCardId.slice(10, 12) + '-' + this.formData.patientCardId.slice(12, 14);} else {uni.showToast({ title: '请输入正确的身份证号！', icon: 'none', duration: 2000 });}}, submitBtn: function submitBtn() {if (!this.formData.patientName) {uni.showToast({ title: '请输入就诊人姓名！', icon: 'none', duration: 2000 });
+      loading: false, patientRelationshipList: [{ label: '本人', value: '1030' }, { label: '家属', value: '1031' }, { label: '同事', value: '1032' }, { label: '其他', value: '1033' }], formData: { patientName: '', patientCardId: '', patientBirthday: '', patientRelationship: '1030', patientPhone: '', cardNo: '' }, val: {} };}, filters: { patientRelationship: function patientRelationship(val) {if (!val) return '';var arr = [{ label: '本人', value: '1030' }, { label: '家属', value: '1031' }, { label: '同事', value: '1032' }, { label: '其他', value: '1033' }];var obj = arr.filter(function (item) {return item.value === val;});return obj[0].label;}, processingName: function processingName(str) {if (!str) {return '-';}if (null != str && str != undefined) {var star = ''; //存放名字中间的*
+        //名字是两位的就取姓名首位+*
+        if (str.length <= 2) {return str.substring(0, 1) + "*";} else {// 长度减1是因为后面要保留1位
+          for (var i = 0; i < str.length - 1; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+          return str.substring(0, 0) + star + str.substring(str.length - 1, str.length);}}}, processingcardNumber: function processingcardNumber(str) {if (!str) {return '-';}var star = ''; //存放就诊号中间的*
+      // 长度减2是因为后面要保留两位
+      for (var i = 0; i < str.length - 2; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+      return str.substring(0, 3) + star + str.substring(str.length - 2, str.length);}, processingcardID: function processingcardID(str) {if (!str) {return '-';}var star = ''; //存放身份证中间的*
+      // 长度减1是因为后面要保留1位
+      for (var i = 0; i < str.length - 1; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+      return str.substring(0, 1) + star + str.substring(str.length - 1, str.length);} }, mounted: function mounted() {var _this = this;my.getAuthCode({ scopes: 'auth_user', success: function success(res) {console.log(res);_this.$myRequest({ // url: `/al/auth/login?code=${res.code}`,
+          url: "/al/auth/user?code=".concat(res.authCode), method: 'get' }).then(function (data) {_this.val = data.data;});} });this.getAlUserInfo();}, methods: {
+    getAlUserInfo: function getAlUserInfo() {
+      my.getOpenUserInfo({
+        fail: function fail(res) {
+        },
+        success: function success(res) {
+          var userInfo = JSON.parse(res.response).response; // 以下方的报文格式解析两层 response
+          console.log(userInfo);
+        } });
+
+    },
+    // Picker选择器的方法
+    listPicker: function listPicker(e) {
+      this.formData.patientRelationship = this.patientRelationshipList[e.target.value].value;
+    },
+
+    idCardBlur: function idCardBlur() {
+      var _IDRe18 =
+      /^([1-6][1-9]|50)\d{4}(18|19|20)\d{2}((0[1-9])|10|11|12)(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+      if (_IDRe18.test(this.formData.patientCardId)) {
+        this.formData.patientBirthday = this.formData.patientCardId.slice(6, 10) + '-' + this.formData.
+        patientCardId.slice(10, 12) + '-' + this.formData.patientCardId.slice(12, 14);
+      } else {
+        uni.showToast({
+          title: '请输入正确的身份证号！',
+          icon: 'none',
+          duration: 2000 });
+
+
+      }
+    },
+
+    submitBtn: function submitBtn() {
+      if (!this.formData.patientName && this.formData.patientRelationship != '1030') {
+        uni.showToast({
+          title: '请输入就诊人姓名！',
+          icon: 'none',
+          duration: 2000 });
 
 
         return;
       }
-      if (!this.formData.patientCardId) {
+      if (!this.formData.patientCardId && this.formData.patientRelationship != '1030') {
         uni.showToast({
           title: '请输入就诊人身份证号！',
           icon: 'none',
@@ -367,7 +493,7 @@ var _default = { // 注册使用导航栏组件
 
         return;
       }
-      if (!this.formData.patientRelationship) {
+      if (!this.formData.patientRelationship && this.formData.patientRelationship != '1030') {
         uni.showToast({
           title: '请选择与就诊人关系！',
           icon: 'none',
@@ -376,7 +502,7 @@ var _default = { // 注册使用导航栏组件
 
         return;
       }
-      if (!this.formData.patientPhone) {
+      if (!this.formData.patientPhone && this.formData.patientRelationship != '1030') {
         uni.showToast({
           title: '请输入就诊人手机号码！',
           icon: 'none',
@@ -391,7 +517,7 @@ var _default = { // 注册使用导航栏组件
       if (this.formData.cardNo == null || this.formData.cardNo == '') {
         uni.showModal({
           title: "提示",
-          content: "是否注册卡号?",
+          content: "是否添加就诊人?",
           success: function success(res) {
             if (res.confirm) {
               _this.$myRequest({
@@ -421,6 +547,7 @@ var _default = { // 注册使用导航栏组件
                 icon: 'none',
                 duration: 2000 });
 
+              _this.loading = false;
             }
           } });
 

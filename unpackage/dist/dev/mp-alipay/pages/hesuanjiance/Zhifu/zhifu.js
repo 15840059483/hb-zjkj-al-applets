@@ -127,15 +127,22 @@ var render = function() {
   var _c = _vm._self._c || _h
   var m0 =
     _vm.huanzhexinxi.name == null
+      ? _vm.processingName(_vm.huanzhexinxi.patientName)
+      : null
+  var m1 =
+    _vm.huanzhexinxi.name == null
       ? _vm.processingcardNumber(_vm.huanzhexinxi.cardNumber)
       : null
-  var m1 = !(_vm.huanzhexinxi.name == null)
+  var m2 = !(_vm.huanzhexinxi.name == null)
     ? _vm.processingName(_vm.huanzhexinxi.name)
     : null
-  var m2 = !(_vm.huanzhexinxi.name == null)
+  var m3 = !(_vm.huanzhexinxi.name == null)
     ? _vm.processingcardNumber(_vm.huanzhexinxi.shouji)
     : null
-  var m3 = !(_vm.huanzhexinxi.name == null)
+  var m4 = !(_vm.huanzhexinxi.name == null)
+    ? _vm.processingName(_vm.huanzhexinxi.patientName)
+    : null
+  var m5 = !(_vm.huanzhexinxi.name == null)
     ? _vm.processingcardNumber(_vm.huanzhexinxi.cardNumber)
     : null
   var l0 =
@@ -143,10 +150,10 @@ var render = function() {
       ? _vm.__map(_vm.switchPatientList, function(item, __i0__) {
           var $orig = _vm.__get_orig(item)
 
-          var m4 = _vm.processingcardNumber(item.shenfenID)
+          var m6 = _vm.processingcardNumber(item.shenfenID)
           return {
             $orig: $orig,
-            m4: m4
+            m6: m6
           }
         })
       : null
@@ -155,10 +162,10 @@ var render = function() {
       ? _vm.__map(_vm.switchPatientList, function(item, __i1__) {
           var $orig = _vm.__get_orig(item)
 
-          var m5 = _vm.processingcardNumber(item.shenfenID)
+          var m7 = _vm.processingcardNumber(item.shenfenID)
           return {
             $orig: $orig,
-            m5: m5
+            m7: m7
           }
         })
       : null
@@ -188,6 +195,8 @@ var render = function() {
         m1: m1,
         m2: m2,
         m3: m3,
+        m4: m4,
+        m5: m5,
         l0: l0,
         l1: l1,
         f0: f0,
@@ -428,19 +437,38 @@ var _vuex = __webpack_require__(/*! vuex */ 14);function _interopRequireDefault(
 
   (0, _vuex.mapState)(["xiangmu", "yuyueriqi", "huanzhejibenxinxi"])), {}, {
     processingName: function processingName() {
-      return function (val) {
-        if (!val) {
+      return function (str) {
+        if (!str) {
           return '-';
         }
-        return '*' + val.substr(1);
+        if (null != str && str != undefined) {
+          var star = ''; //存放名字中间的*
+          //名字是两位的就取姓名首位+*
+          if (str.length <= 2) {
+            return str.substring(0, 1) + "*";
+          } else {
+            // 长度减1是因为后面要保留1位
+            for (var i = 0; i < str.length - 1; i++) {
+              star = star + '*';
+            }
+            // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+            return str.substring(0, 0) + star + str.substring(str.length - 1, str.length);
+          }
+        }
       };
     },
     processingcardNumber: function processingcardNumber() {
-      return function (val) {
-        if (!val) {
+      return function (str) {
+        if (!str) {
           return '-';
         }
-        return '*****' + val.substr(5);
+        var star = ''; //存放就诊号中间的*
+        // 长度减2是因为后面要保留两位
+        for (var i = 0; i < str.length - 2; i++) {
+          star = star + '*';
+        }
+        // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+        return str.substring(0, 3) + star + str.substring(str.length - 2, str.length);
       };
     } }),
 

@@ -3,6 +3,8 @@
   "usingComponents": {
     "zero-loading": "/uni_modules/zero-loading/components/zero-loading/zero-loading",
     "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card",
+    "uni-collapse": "/uni_modules/uni-collapse/components/uni-collapse/uni-collapse",
+    "uni-collapse-item": "/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item",
     "pop": "/components/ming-pop/ming-pop"
   }
 }

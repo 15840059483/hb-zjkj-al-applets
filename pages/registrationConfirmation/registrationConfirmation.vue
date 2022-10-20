@@ -55,6 +55,7 @@
 			</uni-card>
 			<uni-card>
 				<div style="margin-bottom:0;" class="bg-white patient-container">
+					<!-- 版本迭代，此段代码已弃用，仅供参考
 					<view style="display: flex;" class="patient-container-row" @click.native="showMore()">
 						<view style="width: 40%;text-align: left;">就诊人</view>
 						<view class="text-right" style="position: relative;width: 60%;">
@@ -66,29 +67,45 @@
 									style="font-size: 24px;"></text>
 							</div>
 						</view>
-					</view>
-					<!-- 此处使用了过渡动画   <view class="show-more" :class="[isShowDate ? 'show-more-click' : '']">-->
-					<view class="show-more" :class="[showOtherPatient ? 'show-more-click' : '']">
+					</view> 
+					-->
+					<!-- 这里使用了uniapp中的uni-collapse组件替代了动画效果 -->
+					<uni-collapse ref="collapse">
+						<uni-collapse-item titleBorder="none" :open="true">
+							<template style="border-bottom: 1px solid #e1e1e1;" v-slot:title>
+								<view style="display: flex;" class="patient-container-row">
+									<view style="width: 40%;text-align: left;">就诊人</view>
 
-						<view v-show="isShowText">
-							<div v-if="showOtherPatient" class="zoom-patient-container">
-								<view style="display: flex;padding:10px .3rem 10px .3rem;" class="patient-container-row"
-									:class="item.patientId === selectPatient.patientId ? 'select-bg' : ''"
-									v-for="(item,index) in patients" v-bind:key="index"
-									@click.native="selectPatient = item">
-									<view style="width: 50%;text-align: left;">{{item.patientName}}</view>
-									<view style="width: 50%;text-align: right;" class="text-right">
-										{{item.cardNumber}}
+									<view class="select-patient-show"
+										style="position: relative;width: 60%;text-align:right;">
+										<text class="red-font"
+											style="margin-right: .2rem;">{{processingName(selectPatient.patientName)}}</text>
 									</view>
-								</view>
-							</div>
-						</view>
 
-					</view>
+								</view>
+							</template>
+							<view class="content">
+								<view v-show="isShowText">
+									<div v-if="showOtherPatient" class="zoom-patient-container">
+										<view style="display: flex;padding:.3rem .5rem .3rem .5rem;"
+											class="patient-container-row"
+											:class="item.patientId === selectPatient.patientId ? 'select-bg' : ''"
+											v-for="(item,index) in patients" v-bind:key="index"
+											@click.native="selectPatient = item">
+											<view style="width: 50%;text-align: left;">{{processingName(item.patientName)}}</view>
+											<view style="width: 50%;text-align: right;" class="text-right">
+												{{processingcardNumber(item.cardNumber)}}
+											</view>
+										</view>
+									</div>
+								</view>
+							</view>
+						</uni-collapse-item>
+					</uni-collapse>
 					<view style="display: flex;padding:10px .3rem 10px .3rem;" class="patient-container-row">
 						<view style="width: 50%;text-align: left;">就诊号</view>
 						<view style="width: 50%;text-align: right;" class="text-right red-font">
-							{{selectPatient.cardNumber}}
+							{{processingcardNumber(selectPatient.cardNumber)}}
 						</view>
 					</view>
 					<view style="display: flex;" class="patient-container-row">
@@ -185,6 +202,43 @@
 			// header,
 			pop
 		},
+		computed: {
+			processingName() {
+				return function(str) {
+					if (!str) {
+						return '-';
+					}
+					if (null != str && str != undefined) {
+						let star = '' //存放名字中间的*
+						//名字是两位的就取姓名首位+*
+						if (str.length <= 2) {
+							return str.substring(0, 1) + "*";
+						} else {
+							// 长度减1是因为后面要保留1位
+							for (var i = 0; i < str.length - 1; i++) {
+								star = star + '*'
+							}
+							// substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+							return str.substring(0, 0) + star + str.substring(str.length - 1, str.length);
+						}
+					}
+				}
+			},
+			processingcardNumber() {
+				return function(str) {
+					if (!str) {
+						return '-';
+					}
+					let star = '' //存放就诊号中间的*
+					// 长度减2是因为后面要保留两位
+					for (var i = 0; i < str.length - 2; i++) {
+						star = star + '*'
+					}
+					// substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+					return str.substring(0, 3) + star + str.substring(str.length - 2, str.length)
+				}
+			}
+		},
 		data() {
 			return {
 				title: "挂号确认", // 页面标题
@@ -222,69 +276,71 @@
 				// 关闭弹窗
 				this.$refs.nengliang.close();
 			},
-
+			/* 此处代码已作废，仅供参考
 			// 控制动画的方法
-			showMore() {
-				//获取当前时间的时间戳
+						showMore() {
+							//获取当前时间的时间戳
 
-				let now = new Date().valueOf();
+							let now = new Date().valueOf();
 
-				//第一次点击
-				// 控制两秒内点击多次只触发一次方法
-				if (this.lastTime == 0) {
+							//第一次点击
+							// 控制两秒内点击多次只触发一次方法
+							if (this.lastTime == 0) {
 
-					console.log('触发事件');
-					// 控制显示
-					this.showOtherPatient = !this.showOtherPatient
+								console.log('触发事件');
+								// 控制显示
+								this.showOtherPatient = !this.showOtherPatient
 
-					// 先展开500毫秒后再显示文字,收缩200毫秒后再隐藏文字
-					if (this.isShowText) {
-						setTimeout(() => {
-							this.isShowText = !this.isShowText
-						}, 500)
-					} else {
-						setTimeout(() => {
-							this.isShowText = !this.isShowText
-						}, 900)
-					}
-					this.lastTime = now;
+								// 先展开500毫秒后再显示文字,收缩200毫秒后再隐藏文字
+								if (this.isShowText) {
+									setTimeout(() => {
+										this.isShowText = !this.isShowText
+									}, 500)
+								} else {
+									setTimeout(() => {
+										this.isShowText = !this.isShowText
+									}, 900)
+								}
+								this.lastTime = now;
 
-				} else {
+							} else {
 
-					if ((now - this.lastTime) > 2000) {
+								if ((now - this.lastTime) > 2000) {
 
-						//重置上一次点击时间，2000是我自己设置的2秒间隔，根据自己的需要更改
-						// 控制显示
-						this.showOtherPatient = !this.showOtherPatient
+									//重置上一次点击时间，2000是我自己设置的2秒间隔，根据自己的需要更改
+									// 控制显示
+									this.showOtherPatient = !this.showOtherPatient
 
-						// 先展开500毫秒后再显示文字,收缩200毫秒后再隐藏文字
-						if (this.isShowText) {
-							setTimeout(() => {
-								this.isShowText = !this.isShowText
-							}, 500)
-						} else {
-							setTimeout(() => {
-								this.isShowText = !this.isShowText
-							}, 900)
-						}
-						this.lastTime = now;
+									// 先展开500毫秒后再显示文字,收缩200毫秒后再隐藏文字
+									if (this.isShowText) {
+										setTimeout(() => {
+											this.isShowText = !this.isShowText
+										}, 500)
+									} else {
+										setTimeout(() => {
+											this.isShowText = !this.isShowText
+										}, 900)
+									}
+									this.lastTime = now;
 
-						console.log('间隔大于2秒，触发方法');
+									console.log('间隔大于2秒，触发方法');
 
-						//添加自己要调用的方法
+									//添加自己要调用的方法
 
-					} else {
-						uni.showToast({
-							title: '点的太快啦！QAQ',
-							icon: 'none',
-							duration: 2000
-						});
-						console.log('不触发');
+								} else {
+									uni.showToast({
+										title: '点的太快啦！QAQ',
+										icon: 'none',
+										duration: 2000
+									});
+									console.log('不触发');
 
-					}
+								}
 
-				}
-			},
+							}
+						},
+			*/
+
 
 			// 加载框
 			jiazai() {
@@ -303,6 +359,9 @@
 					this.patients = data.data;
 					this.selectPatient = data.data[0];
 					this.loading = false;
+					this.$nextTick(() => {
+						this.$refs.collapse.resize()
+					})
 				}).catch(err => {
 					this.loading = false;
 				})
@@ -478,7 +537,8 @@
 		background-size: 100%, 100%;
 		margin-left: .2rem;
 	}
-	.neirong{
+
+	.neirong {
 		padding: .2rem;
 	}
 </style>

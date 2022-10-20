@@ -152,8 +152,7 @@
 }
 .toubu_1.data-v-ce555efc,
 .toubu_2.data-v-ce555efc,
-.toubu_3.data-v-ce555efc,
-._div[class^="toubu_"].data-v-ce555efc {
+.toubu_3.data-v-ce555efc {
 	width: 130px;
 	height: 100%;
 }
@@ -165,8 +164,7 @@
 }
 .jingbu_1.data-v-ce555efc,
 .jingbu_2.data-v-ce555efc,
-.jingbu_3.data-v-ce555efc,
-._div[class^="jingbu_"].data-v-ce555efc {
+.jingbu_3.data-v-ce555efc {
 	width: 141px;
 	height: 100%;
 }
@@ -254,8 +252,7 @@
 }
 .toubu-nv_1.data-v-ce555efc,
 .toubu-nv_2.data-v-ce555efc,
-.toubu-nv_3.data-v-ce555efc,
-._div[class^="toubu-nv_"].data-v-ce555efc {
+.toubu-nv_3.data-v-ce555efc {
 	width: 130px;
 	height: 100%;
 }
@@ -267,8 +264,7 @@
 }
 .jingbu-nv_1.data-v-ce555efc,
 .jingbu-nv_2.data-v-ce555efc,
-.jingbu-nv_3.data-v-ce555efc,
-._div[class^="jingbu-nv_"].data-v-ce555efc {
+.jingbu-nv_3.data-v-ce555efc {
 	width: 141px;
 	height: 100%;
 }
@@ -356,8 +352,7 @@
 }
 .toubu-tong_1.data-v-ce555efc,
 .toubu-tong_2.data-v-ce555efc,
-.toubu-tong_3.data-v-ce555efc,
-._div[class^="toubu-tong_"].data-v-ce555efc {
+.toubu-tong_3.data-v-ce555efc {
 	width: 120px;
 	height: 100%;
 }
@@ -369,8 +364,7 @@
 }
 .jingbu-tong_1.data-v-ce555efc,
 .jingbu-tong_2.data-v-ce555efc,
-.jingbu-tong_3.data-v-ce555efc,
-._div[class^="jingbu-tong_"].data-v-ce555efc {
+.jingbu-tong_3.data-v-ce555efc{
 	width: 141px;
 	height: 100%;
 }

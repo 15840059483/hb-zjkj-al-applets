@@ -144,10 +144,12 @@ var render = function() {
       ? _vm.__map(_vm.switchPatientList, function(item, __i0__) {
           var $orig = _vm.__get_orig(item)
 
-          var m4 = _vm.processingcardNumber(item.cardNumber)
+          var m4 = _vm.processingName(item.patientName)
+          var m5 = _vm.processingcardNumber(item.cardNumber)
           return {
             $orig: $orig,
-            m4: m4
+            m4: m4,
+            m5: m5
           }
         })
       : null
@@ -156,10 +158,12 @@ var render = function() {
       ? _vm.__map(_vm.switchPatientList, function(item, __i1__) {
           var $orig = _vm.__get_orig(item)
 
-          var m5 = _vm.processingcardNumber(item.cardNumber)
+          var m6 = _vm.processingName(item.patientName)
+          var m7 = _vm.processingcardNumber(item.cardNumber)
           return {
             $orig: $orig,
-            m5: m5
+            m6: m6,
+            m7: m7
           }
         })
       : null
@@ -168,10 +172,10 @@ var render = function() {
       ? _vm.__map(_vm.paymentList, function(item, __i2__) {
           var $orig = _vm.__get_orig(item)
 
-          var m6 = _vm.handRegDate(item.regInfos.regDate)
+          var m8 = _vm.handRegDate(item.regInfos.regDate)
           return {
             $orig: $orig,
-            m6: m6
+            m8: m8
           }
         })
       : null
@@ -709,7 +713,14 @@ __webpack_require__(/*! ./queryOutFeeList.scss */ 218); //
 var _default = { // 调用头部组件
   components: {// header
   }, // 计算属性
-  computed: { processingName: function processingName() {return function (val) {if (!val) {return "-";}return "*" + val.substr(1);};}, processingcardNumber: function processingcardNumber() {return function (val) {if (!val) {return '-';}return '****' + val.substr(4);};}, zongjiner: function zongjiner(xiangmujiner, xiangmucishu) {var chufangsum = xiangmujiner * xiangmucishu + chufangsum;return chufangsum;} }, data: function data() {return { title: "缴费列表", // 页面标题
+  computed: { processingName: function processingName() {return function (str) {if (!str) {return '-';}if (null != str && str != undefined) {var star = ''; //存放名字中间的*
+          //名字是两位的就取姓名首位+*
+          if (str.length <= 2) {return str.substring(0, 1) + "*";} else {// 长度减1是因为后面要保留1位
+            for (var i = 0; i < str.length - 1; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+            return str.substring(0, 0) + star + str.substring(str.length - 1, str.length);}}};}, processingcardNumber: function processingcardNumber() {return function (str) {if (!str) {return '-';}var star = ''; //存放就诊号中间的*
+        // 长度减2是因为后面要保留两位
+        for (var i = 0; i < str.length - 2; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+        return str.substring(0, 3) + star + str.substring(str.length - 2, str.length);};}, zongjiner: function zongjiner(xiangmujiner, xiangmucishu) {var chufangsum = xiangmujiner * xiangmucishu + chufangsum;return chufangsum;} }, data: function data() {return { title: "缴费列表", // 页面标题
       shouye: "no", // 是否是首页，不是首页显示返回上一层箭头
       //就诊人中的所有值
       showSwitchPatient: false, //切换就诊人的弹窗值，如果此值为true弹窗会打开
@@ -734,14 +745,26 @@ var _default = { // 调用头部组件
     onSelectAllBtn: function onSelectAllBtn() {var _this5 = this;this.selectPaymentList = [];this.selectPaymentMoOrderList = [];if (this.isSelectAll) {this.paymentList.forEach(function (item) {item.outFeeList.forEach(function (outFee) {outFee.regNo = item.regInfos.regNo;_this5.selectPaymentList.push(outFee);_this5.selectPaymentMoOrderList.push(outFee.recipeNo);});});}this.calculationTotalMoney();}, // 是否全选
     judgeWhetherSelectAll: function judgeWhetherSelectAll() {var len = 0;this.paymentList.forEach(function (item) {len += item.outFeeList.length;});this.isSelectAll = this.selectPaymentMoOrderList.length === len;}, // 计算金额
     calculationTotalMoney: function calculationTotalMoney(item) {var money = 0;this.selectPaymentList.forEach(function (item) {item.feeList.forEach(function (outFee) {money += Number((outFee.itemPrice * outFee.itemNum).toFixed(2));});});item.totalMoney = money;}, handRegDate: function handRegDate(str) {var date = str.substr(4, 2) + "月" + str.substr(6, 2) + "日";return date;}, goToPage: function goToPage(url) {if (!url) {return;}this.$router.push(url);}, goToPayment: function goToPayment(item) {var _this6 = this;console.log(this.selectPaymentList[0].regNo);console.log(item.regInfos.regNo);if (this.selectPaymentMoOrderList.length === 0 || this.selectPaymentList[0].regNo !== item.regInfos.regNo) {this.$message.info("请选择缴费项目");return;}var params = { deptId: item.regInfos.deptId, deptName: item.regInfos.deptName, doctorName: item.regInfos.doctorName, regLevelName: item.regInfos.regLevelName, doctorTitleId: item.regInfos.regLevelId, patientName: item.regInfos.patientName, patientNo: item.regInfos.cardNo, patientSeq: item.regInfos.regNo, payMount: item.totalMoney, recipeNos: this.selectPaymentMoOrderList };var loadingInstance = Loading.service({});this.$myRequest({ url: "/wechat/pay/out", data: params }).then(function (res) {if (res && res.code === 0) {//TODO: 重新写支付宝支付
-          var data = res.data;if (typeof WeixinJSBridge == "undefined") {if (document.addEventListener) {document.addEventListener("WeixinJSBridgeReady", onBridgeReady, false);} else if (document.attachEvent) {document.attachEvent("WeixinJSBridgeReady", onBridgeReady);document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);}} else {var _this = _this6;WeixinJSBridge.invoke("getBrandWCPayRequest", { appId: data.appId, //公众号名称，由商户传入
+          var data = res.data;if (typeof WeixinJSBridge == "undefined") {if (document.addEventListener) {document.addEventListener("WeixinJSBridgeReady", onBridgeReady, false);} else if (document.attachEvent) {document.attachEvent("WeixinJSBridgeReady", onBridgeReady);document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);}} else {var _this = _this6;
+            WeixinJSBridge.invoke(
+            "getBrandWCPayRequest", {
+              appId: data.appId, //公众号名称，由商户传入
               timeStamp: data.timeStamp, //时间戳，自1970年以来的秒数
               nonceStr: data.nonceStr, //随机串
-              package: data.package, signType: data.signType, //微信签名方式：
+              package: data.package,
+              signType: data.signType, //微信签名方式：
               paySign: data.paySign //微信签名
-            }, function (res) {if (res.err_msg == "get_brand_wcpay_request:ok") {// 使用以上方式判断前端返回,微信团队郑重提示：
+            },
+            function (res) {
+              if (res.err_msg == "get_brand_wcpay_request:ok") {
+                // 使用以上方式判断前端返回,微信团队郑重提示：
                 //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-                _this.$router.push("/paymentPage?orderNo=" + data.orderNo);}});}}
+                _this.$router.push("/paymentPage?orderNo=" + data.orderNo);
+              }
+            });
+
+          }
+        }
 
         _this6.loading = false;
       }).catch(function (err) {

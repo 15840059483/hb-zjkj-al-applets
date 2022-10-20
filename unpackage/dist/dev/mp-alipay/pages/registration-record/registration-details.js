@@ -286,7 +286,14 @@ __webpack_require__(/*! ../payment-details/payment-details.scss */ 122); //
 //
 //
 //
-var _default = { name: "registration-details", filters: { processingName: function processingName(str) {if (!str) {return '-';}return '*' + str.substr(1);}, processingcardNumber: function processingcardNumber(str) {if (!str) {return '-';}return '****' + str.substr(4);}, dateStr: function dateStr(val) {if (!val) {return '-';}return val.slice(0, 4) + '-' + val.slice(4, 6) + '-' + val.slice(6, 8);} }, data: function data() {return { orderDetail: '', baseUrl: _api.BASE_URL };}, mounted: function mounted() {console.log(this.BASE_URL);}, onLoad: function onLoad(query) {console.log("接收参数", query); // query 就是传递过来的参数
+var _default = { name: "registration-details", filters: { processingName: function processingName(str) {if (!str) {return '-';}if (null != str && str != undefined) {var star = ''; //存放名字中间的*
+        //名字是两位的就取姓名首位+*
+        if (str.length <= 2) {return str.substring(0, 1) + "*";} else {// 长度减1是因为后面要保留1位
+          for (var i = 0; i < str.length - 1; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+          return str.substring(0, 0) + star + str.substring(str.length - 1, str.length);}}}, processingcardNumber: function processingcardNumber(str) {if (!str) {return '-';}var star = ''; //存放就诊号中间的*
+      // 长度减2是因为后面要保留两位
+      for (var i = 0; i < str.length - 2; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+      return str.substring(0, 3) + star + str.substring(str.length - 2, str.length);}, dateStr: function dateStr(val) {if (!val) {return '-';}return val.slice(0, 4) + '-' + val.slice(4, 6) + '-' + val.slice(6, 8);} }, data: function data() {return { orderDetail: '', baseUrl: _api.BASE_URL };}, mounted: function mounted() {console.log(this.BASE_URL);}, onLoad: function onLoad(query) {console.log("接收参数", query); // query 就是传递过来的参数
     this.orderDetail = JSON.parse(query.orderDetail);} };exports.default = _default;
 
 /***/ })

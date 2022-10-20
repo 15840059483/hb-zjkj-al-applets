@@ -333,6 +333,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 // 引入底部导航栏组件
 // import dacizinavtag from '../../components/dacizi-navtag/dacizi-navtag.vue'
 var _default = {
@@ -354,7 +355,7 @@ var _default = {
       showAddPatient: false,
       cardNo: '',
       loading: false, // 加载动画
-
+      alUserInfo: {},
       isToken: true };
 
   },
@@ -363,13 +364,34 @@ var _default = {
       if (!str) {
         return '-';
       }
-      return '*' + str.substr(1);
+      if (null != str && str != undefined) {
+        var star = ''; //存放名字中间的*
+        //名字是两位的就取姓名首位+*
+        if (str.length <= 2) {
+          return str.substring(0, 1) + "*";
+        } else {
+          // 长度减1是因为后面要保留1位
+          for (var i = 0; i < str.length - 1; i++) {
+            star = star + '*';
+          }
+          // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+          return str.substring(0, 0) + star + str.substring(str.length - 1, str.length);
+        }
+      }
+
     },
     processingcardNumber: function processingcardNumber(str) {
       if (!str) {
         return '-';
       }
-      return '****' + str.substr(4);
+      var star = ''; //存放就诊号中间的*
+      // 长度减2是因为后面要保留两位
+      for (var i = 0; i < str.length - 2; i++) {
+        star = star + '*';
+      }
+      // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+      return str.substring(0, 3) + star + str.substring(str.length - 2, str.length);
+
     } },
 
   methods: {
@@ -490,25 +512,30 @@ var _default = {
       });
     },
     onAuthBtn: function onAuthBtn() {var _this6 = this;
+      console.log(this.alUserInfo);
       my.getOpenUserInfo({
         success: function success(res) {
+          var _this = _this6;
+          var aliUser = my.getStorageSync({
+            key: 'alUserInfo' }).
+          data;
           var userInfo = JSON.parse(res.response).response; // 以下方的报文格式解析两层 response
-
+          console.log(userInfo);
+          console.log(aliUser);
           var params = {
-            realname: '测试',
+            realname: aliUser.userName,
             //mobile: userInfo.mobile,
-            mobile: '110',
-            userIdCard: '208831298288742022',
+            mobile: aliUser.mobile,
+            userIdCard: aliUser.certNo,
             /* 两个userid 从缓存中取 */
             aliUserId: my.getStorageSync({
               key: 'user_id' }).
             data,
-            alipayUserId: '20880034933095029415612911016942',
+            alipayUserId: userInfo.alipayUserId,
             /* M男 F女 */
             gender: userInfo.gender === 'M' ? 1 : 2,
             birthday: '2022-02-03' };
 
-          var _this = _this6;
 
           _this6.$myRequest({
             url: "/wechat/register/normal",
@@ -559,11 +586,27 @@ var _default = {
     // this.jiazai()
   },
   onShow: function onShow() {
+    // my.showToast({
+    //       type: '',
+    //       content: '<img src="../../static/xa5TWq.png" />操作成功',
+    //       duration: 3000,
+    //       success: () => {
+
+    //       },
+    //     });
+
+    // uni.showToast({
+    // 	title: '能量发放成功',
+    // 	//icon:'success',
+    // 	image:'../../static/xa5TWq.pßng',
+    // 	duration: 2000,
+    // 	mask:false,
+    // });
     // this.jiazai()
     var _this = this;
     my.getStorage({
       key: 'token',
-      success: function success(res) {
+      success: function success(res) {var _this7 = this;
         console.log(res);
         if (!res.data) {
           _this.isToken = false;
@@ -577,8 +620,15 @@ var _default = {
                 method: 'get' }).
 
               then(function (data) {
-                console.log(data.data);
+
+                _this7.alUserInfo = data.data.aliUserInfo;
+                console.log(_this7.alUserInfo);
+                console.log(_this7.alUserInfo.userName);
                 // _this.user_id = data.user_id;
+                my.setStorageSync({
+                  key: 'alUserInfo',
+                  data: data.data.aliUserInfo });
+
                 my.setStorageSync({
                   key: 'user_id',
                   data: data.data.aliUserId });
@@ -742,25 +792,25 @@ var _default = {
       twoTitle: '自助快速的挂号核酸检测',
       routerUrl: '',
       imageUrl: 'https://s1.ax1x.com/2022/09/02/vIsCct.png',
-      routLink: '/pages/hesuanjiance/Zizhukaidan/zizhukaidan' },
+      routLink: '/pages/hesuanjiance/Zizhukaidan/zizhukaidan' }
 
     /*{
-                                                                 	id: 15,
-                                                                 	menuName: '预约信息',
-                                                                 	twoTitle: '查看核酸检测挂号预约信息',
-                                                                 	routerUrl: '',
-                                                                 	imageUrl: ('https://s1.ax1x.com/2022/09/02/vIsp9A.jpg'),
-                                                                 	routLink: '/pages/hesuanjiance/Shenhejieguo/shenhejieguo'
-                                                                 },*/
-    {
-      id: 16,
-      menuName: '流程图',
-      twoTitle: '查看流程图',
-      routerUrl: '',
-      imageUrl: 'https://s1.ax1x.com/2022/09/02/vIsp9A.jpg',
-      routLink: '/pages/liuchengtu/liuchengtu' }];
-
-
+                                                                	id: 15,
+                                                                	menuName: '预约信息',
+                                                                	twoTitle: '查看核酸检测挂号预约信息',
+                                                                	routerUrl: '',
+                                                                	imageUrl: ('https://s1.ax1x.com/2022/09/02/vIsp9A.jpg'),
+                                                                	routLink: '/pages/hesuanjiance/Shenhejieguo/shenhejieguo'
+                                                                },*/
+    // {
+    // 	id: 16,
+    // 	menuName: '流程图',
+    // 	twoTitle: '查看流程图',
+    // 	routerUrl: '',
+    // 	imageUrl: ('https://s1.ax1x.com/2022/09/02/vIsp9A.jpg'),
+    // 	routLink: '/pages/liuchengtu/liuchengtu'
+    // },
+    ];
 
     this.outpatientFunctionList = [
     /*{
@@ -793,36 +843,37 @@ var _default = {
 
 
 
-    this.inpatientFunctionList = [{
-      id: 3,
-      menuName: '住院缴费',
-      twoTitle: '快速查询不排队',
-      routerUrl: '',
-      imageUrl: 'https://s1.ax1x.com/2022/09/02/vIrzhd.jpg',
-      //routLink: '/hospitalizationPayment',
-      routLink: '',
-      meta: false },
-
+    this.inpatientFunctionList = [
+    // {
+    // 	id: 3,
+    // 	menuName: '住院缴费',
+    // 	twoTitle: '快速查询不排队',
+    // 	routerUrl: '',
+    // 	imageUrl: ('https://s1.ax1x.com/2022/09/02/vIrzhd.jpg'),
+    // 	//routLink: '/hospitalizationPayment',
+    // 	routLink: '',
+    // 	meta: false
+    // },
     /*{
-                     	id: 4,
-                     	menuName: '预约住院',
-                     	twoTitle: '快速查询不排队',
-                     	routerUrl: '',
-                     	imageUrl: ('https://s1.ax1x.com/2022/09/02/vIskB8.jpg'),
-                     	//routLink: '/hospSubscribeHome',
-                     	routLink: '',
-                     	meta: false
-                     },
-                     {
-                     	id: 7,
-                     	menuName: '预约住院记录',
-                     	twoTitle: '快速查询不排队',
-                     	routerUrl: '',
-                     	imageUrl: ('https://s1.ax1x.com/2022/09/02/vIs91I.jpg'),
-                     	// routLink: '/hospSubscribeRecord',
-                     	routLink: '',
-                     	meta: false
-                     },*/
+    	id: 4,
+    	menuName: '预约住院',
+    	twoTitle: '快速查询不排队',
+    	routerUrl: '',
+    	imageUrl: ('https://s1.ax1x.com/2022/09/02/vIskB8.jpg'),
+    	//routLink: '/hospSubscribeHome',
+    	routLink: '',
+    	meta: false
+    },
+    {
+    	id: 7,
+    	menuName: '预约住院记录',
+    	twoTitle: '快速查询不排队',
+    	routerUrl: '',
+    	imageUrl: ('https://s1.ax1x.com/2022/09/02/vIs91I.jpg'),
+    	// routLink: '/hospSubscribeRecord',
+    	routLink: '',
+    	meta: false
+    },*/
     {
       id: 8,
       menuName: '住院缴费记录',

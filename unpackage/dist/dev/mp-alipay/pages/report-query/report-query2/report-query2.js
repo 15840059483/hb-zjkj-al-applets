@@ -516,7 +516,14 @@ __webpack_require__(/*! ./hospitalizationPayment.scss */ 418); //
 //
 //
 var _default = { // 调用头部组件
-  components: {}, computed: {}, filters: { processingName: function processingName(str) {if (!str) {return '-';}return '*' + str.substr(1);}, processingcardNumber: function processingcardNumber(str) {if (!str) {return '-';}return '****' + str.substr(4);} }, data: function data() {return { title: "提交审核", // 页面标题
+  components: {}, computed: {}, filters: { processingName: function processingName(str) {if (!str) {return '-';}if (null != str && str != undefined) {var star = ''; //存放名字中间的*
+        //名字是两位的就取姓名首位+*
+        if (str.length <= 2) {return str.substring(0, 1) + "*";} else {// 长度减1是因为后面要保留1位
+          for (var i = 0; i < str.length - 1; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+          return str.substring(0, 0) + star + str.substring(str.length - 1, str.length);}}}, processingcardNumber: function processingcardNumber(str) {if (!str) {return '-';}var star = ''; //存放就诊号中间的*
+      // 长度减2是因为后面要保留两位
+      for (var i = 0; i < str.length - 2; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+      return str.substring(0, 3) + star + str.substring(str.length - 2, str.length);} }, data: function data() {return { title: "提交审核", // 页面标题
       shouye: "no", // 是否是首页，不是首页显示返回上一层箭头
       loading: false, reportList: [{ name: '血常规', date: '2019-07-23 09:09:09' }], currentPatient: {}, showSwitchPatient: false, list: [], showAddPatient: false, patient: { name: '', admissionNumber: undefined } };}, methods: { // 加载框
     jiazai: function jiazai() {var _this2 = this;this.loading = true; // 定时器，setTimeout只执行一次，setInterval执行多次
@@ -533,7 +540,22 @@ var _default = { // 调用头部组件
       // })
     }, switchPatient: function switchPatient() {this.showSwitchPatient = true;}, // 获取就诊人信息
     getPatientInfo: function getPatientInfo() {var _this = this;var data = [{ patientName: "冷夜", patientId: 1, cardNumber: "124151231" }, { patientName: "小狐狸", patientId: 2, cardNumber: "124124121" }, { patientName: "张力", patientId: 3, cardNumber: "124146554" }];_this.switchPatientList = data; // 让currentPatient等于数组data中索引位置为0的信息
-      _this.currentPatient = data[0];}, getZjkjList: function getZjkjList(item) {var _this3 = this;var parans = { name: this.patient.name, patientId: this.patient.admissionNumber };this.jiazai();this.$myRequest({ url: "/zjkj/list", method: "POST", data: parans }).then(function (res) {console.log(res.data);_this3.jiazai();if (res && res.data && res.data.length > 0) {_this3.list = res.data;my.getAuthCode({ scopes: 'mfrstre', success: function success(res) {my.alert({ content: '能量授权了哟！' });} });console.log(_this3.list);}_this3.showAddPatient = false;}).catch(function (err) {_this3.loading = true;}); // this.$api.outpatientDepartmentService.getZjkjList(parans)
+      _this.currentPatient = data[0];}, getZjkjList: function getZjkjList(item) {var _this3 = this;var parans = { name: this.patient.name, patientId: this.patient.admissionNumber };this.jiazai();my.getAuthCode({ scopes: 'mfrstre', success: function success(item) {if (item.authCode) {var datas = { code: item.authCode, scene: 'hoinquire' };_this3.$myRequest({ url: "/al/auth/al/sendCity", method: "GET", data: datas }).then(function (data) {console.log(data);my.alert({ content: '能量授权了哟！' });});}} }); // this.$myRequest({
+      // 	url: "/zjkj/list",
+      // 	method: "POST",
+      // 	data: parans,
+      // }).then(res => {
+      // 	console.log(res.data)
+      // 	this.jiazai();
+      // 	if (res && res.data && res.data.length > 0&&res.data.resultList) {
+      // 		this.list = res.data;
+      // 		console.log(this.list)
+      // 	}
+      // 	this.showAddPatient = false;
+      // }).catch(err => {
+      // 	this.loading = true;
+      // })
+      // this.$api.outpatientDepartmentService.getZjkjList(parans)
       // 	.then((data) => {
       // 		if (data && data.data && data.data && data.data.length > 0) {
       // 			this.list = data.data

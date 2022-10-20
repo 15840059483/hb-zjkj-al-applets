@@ -57,7 +57,7 @@ var render = function() {
         : null
     var f2 =
       _vm.isShow.isShowCardId === false
-        ? _vm._f("processingcardNumber")(item.patientCardId)
+        ? _vm._f("processingcardID")(item.patientCardId)
         : null
     var f3 =
       _vm.isShow.isShowNumber === false
@@ -577,13 +577,47 @@ __webpack_require__(/*! ./patient-management.scss */ 103); //
 var pop = function pop() {__webpack_require__.e(/*! require.ensure | components/ming-pop/ming-pop */ "components/ming-pop/ming-pop").then((function () {return resolve(__webpack_require__(/*! @/components/ming-pop/ming-pop.vue */ 491));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { // 注册使用导航栏组件
   components: { pop: pop }, data: function data() {return { title: "就诊者管理", // 页面标题
       shouye: "no", // 是否是首页，不是首页显示返回上一层箭头
-      isShowDelConfirm: false, isShow: { isShowName: false, isShowCardId: false, isShowNumber: false }, patientList: [], currentSelectPatient: {}, currentDelSelectPatient: {}, formData: {}, patientRelationshipList: [{ label: '本人', value: '1030' }, { label: '家属', value: '1031' }, { label: '同事', value: '1032' }, { label: '其他', value: '1033' }] };}, filters: { patientRelationship: function patientRelationship(val) {if (!val) return '';var arr = [{ label: '本人', value: '1030' }, { label: '家属', value: '1031' }, { label: '同事', value: '1032' }, { label: '其他', value: '1033' }];var obj = arr.filter(function (item) {return item.value === val;});return obj[0].label;}, processingName: function processingName(str) {if (!str) {return '-';}return '*' + str.substr(1);}, processingcardNumber: function processingcardNumber(str) {if (!str) {return '-';}return '****' + str.substr(4);} }, methods: { // 提示框
+      isShowDelConfirm: false, isShow: { isShowName: false, isShowCardId: false, isShowNumber: false }, patientList: [], currentSelectPatient: {}, currentDelSelectPatient: {}, formData: {}, patientRelationshipList: [{ label: '本人', value: '1030' }, { label: '家属', value: '1031' }, { label: '同事', value: '1032' }, { label: '其他', value: '1033' }] };}, filters: { patientRelationship: function patientRelationship(val) {if (!val) return '';var arr = [{ label: '本人', value: '1030' }, { label: '家属', value: '1031' }, { label: '同事', value: '1032' }, { label: '其他', value: '1033' }];var obj = arr.filter(function (item) {return item.value === val;});return obj[0].label;}, processingName: function processingName(str) {if (!str) {return '-';}if (null != str && str != undefined) {var star = ''; //存放名字中间的*
+        //名字是两位的就取姓名首位+*
+        if (str.length <= 2) {return str.substring(0, 1) + "*";} else {// 长度减1是因为后面要保留1位
+          for (var i = 0; i < str.length - 1; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+          return str.substring(0, 0) + star + str.substring(str.length - 1, str.length);}}}, processingcardNumber: function processingcardNumber(str) {if (!str) {return '-';}var star = ''; //存放就诊号中间的*
+      // 长度减2是因为后面要保留两位
+      for (var i = 0; i < str.length - 2; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+      return str.substring(0, 3) + star + str.substring(str.length - 2, str.length);}, processingcardID: function processingcardID(str) {if (!str) {return '-';}var star = ''; //存放身份证中间的*
+      // 长度减1是因为后面要保留1位
+      for (var i = 0; i < str.length - 1; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+      return str.substring(0, 1) + star + str.substring(str.length - 1, str.length);} }, methods: { // 提示框
     open: function open() {var _this = this;uni.showModal({ title: '提示', content: '确定要删除该患者吗?', success: function success(res) {if (res.confirm) {this.confirmDel();} else if (res.cancel) {console.log("取消");}} });}, // 打开弹窗
     Update: function Update(val) {this.$refs.pop.show();console.log(val);this.formData = val;}, // 取消的方法，触发就会返回首页
     quxiao: function quxiao() {this.$refs.pop.close();}, isShowNameClick: function isShowNameClick() {if (this.isShow.isShowName === false) {this.isShow.isShowName = true;} else {this.isShow.isShowName = false;}}, isShowCardIdClick: function isShowCardIdClick() {if (this.isShow.isShowCardId === false) {this.isShow.isShowCardId = true;} else {this.isShow.isShowCardId = false;}}, isShowNumberClick: function isShowNumberClick() {if (this.isShow.isShowNumber === false) {this.isShow.isShowNumber = true;} else {this.isShow.isShowNumber = false;}}, queren: function queren() {var _this2 = this;this.$myRequest({ url: "/wechat/user/dfltPtCard/info" }).then(function (data) {_this2.currentSelectPatient = data.data;_this2.loading = false;}).catch(function (err) {_this2.loading = false;});this.$refs.pop.close();console.log(this.formData);}, // Picker选择器的方法
     listPicker: function listPicker(e) {this.formData.patientRelationship = this.patientRelationshipList[e.target.value].value;}, idCardBlur: function idCardBlur() {var _IDRe18 = /^([1-6][1-9]|50)\d{4}(18|19|20)\d{2}((0[1-9])|10|11|12)(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;if (_IDRe18.test(this.formData.patientCardId)) {this.formData.patientBirthday = this.formData.patientCardId.slice(6, 10) + '-' + this.formData.patientCardId.slice(10, 12) + '-' + this.formData.patientCardId.slice(12, 14);} else {uni.showToast({ title: '请输入正确的身份证号！', icon: 'none', duration: 2000 });}}, // 由于无接口，所以控制台报错关于无patientService的问题
-    getDfltPtCardInfo: function getDfltPtCardInfo() {var _this3 = this;this.$myRequest({ url: "/wechat/user/dfltPtCard/info" }).then(function (data) {_this3.currentSelectPatient = data.data;_this3.loading = false;}).catch(function (err) {_this3.loading = false;});}, getPatientInfo: function getPatientInfo() {var _this4 = this;this.$myRequest({ url: "/wechat/user/patientcard/info" }).then(function (data) {_this4.patientList = data.data;_this4.loading = false;}).catch(function (err) {_this4.loading = false;});}, addPatient: function addPatient() {uni.navigateTo({ url: '/pages/patient-management/add-patient/add-patient' });}, selectPatient: function selectPatient(item) {var _this5 = this;console.log(item);if (!item || !item.patientId) {return;}var params = { patientId: item.patientId };this.$myRequest({ url: "/wechat/user/update/patientinfo", data: params }).then(function (data) {_this5.getDfltPtCardInfo();_this5.loading = false;}).catch(function (err) {_this5.loading = false;});}, deletePatient: function deletePatient(item) {if (!item.patientId) {return;}var _this = this;uni.showModal({ title: '提示', content: '确定要删除该患者吗?', success: function success(res) {if (res.confirm) {_this.closeConfirm();} else if (res.cancel) {console.log("取消");}} }); // this.isShowDelConfirm = true;
-      this.currentDelSelectPatient = item;}, closeConfirm: function closeConfirm() {var _this6 = this;this.$myRequest({ url: "/wechat/user/deletePtCard/info", data: { patientId: this.currentDelSelectPatient.patientId } }).then(function (data) {uni.showToast({ title: data.msg || '删除成功' });
+    getDfltPtCardInfo: function getDfltPtCardInfo() {var _this3 = this;this.$myRequest({ url: "/wechat/user/dfltPtCard/info" }).then(function (data) {_this3.currentSelectPatient = data.data;_this3.loading = false;}).catch(function (err) {_this3.loading = false;});}, getPatientInfo: function getPatientInfo() {var _this4 = this;this.$myRequest({ url: "/wechat/user/patientcard/info" }).then(function (data) {_this4.patientList = data.data;_this4.loading = false;}).catch(function (err) {_this4.loading = false;});}, addPatient: function addPatient() {uni.navigateTo({ url: '/pages/patient-management/add-patient/add-patient' });}, selectPatient: function selectPatient(item) {var _this5 = this;console.log(item);if (!item || !item.patientId) {return;}var params = { patientId: item.patientId };this.$myRequest({ url: "/wechat/user/update/patientinfo", data: params }).then(function (data) {_this5.getDfltPtCardInfo();_this5.loading = false;}).catch(function (err) {_this5.loading = false;});}, deletePatient: function deletePatient(item) {if (!item.patientId) {return;}
+      var _this = this;
+
+      uni.showModal({
+        title: '提示',
+        content: '确定要删除该患者吗?',
+        success: function success(res) {
+          if (res.confirm) {
+            _this.closeConfirm();
+          } else if (res.cancel) {
+            console.log("取消");
+          }
+        } });
+
+      // this.isShowDelConfirm = true;
+      this.currentDelSelectPatient = item;
+    },
+    closeConfirm: function closeConfirm() {var _this6 = this;
+      this.$myRequest({
+        url: "/wechat/user/deletePtCard/info",
+        data: {
+          patientId: this.currentDelSelectPatient.patientId } }).
+
+      then(function (data) {
+        uni.showToast({
+          title: data.msg || '删除成功' });
 
         _this6.getDfltPtCardInfo();
         _this6.getPatientInfo();

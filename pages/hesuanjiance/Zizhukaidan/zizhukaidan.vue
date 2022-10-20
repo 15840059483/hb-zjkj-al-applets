@@ -98,8 +98,8 @@
 					</view>
 					<view class="neirong">住院患者及陪护家属，到*号楼*层*侧采样点进行核酸采集</view>
 					<view class="neirong">其他人员，到*号楼*层*侧采样点进行核酸采集</view>
-					<view class="neirong">3.核酸采样后,6~12小时可以查看检测结果,具体时间请详见采样点公示或关注公众号进行查询。</view>
-					<view style="padding-bottom: 10px;" class="neirong">4.可以通过自助机打印或公众号查看报告结果</view>
+					<view class="neirong">3.核酸采样后,6~12小时可以查看检测结果,具体时间请详见采样点公示或支付宝小程序进行查询。</view>
+					<view style="padding-bottom: 10px;" class="neirong">4.可以通过自助机打印或支付宝小程序查看报告结果</view>
 				</view>
 				<view class="zizhuanniu">
 					<view @click="guanbi()">同意并阅读</view>

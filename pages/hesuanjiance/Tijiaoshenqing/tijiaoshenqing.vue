@@ -31,7 +31,7 @@
 							<text>{{ currentPatient.patientSex }}</text>
 							<text style="margin-left:5px;">/</text>
 							<!-- <text style="margin-left:5px;">{{ currentPatient.age }}岁</text> -->
-							<text style="margin-left:5px;">身份证：{{ processingcardNumber(currentPatient.patientCardId) }}</text>
+							<text style="margin-left:5px;">身份证：{{ processingcardID(currentPatient.patientCardId) }}</text>
 						</div>
 					</div>
 					<!-- <div class="qiehuananniu">
@@ -62,7 +62,7 @@
 							<text>{{ ceshi.sex }}</text>
 							<text style="margin-left:5px;">/</text>
 							<text style="margin-left:5px;">{{ ceshi.age }}岁</text>
-							<text style="margin-left:5px;">身份证：{{ processingcardNumber(ceshi.shenfenID) }}</text>
+							<text style="margin-left:5px;">身份证：{{ processingcardID(ceshi.shenfenID) }}</text>
 						</div>
 					</div>
 					<!-- <div class="qiehuananniu">
@@ -83,9 +83,9 @@
 					</div>
 					<div class="border-bottom switch-patient-list" v-for="(item, index) in switchPatientList"
 						v-bind:key="index" @click="onSwitchPatientBtn(item)">
-						<div class="patient-name">*{{ item.patientName }}</div>
+						<div class="patient-name">{{processingName(item.patientName)  }}</div>
 						<div class="visit-number" style="font-size: 14px;color: rgb(146, 146, 146);">
-							身份证：{{ processingcardNumber(item.patientCardId )}}</div>
+							身份证：{{ processingcardID(item.patientCardId )}}</div>
 						<!-- <i class="el-icon-check" v-if="currentPatient.shenfenID === item.shenfenID"
 							style="color: #008cfe"></i> -->
 						<text class="iconfont icon-duihao" v-if="currentPatient.patientCardId === item.patientCardId"
@@ -109,9 +109,9 @@
 					</div>
 					<div class="border-bottom switch-patient-list" v-for="item in switchPatientList"
 						v-bind:key="item.cardId" @click="onSwitchPatientBtn(item)">
-						<div class="patient-name">*{{ item.patientName }}</div>
+						<div class="patient-name">{{processingName(item.patientName)  }}</div>
 						<div class="visit-number" style="font-size: 14px;color: rgb(146, 146, 146);">
-							身份证：{{ processingcardNumber(item.shenfenID) }}</div>
+							身份证：{{ processingcardID(item.shenfenID) }}</div>
 						<!-- <i class="el-icon-check" v-if="ceshi.shenfenID === item.shenfenID" style="color: #008cfe"></i> -->
 						<text class="iconfont icon-duihao" v-if="ceshi.shenfenID === item.shenfenID"
 							style="color: #008cfe"></text>
@@ -205,21 +205,54 @@
 			// 括号内必须是数组
 			...mapState(["xiangmu", "yuyueriqi", "huanzhejibenxinxi"]),
 			processingName() {
-				return function(val) {
-					if (!val) {
+				return function(str) {
+					if (!str) {
 						return '-';
 					}
-					return '*' + val.substr(1);
+					if (null != str && str != undefined) {
+						let star = '' //存放名字中间的*
+						//名字是两位的就取姓名首位+*
+						if (str.length <= 2) {
+							return str.substring(0, 1) + "*";
+						} else {
+							// 长度减1是因为后面要保留1位
+							for (var i = 0; i < str.length - 1; i++) {
+								star = star + '*'
+							}
+							// substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+							return str.substring(0, 0) + star + str.substring(str.length - 1, str.length);
+						}
+					}
 				}
 			},
 			processingcardNumber() {
-				return function(val) {
-					if (!val) {
+				return function(str) {
+					if (!str) {
 						return '-';
 					}
-					return '*****' + val.substr(5);
+					let star = '' //存放就诊号中间的*
+					// 长度减2是因为后面要保留两位
+					for (var i = 0; i < str.length - 2; i++) {
+						star = star + '*'
+					}
+					// substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+					return str.substring(0, 3) + star + str.substring(str.length - 2, str.length)
 				}
-			}
+			},
+			processingcardID(str) {
+				return function(str) {
+					if (!str) {
+						return '-';
+					}
+					let star = '' //存放身份证中间的*
+					// 长度减1是因为后面要保留1位
+					for (var i = 0; i < str.length - 1; i++) {
+						star = star + '*'
+					}
+					// substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+					return str.substring(0, 1) + star + str.substring(str.length - 1, str.length)
+				}	
+			},	
 		},
 		filters: {
 			//保留两位小数的过滤器

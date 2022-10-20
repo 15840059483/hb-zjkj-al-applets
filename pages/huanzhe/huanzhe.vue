@@ -658,8 +658,7 @@
 
 	.toubu_1,
 	.toubu_2,
-	.toubu_3,
-	div[class^="toubu_"] {
+	.toubu_3 {
 		width: 130px;
 		height: 100%;
 	}
@@ -673,8 +672,7 @@
 
 	.jingbu_1,
 	.jingbu_2,
-	.jingbu_3,
-	div[class^="jingbu_"] {
+	.jingbu_3 {
 		width: 141px;
 		height: 100%;
 	}
@@ -779,8 +777,7 @@
 
 	.toubu-nv_1,
 	.toubu-nv_2,
-	.toubu-nv_3,
-	div[class^="toubu-nv_"] {
+	.toubu-nv_3 {
 		width: 130px;
 		height: 100%;
 	}
@@ -794,8 +791,7 @@
 
 	.jingbu-nv_1,
 	.jingbu-nv_2,
-	.jingbu-nv_3,
-	div[class^="jingbu-nv_"] {
+	.jingbu-nv_3 {
 		width: 141px;
 		height: 100%;
 	}
@@ -900,8 +896,7 @@
 
 	.toubu-tong_1,
 	.toubu-tong_2,
-	.toubu-tong_3,
-	div[class^="toubu-tong_"] {
+	.toubu-tong_3 {
 		width: 120px;
 		height: 100%;
 	}
@@ -915,8 +910,7 @@
 
 	.jingbu-tong_1,
 	.jingbu-tong_2,
-	.jingbu-tong_3,
-	div[class^="jingbu-tong_"] {
+	.jingbu-tong_3{
 		width: 141px;
 		height: 100%;
 	}

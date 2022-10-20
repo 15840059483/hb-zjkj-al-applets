@@ -8,63 +8,91 @@
 		</view> -->
 		<view class="zhuti">
 			<uni-card class="bg-white patient-container">
-				<view class="patient-container-row">
-					<view class="nei-title">姓名：</view>
-					<view class="nei-input">
-						<uni-easyinput class="uni-mt-5" trim="all" v-model="formData.patientName" placeholder="必填">
-						</uni-easyinput>
-						<!-- <el-input type="text" class="add-input" v-model="formData.patientName" placeholder="必填">
-						</el-input> -->
+				<view v-if="formData.patientRelationship === '1030'">
+					<view class="patient-container-row">
+						<view class="nei-title">姓名：</view>
+						<view class="nei-input">
+							<text>{{val.userName|processingName}}</text>
+							<!-- <el-input type="text" class="add-input" v-model="formData.patientName" placeholder="必填">
+							</el-input> -->
+						</view>
+					</view>
+					<view class="patient-container-row">
+						<view class="nei-title">身份证号：</view>
+						<view class="nei-input">
+							<text>{{val.certNo|processingcardID}}</text>
+							<!-- <el-input type="text" class="add-input" @blur="idCardBlur" v-model="formData.patientCardId"
+								placeholder="请输入就诊者身份证号"></el-input> -->
+						</view>
+					</view>
+					<view class="patient-container-row">
+						<view class="nei-title">与就诊人关系：</view>
+						<view class="nei-input" style="position: relative">
+							<!-- 此处将原先的select/option修改为了picker底部弹出选择器
+							   mode为选择器类型：selector 普通选择器，range为选择器内的选项，range-key为选择器内选项的是什么 -->
+							<picker class="select2" mode="selector" :range="patientRelationshipList" range-key="label"
+								@change="listPicker">
+								<div class="font-div">
+									<span
+										v-if="formData.patientRelationship">{{formData.patientRelationship | patientRelationship}}</span>
+									<span v-else style="color: #C0C4CC;font-size: 14px">请选择与就诊人关系</span>
+								</div>
+							</picker>
+						</view>
+					</view>
+					<view class="patient-container-row">
+						<view class="nei-title">手机号码：</view>
+						<view class="nei-input">
+							<text>{{val.mobile|processingcardNumber}}</text>
+							<!-- <el-input type="text" class="add-input" v-model="formData.patientPhone" placeholder="请输入手机号码">
+							</el-input> -->
+						</view>
 					</view>
 				</view>
-				<view class="patient-container-row">
-					<view class="nei-title">身份证号：</view>
-					<view class="nei-input">
-						<uni-easyinput class="uni-mt-5" trim="all" @blur="idCardBlur" v-model="formData.patientCardId"
-							placeholder="请输入就诊者身份证号">
-						</uni-easyinput>
-						<!-- <el-input type="text" class="add-input" @blur="idCardBlur" v-model="formData.patientCardId"
-							placeholder="请输入就诊者身份证号"></el-input> -->
+				<view v-else>
+					<view class="patient-container-row">
+						<view class="nei-title">姓名：</view>
+						<view class="nei-input">
+							<uni-easyinput class="uni-mt-5" trim="all" v-model="formData.patientName" placeholder="必填">
+							</uni-easyinput>
+							<!-- <el-input type="text" class="add-input" v-model="formData.patientName" placeholder="必填">
+							</el-input> -->
+						</view>
 					</view>
-				</view>
-				<view class="patient-container-row">
-					<view class="nei-title">出生年月日：</view>
-					<view class="nei-input">
-						<div class="font-div">{{formData.patientBirthday}}</div>
+					<view class="patient-container-row">
+						<view class="nei-title">身份证号：</view>
+						<view class="nei-input">
+							<uni-easyinput class="uni-mt-5" trim="all" @blur="idCardBlur" v-model="formData.patientCardId"
+								placeholder="请输入就诊者身份证号">
+							</uni-easyinput>
+							<!-- <el-input type="text" class="add-input" @blur="idCardBlur" v-model="formData.patientCardId"
+								placeholder="请输入就诊者身份证号"></el-input> -->
+						</view>
 					</view>
-				</view>
-				<view class="patient-container-row">
-					<view class="nei-title">与就诊人关系：</view>
-					<view class="nei-input" style="position: relative">
-						<!-- 此处将原先的select/option修改为了picker底部弹出选择器
-						   mode为选择器类型：selector 普通选择器，range为选择器内的选项，range-key为选择器内选项的是什么 -->
-						<picker class="select2" mode="selector" :range="patientRelationshipList" range-key="label"
-							@change="listPicker">
-							<div class="font-div">
-								<span
-									v-if="formData.patientRelationship">{{formData.patientRelationship | patientRelationship}}</span>
-								<span v-else style="color: #C0C4CC;font-size: 14px">请选择与就诊人关系</span>
-							</div>
-						</picker>
+					<view class="patient-container-row">
+						<view class="nei-title">与就诊人关系：</view>
+						<view class="nei-input" style="position: relative">
+							<!-- 此处将原先的select/option修改为了picker底部弹出选择器
+							   mode为选择器类型：selector 普通选择器，range为选择器内的选项，range-key为选择器内选项的是什么 -->
+							<picker class="select2" mode="selector" :range="patientRelationshipList" range-key="label"
+								@change="listPicker">
+								<div class="font-div">
+									<span
+										v-if="formData.patientRelationship">{{formData.patientRelationship | patientRelationship}}</span>
+									<span v-else style="color: #C0C4CC;font-size: 14px">请选择与就诊人关系</span>
+								</div>
+							</picker>
+						</view>
 					</view>
-				</view>
-				<view class="patient-container-row">
-					<view class="nei-title">手机号码：</view>
-					<view class="nei-input">
-						<uni-easyinput class="uni-mt-5" trim="all" v-model="formData.patientPhone"
-							placeholder="请输入手机号码">
-						</uni-easyinput>
-						<!-- <el-input type="text" class="add-input" v-model="formData.patientPhone" placeholder="请输入手机号码">
-						</el-input> -->
-					</view>
-				</view>
-				<view class="patient-container-row">
-					<view class="nei-title">就诊卡号：</view>
-					<view class="nei-input">
-						<uni-easyinput class="uni-mt-5" trim="all" v-model="formData.cardNo" placeholder="请输入就诊卡号">
-						</uni-easyinput>
-						<!-- <el-input type="text" class="add-input" v-model="formData.cardNo" placeholder="请输入就诊卡号">
-						</el-input> -->
+					<view class="patient-container-row">
+						<view class="nei-title">手机号码：</view>
+						<view class="nei-input">
+							<uni-easyinput class="uni-mt-5" trim="all" v-model="formData.patientPhone"
+								placeholder="请输入手机号码">
+							</uni-easyinput>
+							<!-- <el-input type="text" class="add-input" v-model="formData.patientPhone" placeholder="请输入手机号码">
+							</el-input> -->
+						</view>
 					</view>
 				</view>
 				<!--      <view class="patient-container-row">-->
@@ -124,7 +152,8 @@
 					patientRelationship: '1030',
 					patientPhone: '',
 					cardNo: '',
-				}
+				},
+				val: {}
 			}
 		},
 
@@ -150,9 +179,83 @@
 				]
 				const obj = arr.filter(item => item.value === val)
 				return obj[0].label
-			}
+			},
+			processingName(str) {
+				if (!str) {
+					return '-';
+				}
+				if (null != str && str != undefined) {
+					let star = '' //存放名字中间的*
+					//名字是两位的就取姓名首位+*
+					if (str.length <= 2) {
+						return str.substring(0, 1) + "*";
+					} else {
+						// 长度减1是因为后面要保留1位
+						for (var i = 0; i < str.length - 1; i++) {
+							star = star + '*'
+						}
+						// substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+						return str.substring(0, 0) + star + str.substring(str.length - 1, str.length);
+					}
+				}
+			
+			},
+			processingcardNumber(str) {
+				if (!str) {
+					return '-';
+				}
+				let star = '' //存放就诊号中间的*
+				// 长度减2是因为后面要保留两位
+				for (var i = 0; i < str.length - 2; i++) {
+					star = star + '*'
+				}
+				// substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+				return str.substring(0, 3) + star + str.substring(str.length - 2, str.length)
+			
+			},
+			processingcardID(str) {
+				if (!str) {
+					return '-';
+				}
+				let star = '' //存放身份证中间的*
+				// 长度减1是因为后面要保留1位
+				for (var i = 0; i < str.length - 1; i++) {
+					star = star + '*'
+				}
+				// substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+				return str.substring(0, 1) + star + str.substring(str.length - 1, str.length)
+			
+			},	
+		},
+		mounted(){
+			let _this = this
+			my.getAuthCode({
+				scopes: 'auth_user',
+				success: res => {
+					console.log(res)
+					_this.$myRequest({
+							// url: `/al/auth/login?code=${res.code}`,
+							url: `/al/auth/user?code=${res.authCode}`,
+							method: 'get'
+						})
+						.then((data) => {
+							_this.val = data.data
+						})
+				},
+			});
+			this.getAlUserInfo();
 		},
 		methods: {
+			getAlUserInfo(){
+				 my.getOpenUserInfo({
+				    fail: (res) => {
+				    },
+				    success: (res) => {
+				      let userInfo = JSON.parse(res.response).response // 以下方的报文格式解析两层 response
+					  console.log(userInfo)
+				    }
+				  });
+			},
 			// Picker选择器的方法
 			listPicker(e) {
 				this.formData.patientRelationship = this.patientRelationshipList[e.target.value].value
@@ -175,7 +278,7 @@
 			},
 
 			submitBtn() {
-				if (!this.formData.patientName) {
+				if (!this.formData.patientName && this.formData.patientRelationship!='1030') {
 					uni.showToast({
 						title: '请输入就诊人姓名！',
 						icon: 'none',
@@ -184,7 +287,7 @@
 
 					return
 				}
-				if (!this.formData.patientCardId) {
+				if (!this.formData.patientCardId && this.formData.patientRelationship!='1030') {
 					uni.showToast({
 						title: '请输入就诊人身份证号！',
 						icon: 'none',
@@ -193,7 +296,7 @@
 
 					return
 				}
-				if (!this.formData.patientRelationship) {
+				if (!this.formData.patientRelationship && this.formData.patientRelationship!='1030') {
 					uni.showToast({
 						title: '请选择与就诊人关系！',
 						icon: 'none',
@@ -202,7 +305,7 @@
 
 					return
 				}
-				if (!this.formData.patientPhone) {
+				if (!this.formData.patientPhone && this.formData.patientRelationship!='1030') {
 					uni.showToast({
 						title: '请输入就诊人手机号码！',
 						icon: 'none',
@@ -217,7 +320,7 @@
 				if (this.formData.cardNo == null || this.formData.cardNo == '') {
 					uni.showModal({
 						title: "提示",
-						content: "是否注册卡号?",
+						content: "是否添加就诊人?",
 						success: function(res) {
 							if (res.confirm) {
 								_this.$myRequest({
@@ -247,6 +350,7 @@
 									icon: 'none',
 									duration: 2000
 								});
+								_this.loading = false;
 							}
 						}
 					});

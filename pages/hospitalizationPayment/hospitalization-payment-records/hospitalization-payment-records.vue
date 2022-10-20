@@ -17,9 +17,24 @@
 							</div>
 						</div>
 					</div>
-
+					<view v-else>
+						<view class="patient-info-row" style="display: flex;padding:10px 0">
+							<view style="width: 80%;font-size: .22rem">
+								住院人：{{ patient.name }}</view>
+							<view style="width: 20%;text-align: right;" class="text-right">
+								<img style="width: .35rem;height: .35rem;"
+									src="https://s1.ax1x.com/2022/09/28/xeI4gS.png" @click="openAddPatient" />
+							</view>
+						</view>
+						<view class="patient-info-row" style="display: flex;padding:10px 0">
+							<view style="width: 80%;font-size: .22rem">
+								住院号：{{ patient.admissionNumber }}</view>
+						</view>
+					</view>
+				</uni-card>
+				<uni-card v-for="(item,index) in hospInfoList" :key="index">
 					<div v-if="showHospInfo" class="bg-white record-item" style="padding: 0;"
-						v-for="item in hospInfoList">
+						>
 						<div class="record-item-item">
 							<div>住院人</div>
 							<div>{{ item.name }}[{{ item.inpatientNo }}]</div>
@@ -134,9 +149,9 @@
 					hosptFeeList = data.data;
 					uni.navigateTo({
 						url: '/pages/hospitalizationPayment/inpatient-payment-details/inpatient-payment-details?hosptFeeList=' +
-							JSON.stringify(hosptFeeList) +
+							JSON.stringify(hosptFeeList).replace(/%/g, '%25') +
 							"&hosptInfo=" +
-							JSON.stringify(item)
+							JSON.stringify(item).replace(/%/g, '%25')
 					});
 
 					this.loading = false;
@@ -148,14 +163,16 @@
 			openAddPatient() {
 				this.showAddPatient = true;
 				this.patient = {
-					name: "",
-					admissionNumber: undefined
+					name: "周颖",
+					admissionNumber: '0006000477'
 				};
 			},
 			confirmBinding() {
 				if (!this.patient.name || !this.patient.admissionNumber) {
 					return;
 				}
+				this.hospInfoList = [];
+				
 				this.loading = true;
 				const params = {
 					hosptName: this.patient.name,
@@ -184,6 +201,7 @@
 			},
 			// 获取住院信息
 			getHosptList() {
+				
 				const params = {
 					code: "100011",
 					hosptId: this.patient.admissionNumber,

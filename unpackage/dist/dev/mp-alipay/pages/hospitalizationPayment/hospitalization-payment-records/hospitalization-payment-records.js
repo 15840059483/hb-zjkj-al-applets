@@ -262,7 +262,37 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 __webpack_require__(/*! ./hospitalization-payment-records.scss */ 86); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -362,20 +392,8 @@ var _default = { // 调用头部组件
   components: {// header
   }, data: function data() {return { title: "缴费记录", // 页面标题
       shouye: "no", // 是否是首页，不是首页显示返回上一层箭头
-      loading: false, patientInfo: {}, patient: { name: "", admissionNumber: undefined }, hospInfoList: [], showAddPatient: false, showBox: true, showHospInfo: false };}, methods: { goToDetail: function goToDetail(item) {var _this = this;this.loading = true;var hosptFeeList = [];var params = { inpatientNo: this.hospInfoList[0].inpatientNo, inDate: this.hospInfoList[0].inDate };this.$myRequest({ url: "/hospt/getHosptFeeList", data: params }).then(function (data) {hosptFeeList = data.data;uni.navigateTo({ url: '/pages/hospitalizationPayment/inpatient-payment-details/inpatient-payment-details?hosptFeeList=' + JSON.stringify(hosptFeeList) + "&hosptInfo=" + JSON.stringify(item) });_this.loading = false;}).catch(function (err) {_this.loading = false;});}, openAddPatient: function openAddPatient() {this.showAddPatient = true;this.patient = { name: "", admissionNumber: undefined };}, confirmBinding: function confirmBinding() {var _this2 = this;if (!this.patient.name || !this.patient.admissionNumber) {return;}this.loading = true;var params = { hosptName: this.patient.name, hosptId: this.patient.admissionNumber, code: "100011" };this.$myRequest({ url: "/hospt/checkHosptInfo", data: params }).then(function (data) {if (data.code !== 200) {uni.showToast({ title: data.msg, icon: 'none', duration: 2000 });} else {_this2.showAddPatient = false;_this2.getHosptList();}_this2.loading = false;}).catch(function (err) {_this2.loading = false;});}, // 获取住院信息
-    getHosptList: function getHosptList() {var _this3 = this;var params = { code: "100011", hosptId: this.patient.admissionNumber };this.$myRequest({ url: "/hospt/getHosptList", data: params }).then(function (data) {_this3.hospInfoList = data.data;_this3.showBox = _this3.hospInfoList != "" && _this3.hospInfoList != undefined &&
-        _this3.hospInfoList != "" ?
-        false :
-        true;
-        _this3.showHospInfo = true;
-        _this3.loading = false;
-      }).catch(function (err) {
-        _this3.loading = false;
-      });
-
-    } },
-
-
+      loading: false, patientInfo: {}, patient: { name: "", admissionNumber: undefined }, hospInfoList: [], showAddPatient: false, showBox: true, showHospInfo: false };}, methods: { goToDetail: function goToDetail(item) {var _this = this;this.loading = true;var hosptFeeList = [];var params = { inpatientNo: this.hospInfoList[0].inpatientNo, inDate: this.hospInfoList[0].inDate };this.$myRequest({ url: "/hospt/getHosptFeeList", data: params }).then(function (data) {hosptFeeList = data.data;uni.navigateTo({ url: '/pages/hospitalizationPayment/inpatient-payment-details/inpatient-payment-details?hosptFeeList=' + JSON.stringify(hosptFeeList).replace(/%/g, '%25') + "&hosptInfo=" + JSON.stringify(item).replace(/%/g, '%25') });_this.loading = false;}).catch(function (err) {_this.loading = false;});}, openAddPatient: function openAddPatient() {this.showAddPatient = true;this.patient = { name: "周颖", admissionNumber: '0006000477' };}, confirmBinding: function confirmBinding() {var _this2 = this;if (!this.patient.name || !this.patient.admissionNumber) {return;}this.hospInfoList = [];this.loading = true;var params = { hosptName: this.patient.name, hosptId: this.patient.admissionNumber, code: "100011" };this.$myRequest({ url: "/hospt/checkHosptInfo", data: params }).then(function (data) {if (data.code !== 200) {uni.showToast({ title: data.msg, icon: 'none', duration: 2000 });} else {_this2.showAddPatient = false;_this2.getHosptList();}_this2.loading = false;}).catch(function (err) {_this2.loading = false;});}, // 获取住院信息
+    getHosptList: function getHosptList() {var _this3 = this;var params = { code: "100011", hosptId: this.patient.admissionNumber };this.$myRequest({ url: "/hospt/getHosptList", data: params }).then(function (data) {_this3.hospInfoList = data.data;_this3.showBox = _this3.hospInfoList != "" && _this3.hospInfoList != undefined && _this3.hospInfoList != "" ? false : true;_this3.showHospInfo = true;_this3.loading = false;}).catch(function (err) {_this3.loading = false;});} },
   mounted: function mounted() {
 
   } };exports.default = _default;

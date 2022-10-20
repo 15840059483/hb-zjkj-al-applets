@@ -158,16 +158,12 @@
 .patient-container .patient-container-row:last-child {
   border-bottom: none;
 }
-.patient-container .zoom-patient-container .patient-container-row:last-child {
-  border-bottom: 1px solid #e1e1e1;
-}
 .patient-container .select-bg {
   background-color: rgba(0, 140, 254, 0.1);
 }
 .select-patient-show {
   width: 1.5rem;
   float: right;
-  display: flex;
   justify-content: space-between;
   align-items: center;
 }
@@ -188,6 +184,65 @@
   font-size: .4rem !important;
   margin-bottom: 1rem;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -656,7 +711,7 @@
 	background-size: 100%, 100%;
 	margin-left: .2rem;
 }
-.neirong.data-v-52327846{
+.neirong.data-v-52327846 {
 	padding: .2rem;
 }
 

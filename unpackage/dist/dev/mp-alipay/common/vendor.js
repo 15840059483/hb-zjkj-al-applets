@@ -18950,7 +18950,7 @@ module.exports = function (str, opts) {
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.myRequest = exports.BASE_URL = void 0; // 封装的request
 
 // const BASE_URL = "http://fsybzzj.natapp1.cc"
-var BASE_URL = "http://fscrzhyyht.natapp1.cc";
+var BASE_URL = "http://192.168.1.6:8088";
 //http://fscrzhyyht.natapp1.cc
 // const BASE_URL = "http://192.168.1.7:9088"
 exports.BASE_URL = BASE_URL;

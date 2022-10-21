@@ -248,7 +248,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 __webpack_require__(/*! @/pages/outpatientPayment/outpatientPayment.scss */ 279); //
+//
+//
+//
+//
+//
 //
 //
 //
@@ -317,12 +327,7 @@ var _default = { name: "registration-record", data: function data() {return { li
       // 长度减2是因为后面要保留两位
       for (var i = 0; i < str.length - 2; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
       return str.substring(0, 3) + star + str.substring(str.length - 2, str.length);} }, mounted: function mounted() {this.getPatientInfo();}, methods: { // 切换就诊人
-    onSwitchPatientBtn: function onSwitchPatientBtn(item) {this.currentPatient = item;this.isSelectAll = false;this.listData = [];this.getList();}, switchPatient: function switchPatient() {this.showSwitchPatient = true;}, getPatientInfo: function getPatientInfo() {var _this = this;
-      this.loading = true;
-      this.$myRequest({
-        url: "/wechat/user/patientcard/info" }).
-      then(function (data) {
-        if (data && data.data && data.data && data.data.length > 0) {
+    onSwitchPatientBtn: function onSwitchPatientBtn(item) {this.currentPatient = item;this.isSelectAll = false;this.listData = [];this.getList();}, switchPatient: function switchPatient() {this.showSwitchPatient = true;}, getPatientInfo: function getPatientInfo() {var _this = this;this.loading = true;this.$myRequest({ url: "/wechat/user/patientcard/info" }).then(function (data) {if (data && data.data && data.data && data.data.length > 0) {
           _this.switchPatientList = data.data;
           _this.currentPatient = data.data[0];
           _this.getList();

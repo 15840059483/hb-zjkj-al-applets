@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="record-container">
-			<div class="record-item" v-for="item in listData" @click="goToDetail(item)">
+			<div class="record-item" v-for="item in listData" @click="goToDetail(item)" v-if="show">
 				<img class="icon-success" v-if="item.paymentstatusId == 3010" src="../../static/icon-success.png">
 				<img class="icon-success" v-else src="../../static/yes-yi.png">
 				<div class="record-right">
@@ -15,6 +15,12 @@
 					</div>
 				</div>
 			</div>
+			<div class="no-list" v-if="!show">
+				<div>
+					<img src="https://s1.ax1x.com/2022/09/28/xe6wLV.png">
+				</div>
+				<p>暂未获取到您的订单信息</p>
+			</div>
 		</div>
 	</div>
 </template>
@@ -24,7 +30,8 @@
 		name: "payment-record",
 		data() {
 			return {
-				listData: []
+				listData: [],
+				show:false,
 			}
 		},
 		mounted() {
@@ -35,8 +42,12 @@
 				this.$myRequest({
 					url: '/hospt/getWechatOrderList',
 				}).then(data => {
-					this.listData = data.data
-					this.loading = false;
+					if(data.data.length>0){
+						this.listData = data.data
+						this.loading = false;
+						this.show=true;
+					}
+					
 				}).catch(err => {
 					this.loading = false;
 				})
@@ -52,6 +63,33 @@
 </script>
 
 <style scoped lang="scss">
+	.no-list {
+	  margin-top: 1rem;
+	  div {
+	    width: 2rem;
+	    height: 2rem;
+	    margin: 0 auto;
+	    border-radius: 50%;
+	    background-color: #b8b8b8;
+	    text-align: center;
+	    display: flex;
+	    justify-content: space-around;
+	    align-items: center;
+	
+	    img {
+	      width: 60%;
+		  height: 60%;
+	    }
+	  }
+	
+	  p {
+	    text-align: center;
+		margin-top: .2rem;
+	    color: #4d4d4d;
+	    font-size: .35rem;
+	    letter-spacing: 1px;
+	  }
+	}
 	.record-container {
 		.record-item {
 			background: #FFFFFF;

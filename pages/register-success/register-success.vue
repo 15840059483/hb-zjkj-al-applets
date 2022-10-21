@@ -99,8 +99,9 @@
 					<!--        {{ orderDetail.description | description }}-->
 					<!--      </div>-->
 					<!--      <div class="text-right" style="color: red;font-size: .4rem">{{ orderDetail.description | descriptionError }}</div>-->
-					
-					<div v-if="!orderDetail.description || orderDetail.description === '缴费正常'" style="color: green">{{ orderDetail.description || '-' }}
+
+					<div v-if="!orderDetail.description || orderDetail.description === '缴费正常'" style="color: green">
+						{{ orderDetail.description || '-' }}
 					</div>
 					<div v-else v-for="(value, key) in JSON.parse(orderDetail.description)"
 						style="width: 100%;display: flex;justify-content: space-between;margin-top: .2rem;">
@@ -120,6 +121,8 @@
 				</view>
 			</view>
 		</view>
+
+		<energy-success v-if="showToast" :message="toastMessage" :energy-num="energyNum"></energy-success>
 	</view>
 </template>
 
@@ -155,9 +158,13 @@
 			return {
 				title: "订单详情 ", // 页面标题
 				shouye: "no", // 是否是首页，不是首页显示返回上一层箭头
-				orderDetail:{},
+				orderDetail: {},
 				// backGo: this.$route.query.backGo ? Number(this.$route.query.backGo) : -2,
 				home: false, // 底部返回主页栏的显示与隐藏
+
+				showToast: false, // 能量提示成功弹窗
+				toastMessage: '',
+				energyNum: 0
 			}
 		},
 		// 这是uni的生命周期
@@ -167,6 +174,36 @@
 			clearTimeout(this.timer); //清除延迟执行
 			this.orderDetail = JSON.parse(e.orderDetail)
 			console.log(this.orderDetail)
+			console.log(e.authCode, "regiser-success")
+			if (e.authCode&&this.orderDetail.paymentstatusId=='3010') {
+				
+				console.log("发放能量结束");
+				my.getAuthCode({
+				  scopes: ['auth_user','hospital_order','mfrstre'], // 主动授权：auth_user，静默授权：auth_base。或者其它scope  success: (res) => {
+				  success: res => {
+				    if (res.authCode) {
+						let datas = {code:res.authCode,orderNo:this.orderDetail.orderNo,scene: 'horegister'}
+						console.log("发送模版消息");
+				      // 认证成功      // 调用自己的服务端接口，让服务端进行后端的授权认证，并且利用session，需要解决跨域问题      my.request({
+				        this.$myRequest({
+				        	url: "/al/auth/send",
+				        	method: "GET",
+				        	data: datas,
+				        }).then(data => {
+				        	if(data.data.totalEnergy){
+				        		this.toastMessage = '本次挂号得到能量为'
+				        		this.energyNum = Number(data.data.totalEnergy)
+				        		this.showToast = true
+				        		
+				        		setTimeout(() => {
+				        			this.showToast = false
+				        		}, 3000)
+				        	}
+				        });
+					}
+				  },
+				});
+			}
 			this.timer = setTimeout(() => {
 				//设置延迟10秒执行弹出提示框
 				this.open();
@@ -174,6 +211,7 @@
 		},
 		onShow() {
 			clearTimeout(this.timer); //清除延迟执行
+
 
 			this.timer = setTimeout(() => {
 				//设置延迟10秒执行弹出提示框
@@ -187,7 +225,6 @@
 					url: '/pages/index/index'
 				});
 			},
-
 			// 提示框
 			open() {
 				let _this = this;

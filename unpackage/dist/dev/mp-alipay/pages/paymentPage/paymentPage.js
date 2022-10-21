@@ -190,7 +190,7 @@ var _default = {
     getOrderDetail: function getOrderDetail() {var _this = this;
       this.isShowResult = false;
       this.isSuccess = false;
-      // clearInterval(this.time);
+
       var params = {
         orderNo: this.orderNo };
 
@@ -204,7 +204,7 @@ var _default = {
           clearInterval(_this.time);
           setTimeout(function () {
             uni.navigateBack();
-          }, 1000);
+          }, 2000);
         } else {
           var paymentstatusId = res.data[0].paymentstatusId;
           if (paymentstatusId == 3010) {
@@ -235,7 +235,7 @@ var _default = {
 
             setTimeout(function () {
               uni.navigateBack();
-            }, 1000);
+            }, 2000);
           } else {
             setTimeout(function () {
               _this.getOrderDetail();

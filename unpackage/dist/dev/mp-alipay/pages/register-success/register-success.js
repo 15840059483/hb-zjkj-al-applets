@@ -99,6 +99,9 @@ try {
   components = {
     uniCard: function() {
       return __webpack_require__.e(/*! import() | uni_modules/uni-card/components/uni-card/uni-card */ "uni_modules/uni-card/components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-card/components/uni-card/uni-card.vue */ 435))
+    },
+    energySuccess: function() {
+      return __webpack_require__.e(/*! import() | components/energy-success/energy-success */ "components/energy-success/energy-success").then(__webpack_require__.bind(null, /*! @/components/energy-success/energy-success.vue */ 512))
     }
   }
 } catch (e) {
@@ -173,6 +176,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
 
 
 
@@ -424,14 +430,20 @@ __webpack_require__(/*! ../payment-details/payment-details.scss */ 122); //
 //
 //
 //
+//
+//
+//
 var _default = { filters: { dateStr: function dateStr(val) {if (!val) {return "-";}return val.slice(0, 10);}, description: function description(val) {var obj = JSON.parse(val);var str = "";for (var key in obj) {str += "、" + key;}return str ? str.slice(1) : "-";}, descriptionError: function descriptionError(val) {var obj = JSON.parse(val);var str = "";for (var key in obj) {str = obj[key];}return str || "-";} }, data: function data() {return { title: "订单详情 ", // 页面标题
       shouye: "no", // 是否是首页，不是首页显示返回上一层箭头
       orderDetail: {}, // backGo: this.$route.query.backGo ? Number(this.$route.query.backGo) : -2,
-      home: false // 底部返回主页栏的显示与隐藏
-    };}, // 这是uni的生命周期
+      home: false, // 底部返回主页栏的显示与隐藏
+      showToast: false, // 能量提示成功弹窗
+      toastMessage: '', energyNum: 0 };}, // 这是uni的生命周期
   // 在uniapp中如果要使用路由传参必须使用onload(路由传参中的参数值)
   onLoad: function onLoad(e) {var _this2 = this;console.log(e, 'regiser-success');clearTimeout(this.timer); //清除延迟执行
-    this.orderDetail = JSON.parse(e.orderDetail);console.log(this.orderDetail);this.timer = setTimeout(function () {//设置延迟10秒执行弹出提示框
+    this.orderDetail = JSON.parse(e.orderDetail);console.log(this.orderDetail);console.log(e.authCode, "regiser-success");if (e.authCode && this.orderDetail.paymentstatusId == '3010') {console.log("发放能量结束");my.getAuthCode({ scopes: ['auth_user', 'hospital_order', 'mfrstre'], // 主动授权：auth_user，静默授权：auth_base。或者其它scope  success: (res) => {
+        success: function success(res) {if (res.authCode) {var datas = { code: res.authCode, orderNo: _this2.orderDetail.orderNo, scene: 'horegister' };console.log("发送模版消息"); // 认证成功      // 调用自己的服务端接口，让服务端进行后端的授权认证，并且利用session，需要解决跨域问题      my.request({
+            _this2.$myRequest({ url: "/al/auth/send", method: "GET", data: datas }).then(function (data) {if (data.data.totalEnergy) {_this2.toastMessage = '本次挂号得到能量为';_this2.energyNum = Number(data.data.totalEnergy);_this2.showToast = true;setTimeout(function () {_this2.showToast = false;}, 3000);}});}} });}this.timer = setTimeout(function () {//设置延迟10秒执行弹出提示框
       _this2.open();}, 10000);}, onShow: function onShow() {var _this3 = this;clearTimeout(this.timer); //清除延迟执行
     this.timer = setTimeout(function () {//设置延迟10秒执行弹出提示框
       _this3.open();}, 10000);}, methods: { // 返回主页

@@ -379,11 +379,6 @@
 					regPeriod: ['上午'],
 					pay_Type: 'AL'
 				}
-				
-				uni.navigateTo({
-					url: '/pages/paymentPage/paymentPage?orderNo=' + '1245789'
-				});
-				return
 
 				this.$myRequest({
 					url: "/wechat/pay/reg",
@@ -395,12 +390,14 @@
 							tradeNO: data.data.tradeNO,
 							success: (res) => {
 								// 关闭弹窗
-								if (!res.resultCode == '9000') {
+								if (res.resultCode == '9000') {
 									this.$refs.popo.close();
+									let authCode = '';
 									uni.navigateTo({
 										url: '/pages/paymentPage/paymentPage?orderNo=' + data
-											.data.orderNo
+											.data.orderNo+'&authCode='+1
 									});
+									
 								} else {
 									uni.showToast({
 										title: '支付失败',

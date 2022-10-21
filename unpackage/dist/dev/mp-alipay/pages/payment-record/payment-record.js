@@ -103,12 +103,13 @@ var render = function() {
     var $orig = _vm.__get_orig(item)
 
     var m0 =
-      item.paymentstatusId == 3010
+      _vm.show && item.paymentstatusId == 3010
         ? __webpack_require__(/*! ../../static/icon-success.png */ 206)
         : null
-    var m1 = !(item.paymentstatusId == 3010)
-      ? __webpack_require__(/*! ../../static/yes-yi.png */ 207)
-      : null
+    var m1 =
+      _vm.show && !(item.paymentstatusId == 3010)
+        ? __webpack_require__(/*! ../../static/yes-yi.png */ 207)
+        : null
     return {
       $orig: $orig,
       m0: m0,
@@ -178,12 +179,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var _default =
 {
   name: "payment-record",
   data: function data() {
     return {
-      listData: [] };
+      listData: [],
+      show: false };
 
   },
   mounted: function mounted() {
@@ -194,8 +202,12 @@ var _default =
       this.$myRequest({
         url: '/hospt/getWechatOrderList' }).
       then(function (data) {
-        _this.listData = data.data;
-        _this.loading = false;
+        if (data.data.length > 0) {
+          _this.listData = data.data;
+          _this.loading = false;
+          _this.show = true;
+        }
+
       }).catch(function (err) {
         _this.loading = false;
       });

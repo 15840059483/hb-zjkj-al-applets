@@ -24,52 +24,30 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.no-list.data-v-048cfc74 {
-  margin-top: 1rem;
-}
-.no-list ._div.data-v-048cfc74 {
-  width: 2rem;
-  height: 2rem;
-  margin: 0 auto;
-  border-radius: 50%;
-  background-color: #b8b8b8;
-  text-align: center;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-.no-list ._div ._img.data-v-048cfc74 {
-  width: 60%;
-  height: 60%;
-}
-.no-list ._p.data-v-048cfc74 {
-  text-align: center;
-  margin-top: .2rem;
-  color: #4d4d4d;
-  font-size: .35rem;
-  letter-spacing: 1px;
-}
-.record-container .record-item.data-v-048cfc74 {
-  background: #FFFFFF;
-  border-bottom: 1px solid #E2E3E4;
-  padding: .3rem .5rem;
+.energy_wrap.data-v-563878f8 {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0.01rem;
+  font-size: .3rem;
   display: flex;
   align-items: center;
+  z-index: 99;
+  color: #fff;
+  border-radius: .1rem;
+  padding: .2rem .4rem;
+  white-space: nowrap;
 }
-.record-container .record-item .icon-success.data-v-048cfc74 {
-  width: 1rem;
-  height: 1rem;
-  margin-right: .5rem;
+.energy_wrap image.data-v-563878f8 {
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-right: .2rem;
 }
-.record-container .record-item .record-right.data-v-048cfc74 {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: .25srem;
-}
-.record-container .record-item .record-right .item-bot.data-v-048cfc74 {
-  color: #DFE0E1;
-  margin-top: .2rem;
+.energy_wrap ._span.data-v-563878f8 {
+  color: greenyellow;
+  margin-left: .1rem;
 }
 

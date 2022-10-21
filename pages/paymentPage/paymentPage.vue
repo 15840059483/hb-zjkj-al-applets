@@ -56,7 +56,7 @@
 			getOrderDetail() {
 				this.isShowResult = false;
 				this.isSuccess = false;
-				// clearInterval(this.time);
+				
 				const params = {
 					orderNo: this.orderNo
 				}
@@ -70,7 +70,7 @@
 						clearInterval(this.time);
 						setTimeout(() => {
 							uni.navigateBack()
-						}, 1000)
+						}, 2000)
 					} else {
 						const paymentstatusId = res.data[0].paymentstatusId
 						if (paymentstatusId == 3010) {
@@ -101,7 +101,7 @@
 
 							setTimeout(() => {
 								uni.navigateBack()
-							}, 1000)
+							}, 2000)
 						} else {
 							setTimeout(() => {
 								this.getOrderDetail();

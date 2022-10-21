@@ -31,7 +31,12 @@
 					</view>
 				</view>
 			</view>
-			<view v-if="listData.length === 0" style="text-align: center;color: #999;">暂无记录</view>
+			<div class="no-list" v-if="listData.length === 0">
+				<div>
+					<img src="https://s1.ax1x.com/2022/09/28/xe6wLV.png">
+				</div>
+				<p>暂未获取到您的挂号信息</p>
+			</div>
 		</view>
 		<view v-if="showSwitchPatient" class="switch-patient-bg">
 			<view class="switch-patient-container bg-white">
@@ -184,6 +189,33 @@
 </script>
 
 <style scoped lang="scss">
+	.no-list {
+	  margin-top: 1rem;
+	  div {
+	    width: 2rem;
+	    height: 2rem;
+	    margin: 0 auto;
+	    border-radius: 50%;
+	    background-color: #b8b8b8;
+	    text-align: center;
+	    display: flex;
+	    justify-content: space-around;
+	    align-items: center;
+	
+	    img {
+	      width: 60%;
+		  height: 60%;
+	    }
+	  }
+	
+	  p {
+	    text-align: center;
+		margin-top: .2rem;
+	    color: #4d4d4d;
+	    font-size: .35rem;
+	    letter-spacing: 1px;
+	  }
+	}
 	.card-row {
 		display: flex;
 		justify-content: space-between;

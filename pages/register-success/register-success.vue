@@ -175,36 +175,33 @@
 			this.orderDetail = JSON.parse(e.orderDetail)
 			console.log(this.orderDetail)
 			console.log(e.authCode, "regiser-success")
-			if (e.authCode) {
+			if (e.authCode&&this.orderDetail.paymentstatusId=='3010') {
+				
+				console.log("发放能量结束");
 				my.getAuthCode({
-					scopes: 'mfrstre',
-					success: item => {
-						if (item.authCode) {
-							let datas = {
-								code: item.authCode,
-								scene: 'horegister'
-							}
-
-							this.$myRequest({
-								url: "/al/auth/al/sendCity",
-								method: "GET",
-								data: datas,
-							}).then(data => {
-								console.log(data)
-								this.toastMessage = '本次挂号得到能量为'
-								this.energyNum = data.data.totalEnergy
-								this.showToast = true
-								
-								setTimeout(() => {
-									this.showToast = false
-								}, 3000)
-								// my.alert({
-								// 	content: '本次挂号得到能量为' + data.data.totalEnergy,
-								// });
-							});
-						}
-
-					},
+				  scopes: ['auth_user','hospital_order','mfrstre'], // 主动授权：auth_user，静默授权：auth_base。或者其它scope  success: (res) => {
+				  success: res => {
+				    if (res.authCode) {
+						let datas = {code:res.authCode,orderNo:this.orderDetail.orderNo,scene: 'horegister'}
+						console.log("发送模版消息");
+				      // 认证成功      // 调用自己的服务端接口，让服务端进行后端的授权认证，并且利用session，需要解决跨域问题      my.request({
+				        this.$myRequest({
+				        	url: "/al/auth/send",
+				        	method: "GET",
+				        	data: datas,
+				        }).then(data => {
+				        	if(data.data.totalEnergy){
+				        		this.toastMessage = '本次挂号得到能量为'
+				        		this.energyNum = Number(data.data.totalEnergy)
+				        		this.showToast = true
+				        		
+				        		setTimeout(() => {
+				        			this.showToast = false
+				        		}, 3000)
+				        	}
+				        });
+					}
+				  },
 				});
 			}
 			this.timer = setTimeout(() => {

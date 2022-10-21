@@ -325,69 +325,70 @@
 			},
 			onAuthBtn() {
 				console.log(this.alUserInfo)
-				my.getOpenUserInfo({
-					success: (res) => {
-						const _this = this;
-						let aliUser = my.getStorageSync({
-							key: 'alUserInfo'
-						}).data
-						let userInfo = JSON.parse(res.response).response // 以下方的报文格式解析两层 response
-						console.log(userInfo)
-						console.log(aliUser)
-						const params = {
-							realname: aliUser.userName,
-							//mobile: userInfo.mobile,
-							mobile: aliUser.mobile,
-							userIdCard: aliUser.certNo,
-							/* 两个userid 从缓存中取 */
-							aliUserId: my.getStorageSync({
-								key: 'user_id'
-							}).data,
-							alipayUserId: userInfo.alipayUserId,
-							/* M男 F女 */
-							gender: userInfo.gender === 'M' ? 1 : 2,
-							birthday: '2022-02-03',
-						}
-
-						this.$myRequest({
-							url: "/wechat/register/normal",
-							data: params,
-						}).then(data => {
-
-							console.log(data)
-
-							if (data.code !== 200) {
-								uni.showToast({
-									title: data.msg,
-									icon: 'none',
-									duration: 2000
-								});
-								// this.$message.warning(data.msg);
-							} else {
-								uni.showToast({
-									title: '注册成功',
-									icon: 'none',
-									duration: 2000
-								});
-								my.setStorageSync({
-									key: 'token',
-									data: data.data
-								})
-
-								_this.isToken = true;
-
-								_this.getDfltPtCardInfo();
-							}
-							this.loading = false;
-						}).catch(err => {
-							this.loading = false;
+				const _this = this;
+				let aliUser = my.getStorageSync({
+					key: 'alUserInfo'
+				}).data
+				//let userInfo = JSON.parse(res.response).response // 以下方的报文格式解析两层 response
+				//console.log(userInfo)
+				console.log(aliUser)
+				const params = {
+					realname: aliUser.userName,
+					//mobile: userInfo.mobile,
+					mobile: aliUser.mobile,
+					userIdCard: aliUser.certNo,
+					/* 两个userid 从缓存中取 */
+					aliUserId: my.getStorageSync({
+						key: 'user_id'
+					}).data,
+					alipayUserId: '',
+					/* M男 F女 */
+					gender: Number(aliUser.certNo.substring(16,17))&2 !=1 ? 2 : 1,
+					birthday: '2022-02-03',
+				}
+				
+				this.$myRequest({
+					url: "/wechat/register/normal",
+					data: params,
+				}).then(data => {
+				
+					console.log(data)
+				
+					if (data.code !== 200) {
+						uni.showToast({
+							title: data.msg,
+							icon: 'none',
+							duration: 2000
+						});
+						// this.$message.warning(data.msg);
+					} else {
+						uni.showToast({
+							title: '注册成功',
+							icon: 'none',
+							duration: 2000
+						});
+						my.setStorageSync({
+							key: 'token',
+							data: data.data
 						})
-						console.log('userInfo', userInfo)
-					},
-					fail: (res) => {
-						console.log('fail', res)
+				
+						_this.isToken = true;
+				
+						_this.getDfltPtCardInfo();
 					}
-				});
+					this.loading = false;
+				}).catch(err => {
+					this.loading = false;
+				})
+				console.log('userInfo', userInfo)
+				// my.getOpenUserInfo({
+				// 	success: (res) => {
+						
+				// 	},
+				// 	fail: (res) => {
+				// 		console.log('fail', res)
+				// 	}
+				// });
 			},
 		},
 		created() {
@@ -455,6 +456,24 @@
 						});
 					} else {
 						_this.getDfltPtCardInfo();
+						//console.log(decodeURIComponent('03al5b#%EF%BC%88%E4%BA%8C%EF%BC%89%20%E6%8E%88%E6%9D%83%E9%97%AE%E9%A2%98'))
+						// my.getAuthCode({
+						//   scopes: ['auth_user','hospital_order'], // 主动授权：auth_user，静默授权：auth_base。或者其它scope  success: (res) => {
+						//   success: res => {
+						//     if (res.authCode) {
+						// 		let datas = {code:res.authCode,orderNo:'202210211558187539910'}
+						//       // 认证成功      // 调用自己的服务端接口，让服务端进行后端的授权认证，并且利用session，需要解决跨域问题      my.request({
+						//         _this.$myRequest({
+						//         	url: "/al/auth/send",
+						//         	method: "GET",
+						//         	data: datas,
+						//         }).then(data => {
+						//         	console.log(data)
+						        	
+						//         });
+						// 	}
+						//   },
+						// });
 					}
 				}
 			})

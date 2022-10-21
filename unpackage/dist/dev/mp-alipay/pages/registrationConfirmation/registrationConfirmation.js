@@ -98,16 +98,16 @@ var components
 try {
   components = {
     zeroLoading: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/zero-loading/components/zero-loading/zero-loading */ "uni_modules/zero-loading/components/zero-loading/zero-loading").then(__webpack_require__.bind(null, /*! @/uni_modules/zero-loading/components/zero-loading/zero-loading.vue */ 429))
+      return __webpack_require__.e(/*! import() | uni_modules/zero-loading/components/zero-loading/zero-loading */ "uni_modules/zero-loading/components/zero-loading/zero-loading").then(__webpack_require__.bind(null, /*! @/uni_modules/zero-loading/components/zero-loading/zero-loading.vue */ 428))
     },
     uniCard: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-card/components/uni-card/uni-card */ "uni_modules/uni-card/components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-card/components/uni-card/uni-card.vue */ 441))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-card/components/uni-card/uni-card */ "uni_modules/uni-card/components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-card/components/uni-card/uni-card.vue */ 435))
     },
     uniCollapse: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-collapse/components/uni-collapse/uni-collapse */ "uni_modules/uni-collapse/components/uni-collapse/uni-collapse").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue */ 504))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-collapse/components/uni-collapse/uni-collapse */ "uni_modules/uni-collapse/components/uni-collapse/uni-collapse").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue */ 498))
     },
     uniCollapseItem: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item */ "uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue */ 511))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item */ "uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue */ 505))
     }
   }
 } catch (e) {
@@ -589,7 +589,7 @@ var _store = _interopRequireDefault(__webpack_require__(/*! ../../store */ 13));
 //
 // 引入导航栏组件
 // import header from '@/components/header/header.vue'
-var pop = function pop() {__webpack_require__.e(/*! require.ensure | components/ming-pop/ming-pop */ "components/ming-pop/ming-pop").then((function () {return resolve(__webpack_require__(/*! @/components/ming-pop/ming-pop.vue */ 497));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { // 调用头部组件
+var pop = function pop() {__webpack_require__.e(/*! require.ensure | components/ming-pop/ming-pop */ "components/ming-pop/ming-pop").then((function () {return resolve(__webpack_require__(/*! @/components/ming-pop/ming-pop.vue */ 491));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { // 调用头部组件
   components: { // header,
     pop: pop }, computed: { processingName: function processingName() {return function (str) {if (!str) {return '-';}if (null != str && str != undefined) {var star = ''; //存放名字中间的*
           //名字是两位的就取姓名首位+*
@@ -659,7 +659,7 @@ var pop = function pop() {__webpack_require__.e(/*! require.ensure | components/
                                       */ // 加载框
     jiazai: function jiazai() {var _this = this;this.loading = true; // 定时器，setTimeout只执行一次，setInterval执行多次
       setTimeout(function () {_this.loading = false;console.log(_this.loading);}, 500);}, //获取就诊人
-    getPatientInfo: function getPatientInfo() {var _this2 = this;this.$myRequest({ url: "/wechat/user/patientcard/info" }).then(function (data) {_this2.patients = data.data;_this2.selectPatient = data.data[0];_this2.loading = false;_this2.$nextTick(function () {_this2.$refs.collapse.resize();});}).catch(function (err) {_this2.loading = false;});}, payRegister: function payRegister() {var _this3 = this;var params = { deptId: this.deptId, deptName: this.deptName, doctorTitle: '普诊', doctorTitleId: '1', patientName: this.selectPatient.patientName, patientNo: this.selectPatient.cardNumber, payMount: '8', noonId: '1', regPeriod: ['上午'], pay_Type: 'AL' };this.$myRequest({ url: "/wechat/pay/reg", data: params }).then(function (data) {if (data.code == 0) {my.tradePay({ // 调用统一收单交易创建接口（alipay.trade.create），获得返回字段支付宝交易号trade_no
+    getPatientInfo: function getPatientInfo() {var _this2 = this;this.$myRequest({ url: "/wechat/user/patientcard/info" }).then(function (data) {_this2.patients = data.data;_this2.selectPatient = data.data[0];_this2.loading = false;_this2.$nextTick(function () {_this2.$refs.collapse.resize();});}).catch(function (err) {_this2.loading = false;});}, payRegister: function payRegister() {var _this3 = this;var params = { deptId: this.deptId, deptName: this.deptName, doctorTitle: '普诊', doctorTitleId: '1', patientName: this.selectPatient.patientName, patientNo: this.selectPatient.cardNumber, payMount: '8', noonId: '1', regPeriod: ['上午'], pay_Type: 'AL' };uni.navigateTo({ url: '/pages/paymentPage/paymentPage?orderNo=' + '1245789' });return;this.$myRequest({ url: "/wechat/pay/reg", data: params }).then(function (data) {if (data.code == 0) {my.tradePay({ // 调用统一收单交易创建接口（alipay.trade.create），获得返回字段支付宝交易号trade_no
             tradeNO: data.data.tradeNO, success: function success(res) {// 关闭弹窗
               if (!res.resultCode == '9000') {_this3.$refs.popo.close();uni.navigateTo({ url: '/pages/paymentPage/paymentPage?orderNo=' + data.data.orderNo });} else {uni.showToast({ title: '支付失败', icon: 'none', duration: 2000 });}}, fail: function fail(res) {my.alert({ content: '已取消支付' });} });}}).catch(function (err) {_this3.loading = false;}); // _this.$router.push('/paymentPage?orderNo=' + 1);
     } }, // 这是uni的生命周期

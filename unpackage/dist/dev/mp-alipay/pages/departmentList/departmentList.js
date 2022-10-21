@@ -96,7 +96,7 @@ var components
 try {
   components = {
     zeroLoading: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/zero-loading/components/zero-loading/zero-loading */ "uni_modules/zero-loading/components/zero-loading/zero-loading").then(__webpack_require__.bind(null, /*! @/uni_modules/zero-loading/components/zero-loading/zero-loading.vue */ 429))
+      return __webpack_require__.e(/*! import() | uni_modules/zero-loading/components/zero-loading/zero-loading */ "uni_modules/zero-loading/components/zero-loading/zero-loading").then(__webpack_require__.bind(null, /*! @/uni_modules/zero-loading/components/zero-loading/zero-loading.vue */ 428))
     }
   }
 } catch (e) {
@@ -218,7 +218,7 @@ __webpack_require__(/*! ./departmentList.scss */ 236); //
 //
 //
 // 引入scss文件
-var mSearch = function mSearch() {__webpack_require__.e(/*! require.ensure | components/mehaotian-search/mehaotian-search */ "components/mehaotian-search/mehaotian-search").then((function () {return resolve(__webpack_require__(/*! @/components/mehaotian-search/mehaotian-search.vue */ 490));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { // 调用头部组件
+var mSearch = function mSearch() {__webpack_require__.e(/*! require.ensure | components/mehaotian-search/mehaotian-search */ "components/mehaotian-search/mehaotian-search").then((function () {return resolve(__webpack_require__(/*! @/components/mehaotian-search/mehaotian-search.vue */ 484));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { // 调用头部组件
   components: { // header,
     mSearch: mSearch }, data: function data() {return { title: "科室列表", // 页面标题
       shouye: "no", // 是否是首页，不是首页显示返回上一层箭头

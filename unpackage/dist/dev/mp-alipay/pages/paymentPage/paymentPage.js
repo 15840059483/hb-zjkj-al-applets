@@ -132,7 +132,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -173,7 +173,7 @@ var _default = {
     return {
       title: "缴费页面", // 页面标题
       shouye: "no", // 是否是首页，不是首页显示返回上一层箭头
-
+      authCode: '',
       orderNo: "",
       second: 10,
       isSuccess: true,
@@ -188,38 +188,58 @@ var _default = {
     },
 
     getOrderDetail: function getOrderDetail() {var _this = this;
-      this.isShowResult = true;
-      this.isSuccess = true;
-      clearInterval(this.time);
+      this.isShowResult = false;
+      this.isSuccess = false;
+      // clearInterval(this.time);
+      var params = {
+        orderNo: this.orderNo };
 
       this.$myRequest({
-        url: "/wechat/user/dfltPtCard/info" }).
+        url: "/hospt/getWechatOrderList",
+        data: params }).
       then(function (res) {
         if (res.data.length === 0) {
           _this.isShowResult = true;
           _this.isSuccess = false;
           clearInterval(_this.time);
+          setTimeout(function () {
+            uni.navigateBack();
+          }, 1000);
         } else {
           var paymentstatusId = res.data[0].paymentstatusId;
           if (paymentstatusId == 3010) {
             _this.isShowResult = true;
             _this.isSuccess = true;
             clearInterval(_this.time);
+            console.log(_this.authCode, "判断缴费");
+            if (_this.authCode) {
+              setTimeout(function () {
+                uni.navigateTo({
+                  url: '/pages/register-success/register-success?type=门诊' +
+                  '&orderDetail=' + JSON.stringify(
+                  res.data[0]) + '&authCode=' + '1' });
+
+              }, 1000);
+              return;
+            }
             setTimeout(function () {
-              url: '/pages/register-success/register-success?type=门诊&&' + JSON.stringify(
-              res.data[0]);
+              uni.navigateTo({
+                url: '/pages/register-success/register-success?type=门诊' +
+                '&orderDetail=' + JSON.stringify(
+                res.data[0]) });
+
             }, 1000);
-          } else if (paymentstatusId == 3011 && !_this.isTime) {
+          } else if (!paymentstatusId == 3010 && !_this.isTime) {
             _this.isShowResult = true;
             _this.isSuccess = false;
-          } else if (paymentstatusId == 3011) {
+
+            setTimeout(function () {
+              uni.navigateBack();
+            }, 1000);
+          } else {
             setTimeout(function () {
               _this.getOrderDetail();
             }, 1000);
-          } else if (paymentstatusId == 3014) {
-            _this.isShowResult = true;
-            _this.isSuccess = false;
-            clearInterval(_this.time);
           }
         }
       }).catch(function (err) {
@@ -230,6 +250,7 @@ var _default = {
 
   onLoad: function onLoad(e) {
     this.orderNo = e.orderNo;
+    this.authCode = e.authCode;
     console.log(this.orderNo);
   },
   mounted: function mounted() {var _this2 = this;
@@ -243,6 +264,7 @@ var _default = {
       }
     }, 1000);
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-alipay/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

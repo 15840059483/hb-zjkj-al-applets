@@ -379,6 +379,11 @@
 					regPeriod: ['上午'],
 					pay_Type: 'AL'
 				}
+				
+				uni.navigateTo({
+					url: '/pages/paymentPage/paymentPage?orderNo=' + '1245789'
+				});
+				return
 
 				this.$myRequest({
 					url: "/wechat/pay/reg",

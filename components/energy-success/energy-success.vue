@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="energy_wrap">
-			<image src="../../static/xa5TWq.png"></image>{{ message || '能量发放成功' }}<span>{{energyNum}}g</span>
+			<image src="https://s1.ax1x.com/2022/10/13/xa5TWq.png"></image>{{ message || '能量发放成功' }}<span>{{energyNum}}g</span>
 		</view>
 	</view>
 </template>

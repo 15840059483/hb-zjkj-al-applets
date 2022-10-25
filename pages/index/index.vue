@@ -41,10 +41,7 @@
 			<uni-card shadow="never" v-else>
 				<uni-row class="card-row">
 					<div v-if="isToken" class="patient-wrapper-button" @click="addCardNumber">请点击注册卡号</div>
-					<button v-if="!isToken" open-type="getAuthorize" scope="userInfo" @getAuthorize="onAuthBtn"
-						@error="onAuthError">
-						个人信息授权
-					</button>
+					<div v-if="!isToken" class="patient-wrapper-button" @click="onAuthBtn">请点击注册用户信息</div>
 					<!-- <div v-if="!isToken" class="patient-wrapper-button" @click="onAuthBtn">点击授权</div> -->
 				</uni-row>
 			</uni-card>
@@ -284,7 +281,7 @@
 					return;
 				}
 				//console.log(meta)
-				if (!meta) {
+				if (true) {
 					uni.navigateTo({
 						url: url
 					})
@@ -324,71 +321,7 @@
 					})
 			},
 			onAuthBtn() {
-				console.log(this.alUserInfo)
-				const _this = this;
-				let aliUser = my.getStorageSync({
-					key: 'alUserInfo'
-				}).data
-				//let userInfo = JSON.parse(res.response).response // 以下方的报文格式解析两层 response
-				//console.log(userInfo)
-				console.log(aliUser)
-				const params = {
-					realname: aliUser.userName,
-					//mobile: userInfo.mobile,
-					mobile: aliUser.mobile,
-					userIdCard: aliUser.certNo,
-					/* 两个userid 从缓存中取 */
-					aliUserId: my.getStorageSync({
-						key: 'user_id'
-					}).data,
-					alipayUserId: '',
-					/* M男 F女 */
-					gender: Number(aliUser.certNo.substring(16,17))&2 !=1 ? 2 : 1,
-					birthday: '2022-02-03',
-				}
-				
-				this.$myRequest({
-					url: "/wechat/register/normal",
-					data: params,
-				}).then(data => {
-				
-					console.log(data)
-				
-					if (data.code !== 200) {
-						uni.showToast({
-							title: data.msg,
-							icon: 'none',
-							duration: 2000
-						});
-						// this.$message.warning(data.msg);
-					} else {
-						uni.showToast({
-							title: '注册成功',
-							icon: 'none',
-							duration: 2000
-						});
-						my.setStorageSync({
-							key: 'token',
-							data: data.data
-						})
-				
-						_this.isToken = true;
-				
-						_this.getDfltPtCardInfo();
-					}
-					this.loading = false;
-				}).catch(err => {
-					this.loading = false;
-				})
-				console.log('userInfo', userInfo)
-				// my.getOpenUserInfo({
-				// 	success: (res) => {
-						
-				// 	},
-				// 	fail: (res) => {
-				// 		console.log('fail', res)
-				// 	}
-				// });
+
 			},
 		},
 		created() {
@@ -398,85 +331,10 @@
 		onLoad() {
 			// this.jiazai()
 		},
-		onShow() {
+		async onShow() {
+			await this.$onLaunched
 			// this.jiazai()
-			let _this = this
-			my.getStorage({
-				key: 'token',
-				success: function(res) {
-					console.log(res)
-					if (!res.data) {
-						_this.isToken = false
-						my.getAuthCode({
-							scopes: 'auth_user',
-							success: res => {
-								console.log(res)
-								_this.$myRequest({
-										// url: `/al/auth/login?code=${res.code}`,
-										url: `/al/auth/login?code=${res.authCode}`,
-										method: 'get'
-									})
-									.then((data) => {
-
-										this.alUserInfo = data.data.aliUserInfo;
-										console.log(this.alUserInfo)
-										console.log(this.alUserInfo.userName)
-										// _this.user_id = data.user_id;
-										my.setStorageSync({
-											key: 'alUserInfo',
-											data: data.data.aliUserInfo
-										})
-										my.setStorageSync({
-											key: 'user_id',
-											data: data.data.aliUserId
-										})
-										my.removeStorage({
-											key: 'token'
-										})
-										console.log(data.data.reg)
-
-
-										if (!data.data.reg) {
-											// _this.$router.push('/register')
-											uni.showToast({
-												title: '还没有注册哟~',
-												icon: 'none',
-												duration: 2000
-											});
-										} else {
-											my.setStorageSync({
-												key: 'token',
-												data: data.data.token
-											})
-											_this.getDfltPtCardInfo();
-											_this.isToken = true;
-										}
-									})
-							},
-						});
-					} else {
-						_this.getDfltPtCardInfo();
-						//console.log(decodeURIComponent('03al5b#%EF%BC%88%E4%BA%8C%EF%BC%89%20%E6%8E%88%E6%9D%83%E9%97%AE%E9%A2%98'))
-						// my.getAuthCode({
-						//   scopes: ['auth_user','hospital_order'], // 主动授权：auth_user，静默授权：auth_base。或者其它scope  success: (res) => {
-						//   success: res => {
-						//     if (res.authCode) {
-						// 		let datas = {code:res.authCode,orderNo:'202210211558187539910'}
-						//       // 认证成功      // 调用自己的服务端接口，让服务端进行后端的授权认证，并且利用session，需要解决跨域问题      my.request({
-						//         _this.$myRequest({
-						//         	url: "/al/auth/send",
-						//         	method: "GET",
-						//         	data: datas,
-						//         }).then(data => {
-						//         	console.log(data)
-						        	
-						//         });
-						// 	}
-						//   },
-						// });
-					}
-				}
-			})
+			this.getDfltPtCardInfo();
 		},
 		mounted() {
 			// const item = JSON.parse(JSON.stringify(localStorage.getItem('selectPatient')));
@@ -637,16 +495,16 @@
 					//routLink: '/addPatient',
 					routLink: '',
 					meta: true
-				},
+				},*/
 				{
 					id: 2,
 					menuName: '挂号记录',
 					twoTitle: '快速缴费不排队',
 					routerUrl: '',
 					imageUrl: ('https://s1.ax1x.com/2022/09/02/vIrLnK.jpg'),
-					routLink: '',
+					routLink: '/pages/registration-record/registration-record',
 					meta: true
-				},*/
+				},
 				{
 					id: 5,
 					menuName: '门诊缴费记录',

@@ -190,6 +190,8 @@
 	// 引入导航栏组件
 	// import header from '@/components/header/header.vue'
 	// 引入scss组件
+	import monitor from '../../utils/alipayLogger.js';
+	import { reportCmPV } from '../../utils/cloudMonitorHelper';
 	import "./outpatientPayment.scss";
 	export default {
 		// 调用头部组件
@@ -256,6 +258,10 @@
 				loading: true,
 			}
 		},
+		onLoad(e){
+			reportCmPV({ title: '门诊缴费', e });
+			monitor._lgPV({page: '门诊缴费', url:'pages/outpatientPayment/outpatientPayment'})
+		},
 		methods: {
 
 			// 就诊人中的全部方法
@@ -268,9 +274,39 @@
 				this.$myRequest({
 					url: "/wechat/user/patientcard/info",
 				}).then(data => {
-					this.switchPatientList = data.data;
-					this.currentPatient = data.data[0];
-					this.getOutPayList()
+					
+					console.log(data.data.length>0&&!data.data[0].cardNumber,"判断用户信息")
+					if(data.data.length>0&&!data.data[0].cardNumber){
+						const params = Object.assign(data.data[0], {
+							cardNo: ''
+						})
+						console.log("开始了呀")
+						_this.$myRequest({
+							url: "/wechat/user/addPtCard/info",
+							contentType: 'application/json;charset=UTF-8',
+							data: params
+						}).then(data => {
+							console.log("完成")
+							this.loading = false;
+							_this.getPatientInfo()
+						}).catch(err => {
+							this.loading = false;
+						})
+						
+					}
+					if(!data.data.length>0){
+						this.loading = false;
+						uni.navigateTo({
+							url: '/pages/patient-management/add-patient/add-patient'
+						})
+					}
+					
+					if(data.data.length>0&&data.data[0].cardNumber){
+						this.switchPatientList = data.data;
+						this.currentPatient = data.data[0];
+						
+						this.getOutPayList();
+					}
 					this.loading = false;
 				}).catch(err => {
 					this.loading = false;
@@ -453,6 +489,7 @@
 					data: params
 				}).then(data => {
 					if(data.code==0){
+						monitor.api({api:"门诊缴费",success:true,c1:"taSR_YL",time:200})
 						my.tradePay({
 						  // 调用统一收单交易创建接口（alipay.trade.create），获得返回字段支付宝交易号trade_no
 						  tradeNO: data.data.tradeNO,
@@ -485,8 +522,10 @@
 				// this.$router.push('/paymentPage?orderNo');
 			}
 		},
-		mounted() {
+		async onShow() {
+			await this.$onLaunched
 			this.getPatientInfo();
+			//this.jiazai()
 		},
 	};
 </script>

@@ -120,10 +120,25 @@
 			
 			},
 		},
-		mounted() {
-			this.getPatientInfo()
+		async onShow() {
+			await this.$onLaunched
+			this.getPatientInfo();
+			
 		},
+		
 		methods: {
+			// 添加就诊人
+			addPatient() {
+				uni.navigateTo({
+					url: '/pages/patient-management/add-patient/add-patient'
+				})
+			},
+			// 管理就诊人
+			managePatient() {
+				uni.navigateTo({
+					url: '/pages/patient-management/patient-management'
+				})
+			},
 			// 切换就诊人
 			onSwitchPatientBtn(item) {
 				this.currentPatient = item;
@@ -135,16 +150,56 @@
 				this.showSwitchPatient = true;
 			},
 			getPatientInfo() {
-				this.loading = true
+				const _this = this
 				this.$myRequest({
-					url: "/wechat/user/patientcard/info"
+					url: "/wechat/user/patientcard/info",
 				}).then(data => {
-					if (data && data.data && data.data && data.data.length > 0) {
+					if(data.data.length>0&&data.data[0].cardNumber){
 						this.switchPatientList = data.data;
 						this.currentPatient = data.data[0];
-						this.getList();
+					}
+					console.log(data.data.length>0&&!data.data[0].cardNumber,"判断用户信息")
+					if(data.data.length>0&&!data.data[0].cardNumber){
+						uni.showModal({
+							title: "提示",
+							content: "是否添加就诊人?",
+							success: function(res) {
+								if (res.confirm) {
+									_this.addCard()
+								} else {
+									uni.showToast({
+										title: '已取消添加就诊人！',
+										icon: 'none',
+										duration: 2000
+									});
+								}
+							}
+						});
+					}
+					if(!data.data.length>0){
+						this.loading = false;
+						uni.navigateTo({
+							url: '/pages/patient-management/add-patient/add-patient'
+						})
 					}
 					this.loading = false;
+				}).catch(err => {
+					this.loading = false;
+				})
+			},
+			addCard(){
+				const params = Object.assign(data.data[0], {
+					cardNo: ''
+				})
+				console.log("开始了呀")
+				this.$myRequest({
+					url: "/wechat/user/addPtCard/info",
+					contentType: 'application/json;charset=UTF-8',
+					data: params
+				}).then(data => {
+					console.log("完成")
+					this.loading = false;
+					this.getPatientInfo()
 				}).catch(err => {
 					this.loading = false;
 				})

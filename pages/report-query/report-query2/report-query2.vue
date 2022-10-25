@@ -158,10 +158,14 @@
 				</div>
 			</div> -->
 		</view>
+		<energy-success v-if="showToast" :message="toastMessage" :energy-num="energyNum"></energy-success>
 	</view>
+	
 </template>
 
 <script>
+	import monitor from '../../../utils/alipayLogger.js';
+	import { reportCmPV } from '../../../utils/cloudMonitorHelper';
 	import './report-query2.css'
 	import './outpatientPayment.scss'
 	import './hospitalizationPayment.scss'
@@ -210,6 +214,9 @@
 		},
 		data() {
 			return {
+				toastMessage:'',
+				showToast:false,
+				energyNum:0,
 				title: "提交审核", // 页面标题
 				shouye: "no", // 是否是首页，不是首页显示返回上一层箭头
 				loading: false,
@@ -228,6 +235,18 @@
 				},
 			}
 		},
+		onLoad(e){
+			// this.toastMessage = '本次挂号得到能量为'
+			// this.energyNum = Number(1)
+			// this.showToast = true
+			
+			// setTimeout(() => {
+			// 	this.showToast = false
+			// }, 3000000)
+			reportCmPV({ title: '报告查询', e });
+			monitor._lgPV({page: '报告查询', url:'pages/report-query/report-query2/report-query2'})
+
+		},
 		methods: {
 			// 加载框
 			jiazai() {
@@ -244,8 +263,8 @@
 				this.patient = {
 					// name: '',
 					// admissionNumber: undefined
-					name: '张玉春',
-					admissionNumber: '0800039764'
+					name: '卫恒政',
+					admissionNumber: '0800039862'
 				};
 			},
 			// 添加就诊人
@@ -299,48 +318,53 @@
 					patientId: this.patient.admissionNumber
 				}
 				this.jiazai();
-				
-				my.getAuthCode({
-				  scopes: 'mfrstre',
-				  success: item => {
-					  if(item.authCode){
-						  let datas = {
-						  	code: item.authCode,
-						  	scene: 'hoinquire'
-						    }
+				this.$myRequest({
+					url: "/zjkj/list",
+					method: "POST",
+					data: parans,
+				}).then(res => {
+					monitor.api({api:"报告查询",success:true,c1:"taSR_YL",time:200})
+					console.log(res.data)
+					this.jiazai();
+					if (res && res.data && res.data.length > 0&&res.data[0].resultList) {
+						this.list = res.data;
+						my.getAuthCode({
+						  scopes: 'mfrstre',
+						  success: item => {
+							  if(item.authCode){
+								  let datas = {
+								  	code: item.authCode,
+								  	scene: 'hoinquire'
+								    }
+								    
+								  this.$myRequest({
+								  	url: "/al/auth/al/sendCity",
+								  	method: "GET",
+								  	data: datas,
+								  }).then(data => {
+								  	this.toastMessage = '本次查询报告得到能量为'
+								  	this.energyNum = Number(data.data.totalEnergy)
+								  	this.showToast = true
+								  	
+								  	setTimeout(() => {
+								  		this.showToast = false
+								  	}, 3000)
+									
+								  });
+							  }
 						    
-						  this.$myRequest({
-						  	url: "/al/auth/al/sendCity",
-						  	method: "GET",
-						  	data: datas,
-						  }).then(data => {
-						  	console.log(data)
-						  	my.alert({
-						  	  content: '能量授权了哟！',
-						  	});
-						  });
-					  }
-				    
-				  },
-				});
+						  },
+						});
+						
+						console.log(this.list)
+					}
+					this.showAddPatient = false;
+				}).catch(err => {
+					this.loading = true;
+				})
+				
 
-				// this.$myRequest({
-				// 	url: "/zjkj/list",
-				// 	method: "POST",
-				// 	data: parans,
-				// }).then(res => {
-				// 	console.log(res.data)
-				// 	this.jiazai();
-				// 	if (res && res.data && res.data.length > 0&&res.data.resultList) {
-				// 		this.list = res.data;
-						
-						
-				// 		console.log(this.list)
-				// 	}
-				// 	this.showAddPatient = false;
-				// }).catch(err => {
-				// 	this.loading = true;
-				// })
+				
 
 				// this.$api.outpatientDepartmentService.getZjkjList(parans)
 				// 	.then((data) => {

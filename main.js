@@ -29,6 +29,11 @@ Vue.prototype.$hospitalId = '1';
 
 // 将封装好的Request挂载到全局
 Vue.prototype.$myRequest = myRequest
+
+Vue.prototype.$onLaunched = new Promise(resolve => {
+    Vue.prototype.$isResolve = resolve
+})
+
 App.mpType = 'app'
 const app = new Vue({
 	store,

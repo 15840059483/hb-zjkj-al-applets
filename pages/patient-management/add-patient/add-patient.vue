@@ -315,6 +315,13 @@
 					return
 				}
 				this.loading = true
+				if(this.formData.patientRelationship=='1030'){
+					this.formData.patientName = this.val.userName;
+					this.formData.cardNo = '';
+					this.formData.patientBirthday = '';
+					this.formData.patientCardId = this.val.certNo;
+					this.formData.patientPhone = this.val.mobile;
+				}
 				const params = Object.assign(this.formData)
 				const _this = this
 				if (this.formData.cardNo == null || this.formData.cardNo == '') {

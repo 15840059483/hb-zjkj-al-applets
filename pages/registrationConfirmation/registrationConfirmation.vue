@@ -191,6 +191,7 @@
 <script>
 	// 引入导航栏组件
 	// import header from '@/components/header/header.vue'
+	import monitor from '../../utils/alipayLogger.js';
 	import '../patient-management/patient-management.scss';
 	import './registrationConfirmation.scss';
 	import store from "../../store";
@@ -276,71 +277,6 @@
 				// 关闭弹窗
 				this.$refs.nengliang.close();
 			},
-			/* 此处代码已作废，仅供参考
-			// 控制动画的方法
-						showMore() {
-							//获取当前时间的时间戳
-
-							let now = new Date().valueOf();
-
-							//第一次点击
-							// 控制两秒内点击多次只触发一次方法
-							if (this.lastTime == 0) {
-
-								console.log('触发事件');
-								// 控制显示
-								this.showOtherPatient = !this.showOtherPatient
-
-								// 先展开500毫秒后再显示文字,收缩200毫秒后再隐藏文字
-								if (this.isShowText) {
-									setTimeout(() => {
-										this.isShowText = !this.isShowText
-									}, 500)
-								} else {
-									setTimeout(() => {
-										this.isShowText = !this.isShowText
-									}, 900)
-								}
-								this.lastTime = now;
-
-							} else {
-
-								if ((now - this.lastTime) > 2000) {
-
-									//重置上一次点击时间，2000是我自己设置的2秒间隔，根据自己的需要更改
-									// 控制显示
-									this.showOtherPatient = !this.showOtherPatient
-
-									// 先展开500毫秒后再显示文字,收缩200毫秒后再隐藏文字
-									if (this.isShowText) {
-										setTimeout(() => {
-											this.isShowText = !this.isShowText
-										}, 500)
-									} else {
-										setTimeout(() => {
-											this.isShowText = !this.isShowText
-										}, 900)
-									}
-									this.lastTime = now;
-
-									console.log('间隔大于2秒，触发方法');
-
-									//添加自己要调用的方法
-
-								} else {
-									uni.showToast({
-										title: '点的太快啦！QAQ',
-										icon: 'none',
-										duration: 2000
-									});
-									console.log('不触发');
-
-								}
-
-							}
-						},
-			*/
-
 
 			// 加载框
 			jiazai() {
@@ -353,20 +289,83 @@
 			},
 			//获取就诊人
 			getPatientInfo() {
+				const _this = this
 				this.$myRequest({
 					url: "/wechat/user/patientcard/info",
 				}).then(data => {
-					this.patients = data.data;
-					this.selectPatient = data.data[0];
+					if(data.data.length>0&&data.data[0].cardNumber){
+						this.patients = data.data;
+						this.selectPatient = data.data[0];
+						this.$nextTick(() => {
+							this.$refs.collapse.resize()
+						})
+					}
+					console.log(data.data.length>0&&!data.data[0].cardNumber,"判断用户信息")
+					if(data.data.length>0&&!data.data[0].cardNumber){
+						uni.showModal({
+							title: "提示",
+							content: "是否添加就诊人?",
+							success: function(res) {
+								if (res.confirm) {
+									_this.addCard()
+								} else {
+									uni.showToast({
+										title: '已取消添加就诊人！',
+										icon: 'none',
+										duration: 2000
+									});
+								}
+							}
+						});
+					}
+					if(!data.data.length>0){
+						this.loading = false;
+						uni.navigateTo({
+							url: '/pages/patient-management/add-patient/add-patient'
+						})
+					}
 					this.loading = false;
-					this.$nextTick(() => {
-						this.$refs.collapse.resize()
-					})
+				}).catch(err => {
+					this.loading = false;
+				})
+			},
+			addCard(){
+				const params = Object.assign(data.data[0], {
+					cardNo: ''
+				})
+				console.log("开始了呀")
+				this.$myRequest({
+					url: "/wechat/user/addPtCard/info",
+					contentType: 'application/json;charset=UTF-8',
+					data: params
+				}).then(data => {
+					console.log("完成")
+					this.loading = false;
+					this.getPatientInfo()
 				}).catch(err => {
 					this.loading = false;
 				})
 			},
 			payRegister() {
+				if(!this.selectPatient.cardNumber){
+					uni.showModal({
+						title: "提示",
+						content: "是否添加就诊人?",
+						success: function(res) {
+							if (res.confirm) {
+								this.addCard()
+							} else {
+								uni.showToast({
+									title: '已取消添加就诊人！',
+									icon: 'none',
+									duration: 2000
+								});
+							}
+						}
+					});
+					return
+				}
+				
 				const params = {
 					deptId: this.deptId,
 					deptName: this.deptName,
@@ -385,6 +384,7 @@
 					data: params
 				}).then(data => {
 					if (data.code == 0) {
+						monitor.api({api:"预约挂号",success:true,c1:"taSR_YL",time:200})
 						my.tradePay({
 							// 调用统一收单交易创建接口（alipay.trade.create），获得返回字段支付宝交易号trade_no
 							tradeNO: data.data.tradeNO,
@@ -428,13 +428,17 @@
 			this.deptName = e.deptName;
 			this.deptId = e.deptId;
 			this.date = e.date;
+			// reportCmPV_YL({ title: '挂号订单支付', e });
+			monitor._lgPV({page: '预约挂号订单', url:'pages/registrationConfirmation/registrationConfirmation'})
 			this.jiazai()
 		},
-		onShow() {
+		async onShow() {
+			await this.$onLaunched
+			this.getPatientInfo();
 			this.jiazai()
 		},
 		mounted() {
-			this.getPatientInfo();
+			//this.getPatientInfo();
 			//获取vuex中的科室名称
 			this.keshiname = store.state.keshiname;
 			this.jiazai()

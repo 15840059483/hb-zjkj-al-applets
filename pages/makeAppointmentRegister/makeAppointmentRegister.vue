@@ -148,6 +148,7 @@
 
 <script>
 	// 引入scss文件
+	import { reportCmPV } from '../../utils/cloudMonitorHelper';
 	import './makeAppointmentRegister.scss'
 	import base from "../../request/base";
 	import store from "../../store";
@@ -201,10 +202,29 @@
 		},
 		// 在uniapp中如果要使用路由传参必须使用onload(路由传参中的参数值)
 		onLoad(e) {
-			//console.log(e);
-			this.deptId = e.id;
-			this.deptName = e.deptName;
-			//console.log(this.deptId)
+			reportCmPV({ title: '预约挂号', e });
+			let deptId = my.getStorageSync({
+				key: 'deptId'
+			}).data
+			
+			let deptName = my.getStorageSync({
+				key: 'deptName'
+			}).data
+			
+			console.log(deptId,'deptId')
+			console.log(deptName,'deptName')
+			
+			if (deptId&&deptName) {
+				this.deptId = deptId;
+				this.deptName = deptName;
+				my.removeStorageSync({key: 'deptId'})
+				my.removeStorageSync({key: 'deptName'})
+			} else {
+				this.deptId = e.id;
+				this.deptName = e.deptName;
+			}
+			console.log(this.deptName,this.deptId)
+			//reportCmPV({ title: '预约挂号', e });
 			this.jiazai()
 		},
 		methods: {
@@ -215,7 +235,7 @@
 				setTimeout(() => {
 					this.loading = false;
 					//console.log(this.loading);
-				}, 500)
+				}, 2000)
 			},
 
 			// 控制动画的方法
@@ -457,15 +477,16 @@
 			},
 		},
 		// 这是uni的生命周期
-		onShow() {
-			this.jiazai()
+		async onShow() {
+			await this.$onLaunched
+			this.getDetDoctorInfo();
 		},
 		mounted() {
 			console.log(this.baseUrl)
 			console.log(base)
 			this.getDays(this.today.getDate(), this.today.getMonth());
 			this.getWeeks(this.today.getDay());
-			this.getDetDoctorInfo();
+			
 			let a = "12:00:00".replace(/-/g, "/");
 			let b = new Date(a);
 			//console.log(new Date().getHours());

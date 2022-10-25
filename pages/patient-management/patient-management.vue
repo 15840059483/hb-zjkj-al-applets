@@ -114,7 +114,7 @@
 						</view>
 
 					</view>
-					<view class="patient-container-row">
+					<!-- <view class="patient-container-row">
 						<view style="width: 30%;">年龄</view>
 						<view style="width: 60%;text-align: right;">
 							<view class="text-right">{{item.patientAge}}</view>
@@ -122,7 +122,7 @@
 						<view style="width: 10%;text-align: right;">
 
 						</view>
-					</view>
+					</view> -->
 					<view class="patient-container-row">
 						<view style="width: 30%;">身份证号</view>
 						<view style="width: 60%;text-align: right;">
@@ -505,8 +505,6 @@
 					// this.isShowDelConfirm = false;
 					this.loading = false;
 				}).catch(err => {
-					this.loading = false;
-				}).final(_ => {
 					this.loading = false;
 				})
 			},

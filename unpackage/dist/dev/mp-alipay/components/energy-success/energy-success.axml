@@ -1,1 +1,1 @@
-<view class="data-v-563878f8"><view class="energy_wrap data-v-563878f8"><image src="../../static/xa5TWq.png" class="data-v-563878f8"></image>{{message||'能量发放成功'}}<label class="_span data-v-563878f8">{{energyNum+"g"}}</label></view></view>
+<view class="data-v-563878f8"><view class="energy_wrap data-v-563878f8"><image src="https://s1.ax1x.com/2022/10/13/xa5TWq.png" class="data-v-563878f8"></image>{{message||'能量发放成功'}}<label class="_span data-v-563878f8">{{energyNum+"g"}}</label></view></view>

@@ -91,8 +91,8 @@
 							setTimeout(() => {
 								uni.navigateTo({
 									url: '/pages/register-success/register-success?type=门诊' +
-										'&orderDetail=' + JSON.stringify(
-											res.data[0])
+										'&orderDetail=' + encodeURIComponent(JSON.stringify(
+											res.data[0]))
 								})
 							}, 1000)
 						} else if (!paymentstatusId == 3010 && !this.isTime) {

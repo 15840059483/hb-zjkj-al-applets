@@ -41,7 +41,7 @@
 			<uni-card shadow="never" v-else>
 				<uni-row class="card-row">
 					<div v-if="isToken" class="patient-wrapper-button" @click="addCardNumber">请点击注册卡号</div>
-					<div v-if="!isToken" class="patient-wrapper-button" @click="onAuthBtn">请点击注册用户信息</div>
+					<div v-if="!isToken" class="patient-wrapper-button" @click="goToPage('/pages/patient-management/add-patient/add-patient',true)">请点击添加就诊人</div>
 					<!-- <div v-if="!isToken" class="patient-wrapper-button" @click="onAuthBtn">点击授权</div> -->
 				</uni-row>
 			</uni-card>
@@ -219,6 +219,9 @@
 					url: "/wechat/user/dfltPtCard/info",
 				}).then(data => {
 					this.dfltPatientInfo = data.data || {};
+					if(!data.data){
+						this.isToken = false;
+					}
 					this.loading = false;
 				}).catch(err => {
 					this.loading = false;
@@ -281,7 +284,7 @@
 					return;
 				}
 				//console.log(meta)
-				if (true) {
+				if (meta) {
 					uni.navigateTo({
 						url: url
 					})
@@ -458,7 +461,7 @@
 					routerUrl: '',
 					imageUrl: ('https://s1.ax1x.com/2022/09/02/vIsAHS.png'),
 					routLink: '/pages/survey-new-coupons/survey-new-coupons'
-				},*/
+				},
 				{
 					id: 14,
 					menuName: '核酸检测',
@@ -466,7 +469,7 @@
 					routerUrl: '',
 					imageUrl: ('https://s1.ax1x.com/2022/09/02/vIsCct.png'),
 					routLink: '/pages/hesuanjiance/Zizhukaidan/zizhukaidan'
-				},
+				},*/
 				/*{
 					id: 15,
 					menuName: '预约信息',

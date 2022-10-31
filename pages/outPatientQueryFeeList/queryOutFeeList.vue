@@ -14,11 +14,17 @@
 							<span>{{ processingName(currentPatient.patientName) }}</span>
 
 						</div>
-						<view :span="12" class="change-patient-name">
+						<view :span="12" class="change-patient-name" v-if="currentPatient.cardNumber">
 							<button class="change-patient-name-btn"
 								style="transform: scale(1.0);line-height: .5rem;border-radius: 20px 20px;"
 								@click="switchPatient">切换就诊人</button>
 						</view>
+						<view :span="12" class="change-patient-name" v-if="!currentPatient.cardNumber">
+							<button class="change-patient-name-btn"
+								style="transform: scale(1.0);line-height: .5rem;border-radius: 20px 20px;"
+								@click="getPatientInfo()">点击注册</button>
+						</view>
+						
 					</div>
 
 					<div style="width: 100%;">
@@ -306,18 +312,78 @@
 				this.showSwitchPatient = true;
 			},
 			//就诊人信息的数据
+			//就诊人信息的数据
 			getPatientInfo() {
+				const _this = this
 				this.$myRequest({
 					url: "/wechat/user/patientcard/info",
 				}).then(data => {
-					this.switchPatientList = data.data;
-					this.currentPatient = data.data[0];
-					this.getOutPayList()
+					if(data.data.length>0&&data.data[0].cardNumber){
+						this.switchPatientList = data.data;
+						this.currentPatient = data.data[0];
+						
+						_this.getOutPayList();
+					}
+					console.log(data.data.length>0&&!data.data[0].cardNumber,"判断用户信息")
+					if(data.data.length>0&&!data.data[0].cardNumber){
+						uni.showModal({
+							title: "提示",
+							content: "是否添加就诊卡号?",
+							success: function(res) {
+								if (res.confirm) {
+									_this.addCard(data)
+								} else {
+									uni.showToast({
+										title: '已取消添加就诊卡号！',
+										icon: 'none',
+										duration: 2000
+									});
+								}
+							}
+						});
+					}
+					if(!data.data.length>0){
+						this.loading = false;
+						uni.showModal({
+							title: "提示",
+							content: "是否添加就诊人?",
+							success: function(res) {
+								if (res.confirm) {
+									uni.navigateTo({
+										url: '/pages/patient-management/add-patient/add-patient'
+									})
+								} else {
+									uni.showToast({
+										title: '已取消添加就诊人！',
+										icon: 'none',
+										duration: 2000
+									});
+								}
+							}
+						});
+						
+					}
 					this.loading = false;
 				}).catch(err => {
 					this.loading = false;
 				})
-				
+			},
+			addCard(data){
+				const params = Object.assign(data.data[0], {
+					cardNo: ''
+				})
+				console.log("开始了呀")
+				this.$myRequest({
+					url: "/wechat/user/addPtCard/info",
+					contentType: 'application/json;charset=UTF-8',
+					data: params
+				}).then(data => {
+					console.log("完成")
+					this.loading = false;
+					this.getPatientInfo()
+				}).catch(err => {
+					this.loading = false;
+				})
 			},
 			//切换就诊人，这个参数中包含就诊人信息
 			// onSwitchPatientBtn(item) {
@@ -533,8 +599,10 @@
 				})
 			},
 		},
-		mounted() {
+		async onShow() {
+			await this.$onLaunched
 			this.getPatientInfo();
+			//this.jiazai()
 		},
 	};
 </script>

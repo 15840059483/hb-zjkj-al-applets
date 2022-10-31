@@ -263,8 +263,8 @@
 				this.patient = {
 					// name: '',
 					// admissionNumber: undefined
-					name: '卫恒政',
-					admissionNumber: '0800039862'
+					name: '',
+					admissionNumber: ''
 				};
 			},
 			// 添加就诊人
@@ -326,7 +326,7 @@
 					monitor.api({api:"报告查询",success:true,c1:"taSR_YL",time:200})
 					console.log(res.data)
 					this.jiazai();
-					if (res && res.data && res.data.length > 0&&res.data[0].resultList) {
+					if (res && res.data && res.data.length > 0&&res.data[0].resultList.length) {
 						this.list = res.data;
 						my.getAuthCode({
 						  scopes: 'mfrstre',

@@ -304,10 +304,30 @@
 					if(data.data.length>0&&!data.data[0].cardNumber){
 						uni.showModal({
 							title: "提示",
+							content: "是否添加就诊卡号?",
+							success: function(res) {
+								if (res.confirm) {
+									_this.addCard(data)
+								} else {
+									uni.showToast({
+										title: '已取消添加就诊卡号！',
+										icon: 'none',
+										duration: 2000
+									});
+								}
+							}
+						});
+					}
+					if(!data.data.length>0){
+						this.loading = false;
+						uni.showModal({
+							title: "提示",
 							content: "是否添加就诊人?",
 							success: function(res) {
 								if (res.confirm) {
-									_this.addCard()
+									uni.navigateTo({
+										url: '/pages/patient-management/add-patient/add-patient'
+									})
 								} else {
 									uni.showToast({
 										title: '已取消添加就诊人！',
@@ -318,18 +338,12 @@
 							}
 						});
 					}
-					if(!data.data.length>0){
-						this.loading = false;
-						uni.navigateTo({
-							url: '/pages/patient-management/add-patient/add-patient'
-						})
-					}
 					this.loading = false;
 				}).catch(err => {
 					this.loading = false;
 				})
 			},
-			addCard(){
+			addCard(data){
 				const params = Object.assign(data.data[0], {
 					cardNo: ''
 				})
@@ -347,13 +361,34 @@
 				})
 			},
 			payRegister() {
-				if(!this.selectPatient.cardNumber){
+				console.log(this.selectPatient.patientName)
+				if(this.selectPatient.patientName&&!this.selectPatient.cardNumber){
+					uni.showModal({
+						title: "提示",
+						content: "是否添加就诊卡号?",
+						success: function(res) {
+							if (res.confirm) {
+								this.addCard()
+							} else {
+								uni.showToast({
+									title: '已取消添加就诊卡号！',
+									icon: 'none',
+									duration: 2000
+								});
+							}
+						}
+					});
+					return
+				}
+				if(!this.selectPatient.patientName){
 					uni.showModal({
 						title: "提示",
 						content: "是否添加就诊人?",
 						success: function(res) {
 							if (res.confirm) {
-								this.addCard()
+								uni.navigateTo({
+									url: '/pages/patient-management/add-patient/add-patient'
+								})
 							} else {
 								uni.showToast({
 									title: '已取消添加就诊人！',
@@ -364,8 +399,7 @@
 						}
 					});
 					return
-				}
-				
+				}				
 				const params = {
 					deptId: this.deptId,
 					deptName: this.deptName,

@@ -19,11 +19,11 @@ var _store = _interopRequireDefault(__webpack_require__(/*! ./store */ 14));
 var _api = _interopRequireDefault(__webpack_require__(/*! ./request/api */ 17));
 var _http = _interopRequireDefault(__webpack_require__(/*! ./request/http */ 18));
 
-var _api2 = __webpack_require__(/*! ./http/api.js */ 9);
+var _api2 = __webpack_require__(/*! ./http/api.js */ 63);
 
 
 
-__webpack_require__(/*! @/style/style.scss */ 63);
+__webpack_require__(/*! @/style/style.scss */ 64);
 
 
 
@@ -123,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
-var _alipayLogger = _interopRequireDefault(__webpack_require__(/*! ./utils/alipayLogger.js */ 723));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+var _alipayLogger = _interopRequireDefault(__webpack_require__(/*! ./utils/alipayLogger.js */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 var _default = {
   onLaunch: function onLaunch(options) {
 

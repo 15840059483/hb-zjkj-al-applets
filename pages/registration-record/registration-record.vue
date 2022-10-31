@@ -3,14 +3,17 @@
 		<!-- <Header title="缴费记录" isBack="yes"></Header> -->
 		<!-- loading加载动画，type默认值是原子，love爱心，mask属性是遮罩 -->
 		<!-- <zero-loading v-if="loading" type="pulse" mask></zero-loading> -->
-		<view shadow="never" v-if="currentPatient.cardNumber"
+		<view shadow="never"
 			style="padding: .2rem;margin-bottom: .2rem;background-color: #fff;">
 			<view class="card-row">
 				<view class="patient-name">
 					<span>{{ currentPatient.patientName | processingName }}</span>
 				</view>
-				<view class="change-patient-name">
+				<view class="change-patient-name" v-if="currentPatient.cardNumber">
 					<button class="change-patient-name-btn" @click="switchPatient">切换就诊人</button>
+				</view>
+				<view class="change-patient-name" v-if="!currentPatient.cardNumber">
+					<button class="change-patient-name-btn" @click="getPatientInfo()">点击注册</button>
 				</view>
 			</view>
 			<view class="card-row">
@@ -157,15 +160,36 @@
 					if(data.data.length>0&&data.data[0].cardNumber){
 						this.switchPatientList = data.data;
 						this.currentPatient = data.data[0];
+						this.getList();
 					}
 					console.log(data.data.length>0&&!data.data[0].cardNumber,"判断用户信息")
 					if(data.data.length>0&&!data.data[0].cardNumber){
 						uni.showModal({
 							title: "提示",
+							content: "是否添加就卡号?",
+							success: function(res) {
+								if (res.confirm) {
+									_this.addCard(data)
+								} else {
+									uni.showToast({
+										title: '已取消添加就诊卡号！',
+										icon: 'none',
+										duration: 2000
+									});
+								}
+							}
+						});
+					}
+					if(!data.data.length>0){
+						this.loading = false;
+						uni.showModal({
+							title: "提示",
 							content: "是否添加就诊人?",
 							success: function(res) {
 								if (res.confirm) {
-									_this.addCard()
+									uni.navigateTo({
+										url: '/pages/patient-management/add-patient/add-patient'
+									})
 								} else {
 									uni.showToast({
 										title: '已取消添加就诊人！',
@@ -176,18 +200,12 @@
 							}
 						});
 					}
-					if(!data.data.length>0){
-						this.loading = false;
-						uni.navigateTo({
-							url: '/pages/patient-management/add-patient/add-patient'
-						})
-					}
 					this.loading = false;
 				}).catch(err => {
 					this.loading = false;
 				})
 			},
-			addCard(){
+			addCard(data){
 				const params = Object.assign(data.data[0], {
 					cardNo: ''
 				})

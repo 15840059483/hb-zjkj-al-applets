@@ -12,7 +12,7 @@
 								住院人：{{ patientInfo.name }}[{{ patientInfo.inpatientNo }}]</view>
 							<view style="width: 20%;text-align: right;" class="text-right">
 								<img style="width: .35rem;height: .35rem;"
-									src="https://s1.ax1x.com/2022/09/28/xeI4gS.png" @click="openAddPatient" />
+									src="../../static/replacement.png" @click="openAddPatient" />
 							</view>
 						</view>
 						<view class="patient-info-row" style="display: flex;padding:10px 0;font-size: .22rem">
@@ -183,12 +183,12 @@
 					url: "/wechat/pay/hosp",
 					data: params
 				}).then(data => {
-					if(data.code==200){
+					if(data.code==0){
 						my.tradePay({
 						  // 调用统一收单交易创建接口（alipay.trade.create），获得返回字段支付宝交易号trade_no
 						  tradeNO: data.data.tradeNO,
 						  success: (res) => {
-							  if (!res.resultCode == '9000') {
+							  if (res.resultCode == '9000') {
 							  	// this.$refs.popo.close();
 							  	uni.navigateTo({
 							  		url: '/pages/paymentPage/paymentPage?orderNo=' + data
@@ -215,9 +215,9 @@
 			},
 			openAddPatient() {
 				this.showAddPatient = true;
-				this.patient = {
+				this.patient={
 					name: '',
-					admissionNumber: undefined
+					admissionNumber: ''
 				};
 			},
 		confirmBinding() {

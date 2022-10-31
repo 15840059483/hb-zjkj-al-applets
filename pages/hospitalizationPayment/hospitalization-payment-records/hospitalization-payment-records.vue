@@ -23,7 +23,7 @@
 								住院人：{{ patient.name }}</view>
 							<view style="width: 20%;text-align: right;" class="text-right">
 								<img style="width: .35rem;height: .35rem;"
-									src="https://s1.ax1x.com/2022/09/28/xeI4gS.png" @click="openAddPatient" />
+									src="../../../static/replacement.png" @click="openAddPatient" />
 							</view>
 						</view>
 						<view class="patient-info-row" style="display: flex;padding:10px 0">
@@ -162,10 +162,10 @@
 			},
 			openAddPatient() {
 				this.showAddPatient = true;
-				this.patient = {
-					name: "周颖",
-					admissionNumber: '0006000477'
-				};
+				this.patient={
+					name: '',
+					admissionNumber: ''
+				}
 			},
 			confirmBinding() {
 				if (!this.patient.name || !this.patient.admissionNumber) {

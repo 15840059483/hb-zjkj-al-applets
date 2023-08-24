@@ -1,0 +1,396 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.no-list {
+  margin-top: 1rem;
+}
+.no-list ._div {
+  width: 2rem;
+  height: 2rem;
+  margin: 0 auto;
+  border-radius: 50%;
+  background-color: #b8b8b8;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.no-list ._div ._img {
+  width: 60%;
+  height: 60%;
+}
+.no-list ._p {
+  text-align: center;
+  margin-top: .2rem;
+  color: #4d4d4d;
+  font-size: .35rem;
+  letter-spacing: 1px;
+}
+.switch-patient-bg {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 2002;
+}
+.switch-patient-bg .switch-patient-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+}
+.switch-patient-bg .switch-patient-container .border-bottom {
+  border-bottom: 1px solid #e1e1e1;
+}
+.switch-patient-bg .switch-patient-container .switch-patient-title {
+  padding: 16px 0;
+  position: relative;
+  font-weight: bold;
+  text-align: center;
+}
+.switch-patient-bg .switch-patient-container .switch-patient-title text {
+  position: absolute;
+  right: 25px;
+  top: 16px;
+  color: #e3e7e6;
+  font-size: 20px;
+}
+.switch-patient-bg .switch-patient-container .switch-patient-list {
+  padding: 14px .4rem;
+  position: relative;
+}
+.switch-patient-bg .switch-patient-container .switch-patient-list .patient-name {
+  margin-bottom: .4rem;
+  color: #080808;
+  font-size: 14px;
+  font-weight: bold;
+}
+.switch-patient-bg .switch-patient-container .switch-patient-list text {
+  position: absolute;
+  right: 40px;
+  top: 30px;
+  font-size: 24px;
+}
+.switch-patient-bg .switch-patient-container .switch-patient-btn {
+  text-align: center;
+  margin: .2rem 0;
+  padding: .2rem 0;
+  color: #008cfe;
+}
+.switch-patient-bg .switch-patient-container .switch-patient-btn-l {
+  border-right: 1px solid #e1e1e1;
+}
+.xianzhi > .card-container {
+  padding: .3rem .5rem;
+  display: flex;
+}
+.xianzhi > .card-container .change-patient-name {
+  text-align: right;
+}
+
+
+.overflow.data-v-7c8d45b8{
+	overflow: hidden;
+}
+.top.data-v-7c8d45b8 {
+	width: 100%;
+	height: 350rpx;
+	background-color: #3B71E8;
+	border-radius: 0 0 46rpx 46rpx;
+}
+.table.data-v-7c8d45b8 {
+	width: 100%;
+	display: flex;
+}
+.left.data-v-7c8d45b8 {
+	width: 70%;
+	margin: 50rpx 0 50rpx 60rpx;
+	color: #fff;
+}
+.payment.data-v-7c8d45b8 {
+	font-size: 28rpx;
+	color: #a6c1ff;
+}
+.hospital.data-v-7c8d45b8 {
+	font-size: 36rpx;
+	color: #ffffff;
+	padding-top: 10rpx;
+}
+.right.data-v-7c8d45b8 {
+	width: 30%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding-right: 60rpx;
+}
+.card.data-v-7c8d45b8 {
+	box-shadow: 0 0 -16px rgba(0, 0, 0, 0.05);
+	margin: 0 40rpx;
+	padding: 0 40rpx;
+	background-color: #fff;
+	border: 2rpx #e6e6e6 solid;
+	border-radius: 16rpx;
+	-webkit-transform: translateY(-170rpx);
+	        transform: translateY(-170rpx);
+}
+.menu-image.data-v-7c8d45b8 {
+	width: 80rpx;
+	height: 80rpx;
+}
+.body_bottom.data-v-7c8d45b8 {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+.Tips.data-v-7c8d45b8 {
+	width: 100%;
+	font-size: 28rpx;
+	color: #666666;
+	padding-bottom: 40rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.Tips-image.data-v-7c8d45b8 {
+	width: 80rpx;
+	height: 24rpx;
+	margin-right: 12rpx;
+}
+.bottom.data-v-7c8d45b8 {
+	width: 100%;
+	height: 158rpx;
+	display: flex;
+	border-top: #f5f5f5 2rpx solid;
+	background-color: #ffffff;
+}
+.bottom_span.data-v-7c8d45b8 {
+	width: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 28rpx;
+	color: #666666;
+}
+.botton.data-v-7c8d45b8 {
+	width: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.card_content_top.data-v-7c8d45b8 {
+	display: flex;
+	width: 100%;
+	font-size: 28rpx;
+	color: #909399;
+	margin-bottom: 20rpx;
+}
+.paymentDetails.data-v-7c8d45b8 .card_content_top:last-child {
+	margin-bottom: 0;
+}
+.cash.data-v-7c8d45b8 {
+	display: flex;
+	width: 100%;
+	color: #3b71e8;
+	font-size: 32rpx;
+	font-weight: 600;
+	margin: 44rpx 0;
+}
+.card_top.data-v-7c8d45b8 {
+	font-weight: bold;
+	display: flex;
+	width: 100%;
+	font-size: 36rpx;
+	color: #606266;
+	padding: 40rpx 0;
+	border-bottom: #eff0f4 2rpx dashed;
+	margin-bottom: 44rpx;
+}
+.card_top_title.data-v-7c8d45b8 {
+	width: 70%;
+	text-align: left;
+}
+.card_top_content.data-v-7c8d45b8 {
+	width: 70%;
+	text-align: right;
+}
+.card_bottom.data-v-7c8d45b8 {
+	width: 100%;
+	height: 108rpx;
+	border-top: #eff0f4 2rpx dashed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 28rpx;
+	color: #606266;
+}
+.detailList.data-v-7c8d45b8 {
+	border-top: #e5e5e5 1px solid;
+}
+.paymentSelection.data-v-7c8d45b8 {
+	margin: 0 44rpx;
+	-webkit-transform: translateY(-120rpx);
+	        transform: translateY(-120rpx);
+}
+.option.data-v-7c8d45b8 {
+	width: 100%;
+	display: flex;
+	margin-top: 30rpx;
+}
+.option_box.data-v-7c8d45b8 {
+	width: 50%;
+	height: 72rpx;
+	background-color: #f8f9fa;
+	border: 2rpx #cccccc solid;
+	color: #606266;
+	font-size: 26rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8rpx;
+}
+.option_box_click.data-v-7c8d45b8 {
+	background-color: #f6f9ff;
+	border: 2rpx #3b71e8 solid;
+	color: #3b71e8;
+}
+.switch-patient-title.data-v-7c8d45b8 {
+	display: flex;
+	align-items: center;
+	padding: 50rpx 0 30rpx 0 !important;
+	border-bottom: none !important;
+}
+.switch-Title.data-v-7c8d45b8 {
+	width: 70%;
+	text-align: left;
+	margin-left: 40rpx;
+	color: #303133;
+	font-size: 40rpx;
+}
+.switch-Image-Wai.data-v-7c8d45b8 {
+	width: 30%;
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 28rpx;
+}
+.switch-Image.data-v-7c8d45b8 {
+	width: 80rpx;
+	height: 80rpx;
+}
+.switchImage.data-v-7c8d45b8 {
+	width: 100%;
+	height: 100%;
+}
+.switch-Card.data-v-7c8d45b8 {
+	margin: 0 30rpx 30rpx 30rpx;
+	background-color: #fff;
+	border: 2rpx #e6e6e6 solid;
+	border-radius: 12rpx;
+}
+.title.data-v-7c8d45b8 {
+	width: 100%;
+	height: 130rpx;
+	color: #303133;
+	font-weight: 600;
+	font-size: 34rpx;
+	border-bottom: 2rpx #e6e6e6 solid;
+	display: flex;
+	align-items: center;
+}
+.title.data-v-7c8d45b8::before {
+	content: "";
+	width: 8rpx;
+	height: 32rpx;
+	background-color: #3b71e8;
+	margin-left: 10rpx;
+	margin-right: 24rpx;
+}
+.card-content.data-v-7c8d45b8 {
+	margin: 40rpx;
+}
+.card-content-List.data-v-7c8d45b8 {
+	display: flex;
+	margin-bottom: 24rpx;
+}
+.card-content.data-v-7c8d45b8 .card-content-List:last-child {
+	margin-bottom: 0;
+}
+.card-content-left.data-v-7c8d45b8,
+.card-content-right.data-v-7c8d45b8 {
+	color: #606266;
+	font-size: 28rpx;
+}
+.card-content-left.data-v-7c8d45b8 {
+	width: 40%;
+	text-align: left;
+}
+.card-content-right.data-v-7c8d45b8 {
+	width: 60%;
+	text-align: right;
+}
+.overFlow.data-v-7c8d45b8 {
+	width: 100%;
+	max-height: calc(100vh - 200rpx);
+	overflow: auto;
+}
+.costList.data-v-7c8d45b8::before {
+	content: "";
+	width: 10rpx;
+	height: 10rpx;
+	border: 2rpx solid #9fa2a7;
+	border-radius: 15rpx;
+	background-color: transparent;
+	margin-right: 10rpx;
+	margin-top: 10rpx;
+}
+.zhuti.data-v-7c8d45b8{
+	width: 100%;
+	height: 100vh;
+	background-color: #fff;
+}
+.loadingbody.data-v-7c8d45b8 {
+	padding-top: 240px;
+	text-align: center;
+}
+.image.data-v-7c8d45b8 {
+	display: flex;
+	justify-content: center;
+}
+.loadingImage.data-v-7c8d45b8 {
+	width: 164rpx;
+	height: 164rpx;
+}
+.loadingImage image.data-v-7c8d45b8 {
+	width: 100%;
+	height: 100%;
+}
+.loadingText.data-v-7c8d45b8 {
+	padding-top: 40rpx;
+	color: #3b71e8;
+	font-size: 32rpx;
+	font-weight: 600;
+}
+

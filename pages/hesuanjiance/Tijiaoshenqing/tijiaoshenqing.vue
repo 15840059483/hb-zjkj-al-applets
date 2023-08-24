@@ -351,6 +351,7 @@
 				// 让ceshi等于就诊人信息
 				this.ceshi = item;
 				console.log(item);
+				this.showSwitchPatient = false;
 			},
 			// 添加就诊人
 			addPatient() {

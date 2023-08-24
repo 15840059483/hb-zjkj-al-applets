@@ -43,7 +43,10 @@
     "pages/hospitalizationPayment/hospitalizationPayment",
     "pages/self-service-printing/self-service-printing",
     "pages/report-query/report-query2/report-query2",
-    "pages/report-query/report-query3/report-query3"
+    "pages/report-query/report-query3/report-query3",
+    "pages/empower/empower",
+    "pages/outpatientPayment/order/order",
+    "pages/outpatientPayment/order/loading"
   ],
   "subPackages": [],
   "window": {

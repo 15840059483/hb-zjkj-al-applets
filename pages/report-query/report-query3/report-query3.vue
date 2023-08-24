@@ -50,7 +50,6 @@
 					</uni-tr>
 					<uni-tr v-for="(item,index) in sampleList" :key="index">
 						<uni-td>{{item.itemname}}</uni-td>
-						<uni-td>{{item.rangeinfo}}</uni-td>
 						<uni-td v-if="item.Color=='blue'" >
 							<span style="color: rgb(0,142,254)">{{item.reportvalue}}&nbsp{{item.resultflag}}</span>
 						</uni-td>
@@ -58,6 +57,7 @@
 							<span style="color: red">{{item.reportvalue}}&nbsp{{item.resultflag}}</span>
 						</uni-td>
 						<uni-td v-if="item.Color=='black'">{{item.reportvalue}}</uni-td>
+						<uni-td>{{item.rangeinfo}}</uni-td>
 					</uni-tr>
 
 				</uni-table>

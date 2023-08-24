@@ -2,7 +2,7 @@
 
 /***/ 274:
 /*!***********************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/main.js?{"page":"pages%2FpaymentPage%2FpaymentPage"} ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/main.js?{"page":"pages%2FpaymentPage%2FpaymentPage"} ***!
   \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -20,7 +20,7 @@ my.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;createPage(_paymentPa
 
 /***/ 275:
 /*!****************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/paymentPage/paymentPage.vue ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/paymentPage/paymentPage.vue ***!
   \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -61,7 +61,7 @@ component.options.__file = "pages/paymentPage/paymentPage.vue"
 
 /***/ 276:
 /*!***********************************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/paymentPage/paymentPage.vue?vue&type=template&id=32fc971c&scoped=true& ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/paymentPage/paymentPage.vue?vue&type=template&id=32fc971c&scoped=true& ***!
   \***********************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -83,7 +83,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 277:
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/paymentPage/paymentPage.vue?vue&type=template&id=32fc971c&scoped=true& ***!
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/paymentPage/paymentPage.vue?vue&type=template&id=32fc971c&scoped=true& ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -110,7 +110,7 @@ render._withStripped = true
 
 /***/ 278:
 /*!*****************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/paymentPage/paymentPage.vue?vue&type=script&lang=js& ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/paymentPage/paymentPage.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -126,7 +126,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 279:
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/paymentPage/paymentPage.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/paymentPage/paymentPage.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -229,13 +229,28 @@ var _default = {
                 res.data[0])) });
 
             }, 1000);
-          } else if (!paymentstatusId == 3010 && !_this.isTime) {
+          } else if (!_this.isTime) {
             _this.isShowResult = true;
             _this.isSuccess = false;
+            clearInterval(_this.time);
+            var orderResult = res.data;
+            console.log(orderResult);
+            uni.showModal({
+              title: "提示",
+              content: "缴费失败，是否饭后继续支付?",
+              success: function success(res) {
+                if (res.confirm) {
+                  uni.navigateBack();
+                } else {
+                  uni.navigateTo({
+                    url: '/pages/register-success/register-success?type=门诊' +
+                    '&orderDetail=' + encodeURIComponent(JSON.stringify(
+                    orderResult[0])) });
 
-            setTimeout(function () {
-              uni.navigateBack();
-            }, 2000);
+                }
+              } });
+
+            return;
           } else {
             setTimeout(function () {
               _this.getOrderDetail();
@@ -259,7 +274,7 @@ var _default = {
       _this2.second--;
       if (_this2.second === 0) {
         _this2.isTime = false;
-        _this2.getOrderDetail();
+        //this.getOrderDetail();
         clearInterval(_this2.time);
       }
     }, 1000);
@@ -270,7 +285,7 @@ var _default = {
 
 /***/ 280:
 /*!**************************************************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/paymentPage/paymentPage.vue?vue&type=style&index=0&id=32fc971c&lang=scss&scoped=true& ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/paymentPage/paymentPage.vue?vue&type=style&index=0&id=32fc971c&lang=scss&scoped=true& ***!
   \**************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -286,7 +301,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 281:
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--8-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-2!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/sass-loader/dist/cjs.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/paymentPage/paymentPage.vue?vue&type=style&index=0&id=32fc971c&lang=scss&scoped=true& ***!
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--8-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-2!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/sass-loader/dist/cjs.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/paymentPage/paymentPage.vue?vue&type=style&index=0&id=32fc971c&lang=scss&scoped=true& ***!
   \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {

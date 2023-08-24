@@ -291,7 +291,7 @@
 			},
 			//切换就诊人，这个参数中包含就诊人信息
 			onSwitchPatientBtn(item) {
-
+this.showSwitchPatient = false
 			},
 			// 添加就诊人
 			addPatient() {},

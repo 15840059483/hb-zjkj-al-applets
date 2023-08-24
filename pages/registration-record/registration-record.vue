@@ -9,11 +9,14 @@
 				<view class="patient-name">
 					<span>{{ currentPatient.patientName | processingName }}</span>
 				</view>
-				<view class="change-patient-name" v-if="currentPatient.cardNumber">
+				<view class="change-patient-name" v-if="token&&currentPatient.cardNumber">
 					<button class="change-patient-name-btn" @click="switchPatient">切换就诊人</button>
 				</view>
-				<view class="change-patient-name" v-if="!currentPatient.cardNumber">
+				<view class="change-patient-name" v-if="token&&!currentPatient.cardNumber">
 					<button class="change-patient-name-btn" @click="getPatientInfo()">点击注册</button>
+				</view>
+				<view class="change-patient-name" v-if="!token&&!currentPatient.cardNumber">
+					<button class="change-patient-name-btn" @click="addUser()">点击授权</button>
 				</view>
 			</view>
 			<view class="card-row">
@@ -80,6 +83,7 @@
 				showSwitchPatient: false,
 				isSelectAll: false,
 				loading: false,
+				token:'',
 			}
 		},
 		filters: {
@@ -89,6 +93,7 @@
 				}
 				return val.slice(0, 4) + '-' + val.slice(4, 6) + '-' + val.slice(6, 8)
 			},
+			
 			processingName(str) {
 				if (!str) {
 					return '-';
@@ -123,13 +128,26 @@
 			
 			},
 		},
-		async onShow() {
-			await this.$onLaunched
-			this.getPatientInfo();
+		onShow() {
+			
+			this.token = my.getStorageSync({
+				key: 'token'
+			}).data
+			// this.jiazai()
+			if(this.token){
+				this.getPatientInfo();
+			}else{
+				this.loading = false;
+			}
 			
 		},
 		
 		methods: {
+			addUser(){
+					uni.navigateTo({
+						url: '/pages/empower/empower'  
+					})
+			},
 			// 添加就诊人
 			addPatient() {
 				uni.navigateTo({
@@ -148,6 +166,7 @@
 				this.isSelectAll = false;
 				this.listData = [];
 				this.getList();
+				this.showSwitchPatient = false;
 			},
 			switchPatient() {
 				this.showSwitchPatient = true;

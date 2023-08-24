@@ -403,8 +403,35 @@
 				// 导肮标题
 				"navigationBarTitleText": "报告列表"
 			}
+		},
+		{
+			// 授权页面
+			// 路径
+			"path": "pages/empower/empower",
+			"style": {
+				// 导肮标题
+				"navigationBarTitleText": "授权登录"
+			}
+		}, {
+			"path": "pages/outpatientPayment/order/order",
+			"style": {
+				"navigationBarTitleText": "确认支付",
+				"navigationBarBackgroundColor": "#3B71E8",
+				"backgroundColor": "#ffffff"
+
+			}
+
+		}, {
+			"path": "pages/outpatientPayment/order/loading",
+			"style": {
+				"navigationBarTitleText": "医保电子凭证",
+				"navigationBarBackgroundColor": "#ffffff",
+				"backgroundColor": "#ffffff"
+
+			}
+
 		}
-    ],
+	],
 	// 全局导航样式
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

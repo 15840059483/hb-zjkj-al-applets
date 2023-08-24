@@ -2,7 +2,7 @@
 
 /***/ 394:
 /*!***********************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/main.js?{"page":"pages%2FoutpatientPayment%2FoutpatientPayment"} ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/main.js?{"page":"pages%2FoutpatientPayment%2FoutpatientPayment"} ***!
   \***********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -20,7 +20,7 @@ my.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;createPage(_outpatien
 
 /***/ 395:
 /*!****************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/outpatientPayment/outpatientPayment.vue ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/outpatientPayment/outpatientPayment.vue ***!
   \****************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -61,7 +61,7 @@ component.options.__file = "pages/outpatientPayment/outpatientPayment.vue"
 
 /***/ 396:
 /*!***********************************************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/outpatientPayment/outpatientPayment.vue?vue&type=template&id=9de6a4b4&scoped=true& ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/outpatientPayment/outpatientPayment.vue?vue&type=template&id=9de6a4b4&scoped=true& ***!
   \***********************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -83,7 +83,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 397:
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/outpatientPayment/outpatientPayment.vue?vue&type=template&id=9de6a4b4&scoped=true& ***!
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/outpatientPayment/outpatientPayment.vue?vue&type=template&id=9de6a4b4&scoped=true& ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -98,10 +98,10 @@ var components
 try {
   components = {
     zeroLoading: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/zero-loading/components/zero-loading/zero-loading */ "uni_modules/zero-loading/components/zero-loading/zero-loading").then(__webpack_require__.bind(null, /*! @/uni_modules/zero-loading/components/zero-loading/zero-loading.vue */ 437))
+      return __webpack_require__.e(/*! import() | uni_modules/zero-loading/components/zero-loading/zero-loading */ "uni_modules/zero-loading/components/zero-loading/zero-loading").then(__webpack_require__.bind(null, /*! @/uni_modules/zero-loading/components/zero-loading/zero-loading.vue */ 461))
     },
     uniCard: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-card/components/uni-card/uni-card */ "uni_modules/uni-card/components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-card/components/uni-card/uni-card.vue */ 444))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-card/components/uni-card/uni-card */ "uni_modules/uni-card/components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-card/components/uni-card/uni-card.vue */ 468))
     }
   }
 } catch (e) {
@@ -172,9 +172,7 @@ var render = function() {
       ? _vm.__map(_vm.paymentList, function(item, __i2__) {
           var $orig = _vm.__get_orig(item)
 
-          var m8 = _vm.isChecked(item)
-          var m9 = _vm.isChecked(item)
-          var m10 = _vm.handRegDate(item.regInfos.regDate)
+          var m8 = _vm.handRegDate(item.regInfos.regDate)
 
           var l2 = _vm.__map(item.outFeeList, function(outFee, index) {
             var $orig = _vm.__get_orig(outFee)
@@ -191,8 +189,6 @@ var render = function() {
           return {
             $orig: $orig,
             m8: m8,
-            m9: m9,
-            m10: m10,
             l2: l2
           }
         })
@@ -205,6 +201,12 @@ var render = function() {
 
     _vm.e1 = function($event) {
       _vm.showSwitchPatient = false
+    }
+
+    _vm.e2 = function($event) {
+      _vm.paymentMethod === true
+        ? (_vm.paymentMethod = false)
+        : (_vm.paymentMethod = true)
     }
   }
 
@@ -233,7 +235,7 @@ render._withStripped = true
 
 /***/ 398:
 /*!*****************************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/outpatientPayment/outpatientPayment.vue?vue&type=script&lang=js& ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/outpatientPayment/outpatientPayment.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -249,13 +251,48 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 399:
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/outpatientPayment/outpatientPayment.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/outpatientPayment/outpatientPayment.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 71));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -455,7 +492,9 @@ __webpack_require__.r(__webpack_exports__);
 
 var _alipayLogger = _interopRequireDefault(__webpack_require__(/*! ../../utils/alipayLogger.js */ 9));
 var _cloudMonitorHelper = __webpack_require__(/*! ../../utils/cloudMonitorHelper */ 248);
-__webpack_require__(/*! ./outpatientPayment.scss */ 288);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+
+
+__webpack_require__(/*! ./outpatientPayment.scss */ 288);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var _default =
 {
   // 调用头部组件
   components: {
@@ -507,7 +546,7 @@ __webpack_require__(/*! ./outpatientPayment.scss */ 288);function _interopRequir
     return {
       title: "缴费列表", // 页面标题
       shouye: "no", // 是否是首页，不是首页显示返回上一层箭头
-
+      token: '',
       //就诊人中的所有值
       showSwitchPatient: false, //切换就诊人的弹窗值，如果此值为true弹窗会打开
       huanzhexinxi: {}, //存放患者信息的值
@@ -518,16 +557,35 @@ __webpack_require__(/*! ./outpatientPayment.scss */ 288);function _interopRequir
       selectPaymentMoOrderList: [],
       isSelectAll: false,
       totalMoney: 0,
-      loading: true };
+      loading: true,
+      radio_value: "1",
+      // 支付方式的选择
+      data: {},
+      paymentMethod: true };
 
   },
   onLoad: function onLoad(e) {
-    (0, _cloudMonitorHelper.reportCmPV)({ title: '门诊缴费', e: e });
-    _alipayLogger.default._lgPV({ page: '门诊缴费', url: 'pages/outpatientPayment/outpatientPayment' });
-    _alipayLogger.default.api({ api: "门诊缴费", success: true, c1: "taSR_YL", time: 200 });
+    (0, _cloudMonitorHelper.reportCmPV)({
+      title: '门诊缴费',
+      e: e });
+
+    _alipayLogger.default._lgPV({
+      page: '门诊缴费',
+      url: 'pages/outpatientPayment/outpatientPayment' });
+
+    _alipayLogger.default.api({
+      api: "门诊缴费",
+      success: true,
+      c1: "taSR_YL",
+      time: 200 });
+
   },
   methods: {
+    addUser: function addUser() {
+      uni.navigateTo({
+        url: '/pages/empower/empower' });
 
+    },
     // 就诊人中的全部方法
     //触发切换就诊人的弹窗
     switchPatient: function switchPatient() {
@@ -619,6 +677,7 @@ __webpack_require__(/*! ./outpatientPayment.scss */ 288);function _interopRequir
       this.selectPaymentMoOrderList = [];
       this.paymentList = [];
       this.getOutPayList();
+      this.showSwitchPatient = false;
     },
     // 添加就诊人
     addPatient: function addPatient() {
@@ -650,6 +709,8 @@ __webpack_require__(/*! ./outpatientPayment.scss */ 288);function _interopRequir
             item.isOpen = true;
             item.totalMoney = 0;
           });
+          // 默认全选第一个挂号订单
+          // this.paymentCheck(this.paymentList[0])
         }
         _this4.loading = false;
       }).catch(function (err) {
@@ -696,17 +757,40 @@ __webpack_require__(/*! ./outpatientPayment.scss */ 288);function _interopRequir
     },
     // 选择处方
     selectOutFee: function selectOutFee(item, outFee) {
+      console.log("选中", item);
+      console.log("选中", outFee);
       var index = this.selectPaymentMoOrderList.indexOf(outFee.recipeNo);
       if (index > -1) {
         this.selectPaymentList.splice(index, 1);
         this.selectPaymentMoOrderList.splice(index, 1);
       } else {
-        outFee.regNo = item.regInfos.regNo;
-        this.selectPaymentList.push(outFee);
-        this.selectPaymentMoOrderList.push(outFee.recipeNo);
+        if (this.selectPaymentList.length === 0 && this.selectPaymentMoOrderList.length === 0) {
+          outFee.regNo = item.regInfos.regNo;
+          outFee.totalMoney = outFee.count;
+          outFee.regInfos = item.regInfos;
+
+          outFee.regInfos.patientName = this.currentPatient.patientName;
+          outFee.regInfos.cardNo = this.currentPatient.cardNumber;
+
+          this.selectPaymentList.push(outFee);
+          this.selectPaymentMoOrderList.push(outFee.recipeNo);
+        } else {
+          this.selectPaymentList.splice(index, 1);
+          this.selectPaymentMoOrderList.splice(index, 1);
+          outFee.regNo = item.regInfos.regNo;
+          outFee.totalMoney = outFee.count;
+          outFee.regInfos = item.regInfos;
+
+          outFee.regInfos.patientName = this.currentPatient.patientName;
+          outFee.regInfos.cardNo = this.currentPatient.cardNumber;
+
+          this.selectPaymentList.push(outFee);
+          this.selectPaymentMoOrderList.push(outFee.recipeNo);
+        }
       }
+      console.log("项目", this.selectPaymentList);
       this.calculationTotalMoney(item);
-      // this.judgeWhetherSelectAll();
+
     },
     // 全选
     onSelectAllBtn: function onSelectAllBtn() {var _this6 = this;
@@ -742,14 +826,41 @@ __webpack_require__(/*! ./outpatientPayment.scss */ 288);function _interopRequir
       item.totalMoney = Number(money).toFixed(2);
     },
     handRegDate: function handRegDate(str) {
-      var date = str.substr(4, 2) + '月' + str.substr(6, 2) + '日';
-      return date;
+      // const date = str.substr(4, 2) + '月' + str.substr(6, 2) + '日';
+      // return date;
+      var newDate = new Date(str);
+      return "".concat(newDate.getMonth() + 1, "\u6708").concat(newDate.getDate(), "\u65E5");
     },
     goToPage: function goToPage(url) {
       if (!url) {
         return;
       }
       this.$router.push(url);
+    },
+    encodeSearchKey: function encodeSearchKey(key) {
+      var encodeArr = [{
+        code: '%',
+        encode: '%25' },
+      {
+        code: '?',
+        encode: '%3F' },
+      {
+        code: '#',
+        encode: '%23' },
+      {
+        code: '&',
+        encode: '%26' },
+      {
+        code: '=',
+        encode: '%3D' }];
+
+      return key.replace(/[%?#&=]/g, function ($, index, str) {var _iterator = _createForOfIteratorHelper(
+        encodeArr),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var k = _step.value;
+            if (k.code === $) {
+              return k.encode;
+            }
+          }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
+      });
     },
     goToPayment: function goToPayment(item) {var _this7 = this;
       if (this.selectPaymentMoOrderList.length === 0 || this.selectPaymentList[0].regNo !== item.regInfos.
@@ -762,72 +873,129 @@ __webpack_require__(/*! ./outpatientPayment.scss */ 288);function _interopRequir
         // this.$message.info('请选择缴费项目')
         return;
       }
+      console.log(this.selectPaymentList);
+      if (this.radio_value == '1') {
+        var url =
+        'alipays://platformapi/startapp?appId=2021003193615800&page=pages/outpatientPayment/outpatientPayment&query=' +
+        encodeURIComponent('data=' + JSON.stringify(this.selectPaymentList).replace(/%/g, '%25'));
+        var url_1 = '';
+        my.getAuthCode({
+          scopes: ['nhsamp', 'mcquery'],
+          success: function success(item) {
+            if (item.authCode) {
+              var params = {
+                authCode: item.authCode,
+                //mobile: userInfo.mobile,
+                url: url };
 
-      var params = {
-        deptId: item.regInfos.deptId,
-        deptName: item.regInfos.deptName,
-        doctorName: item.regInfos.doctorName,
-        regLevelName: item.regInfos.regLevelName,
-        doctorTitleId: item.regInfos.regLevelId,
-        patientName: item.regInfos.patientName,
-        patientNo: item.regInfos.cardNo,
-        patientSeq: item.regInfos.regNo,
-        payMount: item.totalMoney,
-        recipeNos: this.selectPaymentMoOrderList,
-        pay_type: 'Al' };
+              _this7.$myRequest({
+                url: "/al/auth/authinfo",
+                data: params }).
+              then(function (data) {
+                console.log(data);
+                url_1 = data.data.data.authUrl;
+                console.log(data.data.data.authUrl);
+                if (data.data.data && !data.data.data.payAuthNo) {
+                  my.ap.openURL({
+                    url: encodeURI(url_1), // 请将 url 替换为有效的页面地址
+                    success: function success(res) {
+                      console.log('openURL success', res);
+                    },
+                    fail: function fail(err) {
+                      console.log('openURL success', err);
+                    } });
+
+                } else if (data.data.data && data.data.data.payAuthNo) {
+
+                  console.log("授权完毕");
+                  uni.navigateTo({
+                    url: "/pages/outpatientPayment/order/order?query=".concat(encodeURIComponent(JSON.stringify(_this7.selectPaymentList).replace(/%/g, '%25'))) });
+
+                }
+              }).catch(function (err) {
+                console.log(err);
+                // this.loading = false;
+              });
+            }
+
+          } });
 
 
-      this.$myRequest({
-        url: "/wechat/pay/out",
-        data: params }).
-      then(function (data) {
-        if (data.code == 0) {
-          _alipayLogger.default.api({ api: "门诊缴费", success: true, c1: "taSR_YL", time: 200 });
-          my.tradePay({
-            // 调用统一收单交易创建接口（alipay.trade.create），获得返回字段支付宝交易号trade_no
-            tradeNO: data.data.tradeNO,
-            success: function success(res) {
-              // 关闭弹窗
-              if (res.resultCode == '9000') {
+        return;
+      } else if (this.radio_value == '2') {
+        uni.navigateTo({
+          url: "/pages/outpatientPayment/order/order?query=".concat(encodeURIComponent(JSON.stringify(this.selectPaymentList).replace(/%/g, '%25'))) });
 
-                uni.navigateTo({
-                  url: '/pages/paymentPage/paymentPage?orderNo=' + data.
-                  data.orderNo });
+      }
+    },
 
-
-              } else {
-                uni.showToast({
-                  title: '支付失败',
-                  icon: 'none',
-                  duration: 2000 });
-
-              }
-            },
-            fail: function fail(res) {
-              my.alert({
-                content: '已取消支付' });
-
-            } });
-
-        }
-      }).catch(function (err) {
-        _this7.loading = false;
-      });
-      // this.$router.push('/paymentPage?orderNo');
+    // 支付方式的单选
+    radioChange: function radioChange(e) {
+      //console.log(e)
+      this.radio_value = e.detail.value;
     } },
 
-  onShow: function onShow() {var _this8 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                _this8.$onLaunched);case 2:
-              _this8.getPatientInfo();
-              //this.jiazai()
-            case 3:case "end":return _context.stop();}}}, _callee);}))();} };exports.default = _default;
+  onShow: function onShow() {var _this8 = this;
+    this.loading = true;
+    // 定时器，setTimeout只执行一次，setInterval执行多次
+    setTimeout(function () {
+      _this8.loading = false;
+      console.log(_this8.loading);
+
+      _this8.token = my.getStorageSync({
+        key: 'token' }).
+      data;
+      // this.jiazai()
+      if (_this8.token) {
+        _this8.getPatientInfo();
+      } else {
+        _this8.loading = false;
+      }
+      _this8.data = my.getStorageSync({
+        key: 'query' }).
+      data;
+
+      if (_this8.data != null && _this8.data.resultCode != null && _this8.data.resultCode != 'SUCCESS') {
+
+
+        my.removeStorage({
+          key: 'query' });
+
+        uni.showToast({
+          title: '授权失败！',
+          icon: 'none',
+          duration: 2000 });
+
+      } else if (_this8.data != null && _this8.data.resultCode != null && _this8.data.resultCode ==
+      'SUCCESS') {
+        console.log("授权返回" + _this8.data);
+        my.removeStorage({
+          key: 'query' });
+
+        uni.showToast({
+          title: '授权成功！',
+          icon: 'none',
+          duration: 2000 });
+
+        var str = JSON.stringify(_this8.data.data).replace(/%/g, '%25');
+        uni.navigateTo({
+          url: "/pages/outpatientPayment/order/order?query=".concat(encodeURIComponent(JSON.parse(str))) });
+
+      }
+      _this8.selectPaymentList = [];
+      _this8.selectPaymentMoOrderList = [];
+    }, 500);
+
+
+
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-alipay/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
 /***/ 400:
 /*!*************************************************************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/outpatientPayment/outpatientPayment.vue?vue&type=style&index=0&id=9de6a4b4&scoped=true&lang=css& ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/outpatientPayment/outpatientPayment.vue?vue&type=style&index=0&id=9de6a4b4&scoped=true&lang=css& ***!
   \*************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -843,7 +1011,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 401:
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/outpatientPayment/outpatientPayment.vue?vue&type=style&index=0&id=9de6a4b4&scoped=true&lang=css& ***!
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/outpatientPayment/outpatientPayment.vue?vue&type=style&index=0&id=9de6a4b4&scoped=true&lang=css& ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {

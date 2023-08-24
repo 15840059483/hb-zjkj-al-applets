@@ -2,7 +2,7 @@
 
 /***/ 265:
 /*!*************************************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/main.js?{"page":"pages%2FregistrationConfirmation%2FregistrationConfirmation"} ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/main.js?{"page":"pages%2FregistrationConfirmation%2FregistrationConfirmation"} ***!
   \*************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -20,7 +20,7 @@ my.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;createPage(_registrat
 
 /***/ 266:
 /*!******************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/registrationConfirmation/registrationConfirmation.vue ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/registrationConfirmation/registrationConfirmation.vue ***!
   \******************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -61,7 +61,7 @@ component.options.__file = "pages/registrationConfirmation/registrationConfirmat
 
 /***/ 267:
 /*!*************************************************************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/registrationConfirmation/registrationConfirmation.vue?vue&type=template&id=52327846&scoped=true& ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/registrationConfirmation/registrationConfirmation.vue?vue&type=template&id=52327846&scoped=true& ***!
   \*************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -83,7 +83,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 268:
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/registrationConfirmation/registrationConfirmation.vue?vue&type=template&id=52327846&scoped=true& ***!
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/registrationConfirmation/registrationConfirmation.vue?vue&type=template&id=52327846&scoped=true& ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -98,16 +98,16 @@ var components
 try {
   components = {
     zeroLoading: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/zero-loading/components/zero-loading/zero-loading */ "uni_modules/zero-loading/components/zero-loading/zero-loading").then(__webpack_require__.bind(null, /*! @/uni_modules/zero-loading/components/zero-loading/zero-loading.vue */ 437))
+      return __webpack_require__.e(/*! import() | uni_modules/zero-loading/components/zero-loading/zero-loading */ "uni_modules/zero-loading/components/zero-loading/zero-loading").then(__webpack_require__.bind(null, /*! @/uni_modules/zero-loading/components/zero-loading/zero-loading.vue */ 461))
     },
     uniCard: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-card/components/uni-card/uni-card */ "uni_modules/uni-card/components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-card/components/uni-card/uni-card.vue */ 444))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-card/components/uni-card/uni-card */ "uni_modules/uni-card/components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-card/components/uni-card/uni-card.vue */ 468))
     },
     uniCollapse: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-collapse/components/uni-collapse/uni-collapse */ "uni_modules/uni-collapse/components/uni-collapse/uni-collapse").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue */ 507))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-collapse/components/uni-collapse/uni-collapse */ "uni_modules/uni-collapse/components/uni-collapse/uni-collapse").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-collapse/components/uni-collapse/uni-collapse.vue */ 531))
     },
     uniCollapseItem: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item */ "uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue */ 514))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item */ "uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-collapse/components/uni-collapse-item/uni-collapse-item.vue */ 538))
     }
   }
 } catch (e) {
@@ -180,7 +180,7 @@ render._withStripped = true
 
 /***/ 269:
 /*!*******************************************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/registrationConfirmation/registrationConfirmation.vue?vue&type=script&lang=js& ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/registrationConfirmation/registrationConfirmation.vue?vue&type=script&lang=js& ***!
   \*******************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -196,13 +196,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 270:
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/registrationConfirmation/registrationConfirmation.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/registrationConfirmation/registrationConfirmation.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 71));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -396,205 +396,221 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _alipayLogger = _interopRequireDefault(__webpack_require__(/*! ../../utils/alipayLogger.js */ 9));
-__webpack_require__(/*! ../patient-management/patient-management.scss */ 108);
+__webpack_require__(/*! ../patient-management/patient-management.scss */ 105);
 __webpack_require__(/*! ./registrationConfirmation.scss */ 271);
-var _store = _interopRequireDefault(__webpack_require__(/*! ../../store */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var pop = function pop() {__webpack_require__.e(/*! require.ensure | components/ming-pop/ming-pop */ "components/ming-pop/ming-pop").then((function () {return resolve(__webpack_require__(/*! @/components/ming-pop/ming-pop.vue */ 500));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
-
-
-{
-  // 调用头部组件
-  components: {
-    // header,
-    pop: pop },
-
-  computed: {
-    processingName: function processingName() {
-      return function (str) {
-        if (!str) {
-          return '-';
-        }
-        if (null != str && str != undefined) {
-          var star = ''; //存放名字中间的*
+var _store = _interopRequireDefault(__webpack_require__(/*! ../../store */ 14));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// 引入导航栏组件
+// import header from '@/components/header/header.vue'
+var pop = function pop() {__webpack_require__.e(/*! require.ensure | components/ming-pop/ming-pop */ "components/ming-pop/ming-pop").then((function () {return resolve(__webpack_require__(/*! @/components/ming-pop/ming-pop.vue */ 524));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = { // 调用头部组件
+  components: { // header,
+    pop: pop }, computed: { processingName: function processingName() {return function (str) {if (!str) {return '-';}if (null != str && str != undefined) {var star = ''; //存放名字中间的*
           //名字是两位的就取姓名首位+*
-          if (str.length <= 2) {
-            return str.substring(0, 1) + "*";
-          } else {
-            // 长度减1是因为后面要保留1位
-            for (var i = 0; i < str.length - 1; i++) {
-              star = star + '*';
-            }
-            // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
-            return str.substring(0, 0) + star + str.substring(str.length - 1, str.length);
-          }
-        }
-      };
-    },
-    processingcardNumber: function processingcardNumber() {
-      return function (str) {
-        if (!str) {
-          return '-';
-        }
-        var star = ''; //存放就诊号中间的*
+          if (str.length <= 2) {return str.substring(0, 1) + "*";} else {// 长度减1是因为后面要保留1位
+            for (var i = 0; i < str.length - 1; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+            return str.substring(0, 0) + star + str.substring(str.length - 1, str.length);}}};}, processingcardNumber: function processingcardNumber() {return function (str) {if (!str) {return '-';}var star = ''; //存放就诊号中间的*
         // 长度减2是因为后面要保留两位
-        for (var i = 0; i < str.length - 2; i++) {
-          star = star + '*';
-        }
-        // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
-        return str.substring(0, 3) + star + str.substring(str.length - 2, str.length);
-      };
-    } },
-
-  data: function data() {
-    return {
-      title: "挂号确认", // 页面标题
+        for (var i = 0; i < str.length - 2; i++) {star = star + '*';} // substring()截取字符串， 第一个参数是开始截取的下标，第二个是结束的下标，第二个参数不填就从下标开始截取到最后一位
+        return str.substring(0, 3) + star + str.substring(str.length - 2, str.length);};} }, data: function data() {return { title: "挂号确认", // 页面标题
       shouye: "no", // 是否是首页，不是首页显示返回上一层箭头
-      loading: true,
-      isShowText: true, // 控制内容显示
+      loading: true, isShowText: true, // 控制内容显示
       // 这里是控制点击速度的变量
       lastTime: 0, //默认上一次点击时间为0
-      doctorInfo: {},
-      registrationDate: '',
-      patients: [],
-      selectPatient: {},
-      showOtherPatient: true,
-      centerDialogVisible: false,
-      noonID: '',
-      noonName: '',
-      seeDateInfo: {},
-      schemaId: '',
-      keshiname: '', //获取vuex中的科室名称
-      deptName: '',
-      date: '' };
-
-  },
-  methods: {
-    // 开启弹窗的方法
-    dialog: function dialog() {
-      this.$refs.popo.show();
-    },
-
-    energy: function energy() {
-      this.$refs.nengliang.show();
-    },
-
-    energyfalse: function energyfalse() {
-      // 关闭弹窗
-      this.$refs.nengliang.close();
-    },
-
-    // 加载框
-    jiazai: function jiazai() {var _this2 = this;
-      this.loading = true;
-      // 定时器，setTimeout只执行一次，setInterval执行多次
-      setTimeout(function () {
-        _this2.loading = false;
-        console.log(_this2.loading);
-      }, 500);
-    },
-    //获取就诊人
-    getPatientInfo: function getPatientInfo() {var _this3 = this;
-      var _this = this;
-      this.$myRequest({
-        url: "/wechat/user/patientcard/info" }).
-      then(function (data) {
-        if (data.data.length > 0 && data.data[0].cardNumber) {
-          _this3.patients = data.data;
-          _this3.selectPatient = data.data[0];
-          _this3.$nextTick(function () {
-            _this3.$refs.collapse.resize();
-          });
-        }
-        console.log(data.data.length > 0 && !data.data[0].cardNumber, "判断用户信息");
-        if (data.data.length > 0 && !data.data[0].cardNumber) {
-          uni.showModal({
-            title: "提示",
-            content: "是否添加就诊卡号?",
-            success: function success(res) {
-              if (res.confirm) {
-                _this.addCard(data);
-              } else {
-                uni.showToast({
-                  title: '已取消添加就诊卡号！',
-                  icon: 'none',
-                  duration: 2000 });
-
-              }
-            } });
-
-        }
-        if (!data.data.length > 0) {
-          _this3.loading = false;
-          uni.showModal({
-            title: "提示",
-            content: "是否添加就诊人?",
-            success: function success(res) {
-              if (res.confirm) {
-                uni.navigateTo({
-                  url: '/pages/patient-management/add-patient/add-patient' });
-
-              } else {
-                uni.showToast({
-                  title: '已取消添加就诊人！',
-                  icon: 'none',
-                  duration: 2000 });
-
-              }
-            } });
-
-        }
-        _this3.loading = false;
-      }).catch(function (err) {
-        _this3.loading = false;
-      });
-    },
-    addCard: function addCard(data) {var _this4 = this;
-      var params = Object.assign(data.data[0], {
-        cardNo: '' });
-
-      console.log("开始了呀");
-      this.$myRequest({
-        url: "/wechat/user/addPtCard/info",
-        contentType: 'application/json;charset=UTF-8',
-        data: params }).
-      then(function (data) {
-        console.log("完成");
-        _this4.loading = false;
-        _this4.getPatientInfo();
-      }).catch(function (err) {
-        _this4.loading = false;
-      });
-    },
-    payRegister: function payRegister() {var _this5 = this;
-      console.log(this.selectPatient.patientName);
-      if (this.selectPatient.patientName && !this.selectPatient.cardNumber) {
-        uni.showModal({
-          title: "提示",
-          content: "是否添加就诊卡号?",
-          success: function success(res) {
-            if (res.confirm) {
-              this.addCard();
-            } else {
-              uni.showToast({
-                title: '已取消添加就诊卡号！',
-                icon: 'none',
-                duration: 2000 });
-
-            }
-          } });
-
-        return;
-      }
-      if (!this.selectPatient.patientName) {
-        uni.showModal({
-          title: "提示",
-          content: "是否添加就诊人?",
-          success: function success(res) {
-            if (res.confirm) {
-              uni.navigateTo({
-                url: '/pages/patient-management/add-patient/add-patient' });
-
-            } else {
-              uni.showToast({
+      doctorInfo: {}, registrationDate: '', patients: [], selectPatient: {}, showOtherPatient: true, centerDialogVisible: false, noonID: '', noonName: '', seeDateInfo: {}, schemaId: '', keshiname: '', //获取vuex中的科室名称
+      deptName: '', date: '' };}, methods: { // 开启弹窗的方法
+    dialog: function dialog() {this.$refs.popo.show();}, energy: function energy() {this.$refs.nengliang.show();}, energyfalse: function energyfalse() {// 关闭弹窗
+      this.$refs.nengliang.close();}, // 加载框
+    jiazai: function jiazai() {var _this2 = this;this.loading = true; // 定时器，setTimeout只执行一次，setInterval执行多次
+      setTimeout(function () {_this2.loading = false;console.log(_this2.loading);}, 500);}, //获取就诊人
+    getPatientInfo: function getPatientInfo() {var _this3 = this;var _this = this;var token = my.getStorageSync({ key: 'token' }).data;if (!token) {return;}this.$myRequest({ url: "/wechat/user/patientcard/info" }).then(function (data) {if (data.data.length > 0 && data.data[0].cardNumber) {_this3.patients = data.data;_this3.selectPatient = data.data[0];_this3.$nextTick(function () {_this3.$refs.collapse.resize();});}console.log(data.data.length > 0 && !data.data[0].cardNumber, "判断用户信息");if (data.data.length > 0 && !data.data[0].cardNumber) {uni.showModal({ title: "提示", content: "是否添加就诊卡号?", success: function success(res) {if (res.confirm) {_this.addCard(data);} else {uni.showToast({ title: '已取消添加就诊卡号！', icon: 'none', duration: 2000 });}} });}if (!data.data.length > 0) {_this3.loading = false;uni.showModal({ title: "提示", content: "是否添加就诊人?", success: function success(res) {if (res.confirm) {uni.navigateTo({ url: '/pages/patient-management/add-patient/add-patient' });} else {uni.showToast({ title: '已取消添加就诊人！', icon: 'none', duration: 2000 });}} });}_this3.loading = false;}).catch(function (err) {_this3.loading = false;});}, addCard: function addCard(data) {var _this4 = this;var params = Object.assign(data.data[0], { cardNo: '' });console.log("开始了呀");this.$myRequest({ url: "/wechat/user/addPtCard/info", contentType: 'application/json;charset=UTF-8', data: params }).then(function (data) {console.log("完成");_this4.loading = false;_this4.getPatientInfo();}).catch(function (err) {_this4.loading = false;});}, payRegister: function payRegister() {var _this5 = this;var token = my.getStorageSync({ key: 'token' }).data;if (!token) {uni.navigateTo({ url: '/pages/empower/empower' });return;}console.log(this.selectPatient.patientName);if (this.selectPatient.patientName && !this.selectPatient.cardNumber) {uni.showModal({ title: "提示", content: "是否添加就诊卡号?", success: function success(res) {if (res.confirm) {this.addCard();} else {uni.showToast({ title: '已取消添加就诊卡号！', icon: 'none', duration: 2000 });}} });return;}if (!this.selectPatient.patientName) {uni.showModal({ title: "提示", content: "是否添加就诊人?", success: function success(res) {if (res.confirm) {uni.navigateTo({ url: '/pages/patient-management/add-patient/add-patient' });} else {uni.showToast({
                 title: '已取消添加就诊人！',
                 icon: 'none',
                 duration: 2000 });
@@ -668,19 +684,20 @@ var _store = _interopRequireDefault(__webpack_require__(/*! ../../store */ 14));
     this.date = e.date;
     // reportCmPV_YL({ title: '挂号订单支付', e });
     _alipayLogger.default._lgPV({ page: '预约挂号订单', url: 'pages/registrationConfirmation/registrationConfirmation' });
-    this.jiazai();
-  },
-  onShow: function onShow() {var _this6 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                _this6.$onLaunched);case 2:
-              _this6.getPatientInfo();
-              _this6.jiazai();case 4:case "end":return _context.stop();}}}, _callee);}))();
-  },
-  mounted: function mounted() {
-    //this.getPatientInfo();
-    //获取vuex中的科室名称
     this.keshiname = _store.default.state.keshiname;
-    this.jiazai();
     console.log(this.doctorInfo, this.registrationDate, this.noonName, this.seeDateInfo);
+  },
+  onShow: function onShow(e) {
+    console.log();
+    // reportCmPV_YL({ title: '挂号订单支付', e });
+    _alipayLogger.default._lgPV({ page: '预约挂号订单', url: 'pages/registrationConfirmation/registrationConfirmation' });
+    this.jiazai();
+    this.getPatientInfo(); ///获取vuex中的科室名称
+  },
+
+  mounted: function mounted() {
+
+
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-alipay/dist/index.js */ 1)["default"]))
 
@@ -688,7 +705,7 @@ var _store = _interopRequireDefault(__webpack_require__(/*! ../../store */ 14));
 
 /***/ 272:
 /*!***************************************************************************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/registrationConfirmation/registrationConfirmation.vue?vue&type=style&index=0&id=52327846&scoped=true&lang=css& ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/registrationConfirmation/registrationConfirmation.vue?vue&type=style&index=0&id=52327846&scoped=true&lang=css& ***!
   \***************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -704,7 +721,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 273:
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/registrationConfirmation/registrationConfirmation.vue?vue&type=style&index=0&id=52327846&scoped=true&lang=css& ***!
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/registrationConfirmation/registrationConfirmation.vue?vue&type=style&index=0&id=52327846&scoped=true&lang=css& ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {

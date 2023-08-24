@@ -12,16 +12,21 @@
 							<span>{{ processingName(currentPatient.patientName) }}</span>
 
 						</div>
-						<view :span="12" class="change-patient-name" v-if="currentPatient.cardNumber != null">
+						<view :span="12" class="change-patient-name" v-if="token&&currentPatient.cardNumber != null">
 							<button class="change-patient-name-btn"
 								style="transform: scale(1.0);line-height: .5rem;border-radius: 20px 20px;"
 								@click="switchPatient">切换就诊人</button>
 						</view>
-						
-						<view :span="12" class="change-patient-name" v-if="currentPatient.cardNumber == null">
+
+						<view :span="12" class="change-patient-name" v-if="token&&currentPatient.cardNumber == null">
 							<button class="change-patient-name-btn"
 								style="transform: scale(1.0);line-height: .5rem;border-radius: 20px 20px;"
 								@click="getPatientInfo()">点击注册</button>
+						</view>
+						<view :span="12" class="change-patient-name" v-if="!token&&currentPatient.cardNumber == null">
+							<button class="change-patient-name-btn"
+								style="transform: scale(1.0);line-height: .5rem;border-radius: 20px 20px;"
+								@click="addUser()">点击授权</button>
 						</view>
 					</div>
 
@@ -65,7 +70,7 @@
 					</div>
 					<div class="border-bottom switch-patient-list" v-for="item in switchPatientList"
 						v-bind:key="item.cardNumber" @click="onSwitchPatientBtn(item)">
-						<div class="patient-name">{{processingName(item.patientName)  }}</div>
+						<div class="patient-name">{{processingName(item.patientName) }}</div>
 						<div class="visit-number" style="font-size: 14px;color: rgb(146, 146, 146);">
 							就诊号：{{ processingcardNumber(item.cardNumber )}}</div>
 						<text class="iconfont icon-duihao" v-if="currentPatient.cardNumber === item.cardNumber"
@@ -89,7 +94,7 @@
 					</div>
 					<div class="border-bottom switch-patient-list" v-for="item in switchPatientList"
 						v-bind:key="item.cardNumber" @click="onSwitchPatientBtn(item)">
-						<div class="patient-name">{{processingName(item.patientName)  }}</div>
+						<div class="patient-name">{{processingName(item.patientName) }}</div>
 						<div class="visit-number" style="font-size: 14px;color: rgb(146, 146, 146);">
 							就诊号：{{ processingcardNumber(item.cardNumber) }}</div>
 						<!-- <i class="el-icon-check" v-if="huanzhexinxi.shenfenID === item.shenfenID" style="color: #008cfe"></i> -->
@@ -112,18 +117,20 @@
 				</div>
 				<p>暂未获取到您的代缴费信息</p>
 			</div>
+
+
 			<view class="neiwaibianju" v-if="paymentList.length > 0">
 				<uni-card>
 					<div v-if="paymentList.length > 0">
 						<div class="bg-white payment-container" v-for="item in paymentList" v-bind:key="item.count">
 							<view class="payment-row" style="display: flex;padding: 10px 0;">
-								<view style="width: 10%;text-align: left;">
+								<!-- <view style="width: 10%;text-align: left;">
 									<text class="iconfont icon-circle-check" style="color: #b7b7b7"
 										v-if="!isChecked(item)" @click="paymentCheck(item)"></text>
 									<text class="iconfont icon-circle-check" style="color: #008cfe"
 										v-if="isChecked(item)" @click="paymentCheck(item)"></text>
-								</view>
-								<view style="width:65% ;" @click.native="openList(item)">
+								</view> -->
+								<view style="width:75% ;" @click.native="openList(item)">
 									挂号科室：{{ item.regInfos.deptName }}({{ item.regInfos.regNo }})
 								</view>
 								<view style="width: 20%;text-align: right;" @click.native="openList(item)"
@@ -151,7 +158,7 @@
 												v-if="selectPaymentMoOrderList.indexOf(outFee.recipeNo) > -1"
 												@click="selectOutFee(item, outFee)"></text>
 										</view>
-										<view style="color: #979797;width: 70%;">处方号：{{ outFee.recipeNo }}</view>
+										<view style="color: #979797;width: 70%;">批次号：{{ outFee.recipeNo }}</view>
 										<view class="text-right" style="color: #008cfe;width: 20%;text-align: right;">
 											<!--                  <span v-if="outFee.isPayment">已支付</span>-->
 											<!--                  <span v-if="!outFee.isPayment">未支付</span>-->
@@ -169,6 +176,33 @@
 								</div>
 							</div>
 
+							<!-- 支付方式 -->
+							<view class="payment-bot bg-white" style="border-top: 1px solid #b8b8b8;">
+								<view style="display: flex; padding-top: .3rem;"
+									@click.native="paymentMethod===true?paymentMethod=false:paymentMethod=true">
+									<view style="padding-left: .3rem;">
+										选择支付方式
+									</view>
+									<view style="width: 5%;text-align: right;" class="text-center">
+										<text class="iconfont icon-xiajiantou" v-if="paymentMethod"
+											style="color: #b7b7b7"></text>
+										<text class="iconfont icon-youjiantou" v-if="!paymentMethod"
+											style="color: #b7b7b7"></text>
+									</view>
+								</view>
+								<view v-show="paymentMethod" style="padding: .2rem 0;width: 100%;">
+									<radio-group @change="radioChange">
+										<label class="radio" style="width: 50%;text-align: center;">
+											<radio value="1" checked="true" />医保支付
+										</label>
+										<label class="radio" style="width: 50%;text-align: center;">
+											<radio value="2" />支付宝支付
+										</label>
+									</radio-group>
+								</view>
+							</view>
+
+
 							<div class="payment-bot bg-white">
 								<view style="display: flex;">
 									<!--            <view :span="7" class="text-center pay-sel-all">-->
@@ -179,8 +213,9 @@
 										总额：<span style="color: #ec6c25">￥{{ item.totalMoney }}</span>
 									</view>
 									<view style="width: 30%;" class="text-center" @click.native="goToPayment(item)">
-										<button style="width: 100%;border-radius: 20px 20px;height: .7rem;line-height: .7rem;" class="mini-btn"
-											type="primary">去缴费</button>
+										<button
+											style="width: 100%;border-radius: 20px 20px;height: .7rem;line-height: .7rem;"
+											class="mini-btn" type="primary">去缴费</button>
 									</view>
 								</view>
 							</div>
@@ -197,7 +232,9 @@
 	// import header from '@/components/header/header.vue'
 	// 引入scss组件
 	import monitor from '../../utils/alipayLogger.js';
-	import { reportCmPV } from '../../utils/cloudMonitorHelper';
+	import {
+		reportCmPV
+	} from '../../utils/cloudMonitorHelper';
 	import "./outpatientPayment.scss";
 	export default {
 		// 调用头部组件
@@ -250,7 +287,7 @@
 			return {
 				title: "缴费列表", // 页面标题
 				shouye: "no", // 是否是首页，不是首页显示返回上一层箭头
-
+				token: '',
 				//就诊人中的所有值
 				showSwitchPatient: false, //切换就诊人的弹窗值，如果此值为true弹窗会打开
 				huanzhexinxi: {}, //存放患者信息的值
@@ -262,15 +299,34 @@
 				isSelectAll: false,
 				totalMoney: 0,
 				loading: true,
+				radio_value: "1",
+				// 支付方式的选择
+				data: {},
+				paymentMethod: true,
 			}
 		},
-		onLoad(e){
-			reportCmPV({ title: '门诊缴费', e });
-			monitor._lgPV({page: '门诊缴费', url:'pages/outpatientPayment/outpatientPayment'})
-			monitor.api({api:"门诊缴费",success:true,c1:"taSR_YL",time:200})
+		onLoad(e) {
+			reportCmPV({
+				title: '门诊缴费',
+				e
+			});
+			monitor._lgPV({
+				page: '门诊缴费',
+				url: 'pages/outpatientPayment/outpatientPayment'
+			})
+			monitor.api({
+				api: "门诊缴费",
+				success: true,
+				c1: "taSR_YL",
+				time: 200
+			})
 		},
 		methods: {
-
+			addUser() {
+				uni.navigateTo({
+					url: '/pages/empower/empower'
+				})
+			},
 			// 就诊人中的全部方法
 			//触发切换就诊人的弹窗
 			switchPatient() {
@@ -282,14 +338,14 @@
 				this.$myRequest({
 					url: "/wechat/user/patientcard/info",
 				}).then(data => {
-					if(data.data.length>0&&data.data[0].cardNumber){
+					if (data.data.length > 0 && data.data[0].cardNumber) {
 						this.switchPatientList = data.data;
 						this.currentPatient = data.data[0];
-						
+
 						_this.getOutPayList();
 					}
-					console.log(data.data.length>0&&!data.data[0].cardNumber,"判断用户信息")
-					if(data.data.length>0&&!data.data[0].cardNumber){
+					console.log(data.data.length > 0 && !data.data[0].cardNumber, "判断用户信息")
+					if (data.data.length > 0 && !data.data[0].cardNumber) {
 						uni.showModal({
 							title: "提示",
 							content: "是否添加就诊卡号?",
@@ -306,7 +362,7 @@
 							}
 						});
 					}
-					if(!data.data.length>0){
+					if (!data.data.length > 0) {
 						this.loading = false;
 						uni.showModal({
 							title: "提示",
@@ -331,7 +387,7 @@
 					this.loading = false;
 				})
 			},
-			addCard(data){
+			addCard(data) {
 				const params = Object.assign(data.data[0], {
 					cardNo: ''
 				})
@@ -362,6 +418,7 @@
 				this.selectPaymentMoOrderList = [];
 				this.paymentList = [];
 				this.getOutPayList();
+				this.showSwitchPatient = false;
 			},
 			// 添加就诊人
 			addPatient() {
@@ -380,19 +437,21 @@
 			getOutPayList() {
 				this.loading = true;
 				const params = {
-				        patientNo: this.currentPatient.cardNumber
-				      }
+					patientNo: this.currentPatient.cardNumber
+				}
 				this.$myRequest({
 					url: "/hospt/getOutPayList",
 					data: params,
-					
+
 				}).then(data => {
-					if(data.data){
+					if (data.data) {
 						this.paymentList = data.data;
 						this.paymentList.forEach(item => {
 							item.isOpen = true;
 							item.totalMoney = 0
 						});
+						// 默认全选第一个挂号订单
+						// this.paymentCheck(this.paymentList[0])
 					}
 					this.loading = false;
 				}).catch(err => {
@@ -439,17 +498,40 @@
 			},
 			// 选择处方
 			selectOutFee(item, outFee) {
+				console.log("选中", item)
+				console.log("选中", outFee)
 				const index = this.selectPaymentMoOrderList.indexOf(outFee.recipeNo);
 				if (index > -1) {
 					this.selectPaymentList.splice(index, 1);
 					this.selectPaymentMoOrderList.splice(index, 1);
 				} else {
-					outFee.regNo = item.regInfos.regNo;
-					this.selectPaymentList.push(outFee);
-					this.selectPaymentMoOrderList.push(outFee.recipeNo);
+					if (this.selectPaymentList.length === 0 && this.selectPaymentMoOrderList.length === 0) {
+						outFee.regNo = item.regInfos.regNo;
+						outFee.totalMoney = outFee.count
+						outFee.regInfos = item.regInfos
+						
+						outFee.regInfos.patientName = this.currentPatient.patientName
+						outFee.regInfos.cardNo = this.currentPatient.cardNumber
+						
+						this.selectPaymentList.push(outFee);
+						this.selectPaymentMoOrderList.push(outFee.recipeNo);
+					} else {
+						this.selectPaymentList.splice(index, 1);
+						this.selectPaymentMoOrderList.splice(index, 1);
+						outFee.regNo = item.regInfos.regNo;
+						outFee.totalMoney = outFee.count
+						outFee.regInfos = item.regInfos
+						
+						outFee.regInfos.patientName = this.currentPatient.patientName
+						outFee.regInfos.cardNo = this.currentPatient.cardNumber
+						
+						this.selectPaymentList.push(outFee);
+						this.selectPaymentMoOrderList.push(outFee.recipeNo);
+					}
 				}
+				console.log("项目", this.selectPaymentList)
 				this.calculationTotalMoney(item);
-				// this.judgeWhetherSelectAll();
+
 			},
 			// 全选
 			onSelectAllBtn() {
@@ -485,14 +567,41 @@
 				item.totalMoney = Number(money).toFixed(2);
 			},
 			handRegDate(str) {
-				const date = str.substr(4, 2) + '月' + str.substr(6, 2) + '日';
-				return date;
+				// const date = str.substr(4, 2) + '月' + str.substr(6, 2) + '日';
+				// return date;
+				let newDate = new Date(str)
+				return `${newDate.getMonth()+1}月${newDate.getDate()}日`;
 			},
 			goToPage(url) {
 				if (!url) {
 					return;
 				}
 				this.$router.push(url);
+			},
+			encodeSearchKey(key) {
+				const encodeArr = [{
+					code: '%',
+					encode: '%25'
+				}, {
+					code: '?',
+					encode: '%3F'
+				}, {
+					code: '#',
+					encode: '%23'
+				}, {
+					code: '&',
+					encode: '%26'
+				}, {
+					code: '=',
+					encode: '%3D'
+				}];
+				return key.replace(/[%?#&=]/g, ($, index, str) => {
+					for (const k of encodeArr) {
+						if (k.code === $) {
+							return k.encode;
+						}
+					}
+				});
 			},
 			goToPayment(item) {
 				if (this.selectPaymentMoOrderList.length === 0 || this.selectPaymentList[0].regNo !== item.regInfos
@@ -505,64 +614,121 @@
 					// this.$message.info('请选择缴费项目')
 					return
 				}
-				
-				const params = {
-				        deptId: item.regInfos.deptId,
-				        deptName: item.regInfos.deptName,
-				        doctorName: item.regInfos.doctorName,
-				        regLevelName: item.regInfos.regLevelName,
-				        doctorTitleId: item.regInfos.regLevelId,
-				        patientName: item.regInfos.patientName,
-				        patientNo: item.regInfos.cardNo,
-				        patientSeq: item.regInfos.regNo,
-				        payMount: item.totalMoney,
-				        recipeNos: this.selectPaymentMoOrderList,
-						pay_type:'Al'
-				      }
-				
-				this.$myRequest({
-					url: "/wechat/pay/out",
-					data: params
-				}).then(data => {
-					if(data.code==0){
-						monitor.api({api:"门诊缴费",success:true,c1:"taSR_YL",time:200})
-						my.tradePay({
-							// 调用统一收单交易创建接口（alipay.trade.create），获得返回字段支付宝交易号trade_no
-							tradeNO: data.data.tradeNO,
-							success: (res) => {
-								// 关闭弹窗
-								if (res.resultCode == '9000') {
-									
-									uni.navigateTo({
-										url: '/pages/paymentPage/paymentPage?orderNo=' + data
-											.data.orderNo
-									});
-									
-								} else {
-									uni.showToast({
-										title: '支付失败',
-										icon: 'none',
-										duration: 2000
-									});
+				console.log(this.selectPaymentList)
+				if (this.radio_value == '1') {
+					let url =
+						'alipays://platformapi/startapp?appId=2021003193615800&page=pages/outpatientPayment/outpatientPayment&query=' +
+						encodeURIComponent('data=' + JSON.stringify(this.selectPaymentList).replace(/%/g, '%25'))
+					let url_1 = '';
+					my.getAuthCode({
+						scopes: ['nhsamp', 'mcquery'],
+						success: item => {
+							if (item.authCode) {
+								const params = {
+									authCode: item.authCode,
+									//mobile: userInfo.mobile,
+									url: url,
 								}
-							},
-							fail: (res) => {
-								my.alert({
-									content: '已取消支付',
-								});
+								this.$myRequest({
+									url: "/al/auth/authinfo",
+									data: params,
+								}).then(data => {
+									console.log(data)
+									url_1 = data.data.data.authUrl
+									console.log(data.data.data.authUrl)
+									if (data.data.data && !data.data.data.payAuthNo) {
+										my.ap.openURL({
+											url: encodeURI(url_1), // 请将 url 替换为有效的页面地址
+											success: (res) => {
+												console.log('openURL success', res)
+											},
+											fail: (err) => {
+												console.log('openURL success', err)
+											}
+										});
+									} else if (data.data.data && data.data.data.payAuthNo) {
+
+										console.log("授权完毕")
+										uni.navigateTo({
+											url: `/pages/outpatientPayment/order/order?query=${encodeURIComponent(JSON.stringify(this.selectPaymentList).replace(/%/g, '%25'))}`
+										}); 
+									}
+								}).catch(err => {
+									console.log(err)
+									// this.loading = false;
+								})
 							}
-						});
-					}
-				}).catch(err => {
-					this.loading = false;
-				})
-				// this.$router.push('/paymentPage?orderNo');
-			}
+
+						},
+					});
+
+					return
+				} else if (this.radio_value == '2') {
+					uni.navigateTo({
+						url: `/pages/outpatientPayment/order/order?query=${encodeURIComponent(JSON.stringify(this.selectPaymentList).replace(/%/g, '%25'))}`
+					});
+				}
+			},
+
+			// 支付方式的单选
+			radioChange(e) {
+				//console.log(e)
+				this.radio_value = e.detail.value;
+			},
 		},
-		async onShow() {
-			await this.$onLaunched
-			this.getPatientInfo();
-			//this.jiazai()
+		onShow() {
+			this.loading = true;
+			// 定时器，setTimeout只执行一次，setInterval执行多次
+			setTimeout(() => {
+				this.loading = false;
+				console.log(this.loading);
+
+				this.token = my.getStorageSync({
+					key: 'token'
+				}).data
+				// this.jiazai()
+				if (this.token) {
+					this.getPatientInfo();
+				} else {
+					this.loading = false;
+				}
+				this.data = my.getStorageSync({
+					key: 'query'
+				}).data;
+
+				if (this.data != null && this.data.resultCode != null && this.data.resultCode != 'SUCCESS') {
+
+
+					my.removeStorage({
+						key: 'query'
+					})
+					uni.showToast({
+						title: '授权失败！',
+						icon: 'none',
+						duration: 2000
+					});
+				} else if (this.data != null && this.data.resultCode != null && this.data.resultCode ==
+					'SUCCESS') {
+					console.log("授权返回" + this.data)
+					my.removeStorage({
+						key: 'query'
+					})
+					uni.showToast({
+						title: '授权成功！',
+						icon: 'none',
+						duration: 2000
+					});
+					var str = JSON.stringify(this.data.data).replace(/%/g, '%25')
+					uni.navigateTo({
+						url: `/pages/outpatientPayment/order/order?query=${encodeURIComponent(JSON.parse(str))}`
+					});
+				}
+				this.selectPaymentList = [];
+				this.selectPaymentMoOrderList= [];
+			}, 500)
+
+
+			
 		},
 	};
 </script>

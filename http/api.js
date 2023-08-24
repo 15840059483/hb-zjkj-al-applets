@@ -1,8 +1,8 @@
 // 封装的request
 
 // const BASE_URL = "http://fsybzzj.natapp1.cc"
-//https://fscrzhyyh.natapp4.cc
-export const BASE_URL = "https://fscrzhyyh.natapp4.cc"
+//https://fscrzhyyh.natapp4.cc 192.168.1.8 192.168.0.125
+export const BASE_URL = "http://192.168.0.125:8088"
  //http://192.168.0.127:8088
 // const BASE_URL = "http://192.168.1.7:8088"
 

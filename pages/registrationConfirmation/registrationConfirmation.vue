@@ -290,6 +290,12 @@
 			//获取就诊人
 			getPatientInfo() {
 				const _this = this
+				let token = my.getStorageSync({
+					key: 'token',
+				}).data
+				if(!token){
+					return
+				}
 				this.$myRequest({
 					url: "/wechat/user/patientcard/info",
 				}).then(data => {
@@ -361,6 +367,16 @@
 				})
 			},
 			payRegister() {
+				
+				let token = my.getStorageSync({
+					key: 'token',
+				}).data
+				if(!token){
+					uni.navigateTo({
+						url: '/pages/empower/empower'  
+					})
+					return
+				}
 				console.log(this.selectPatient.patientName)
 				if(this.selectPatient.patientName&&!this.selectPatient.cardNumber){
 					uni.showModal({
@@ -464,19 +480,20 @@
 			this.date = e.date;
 			// reportCmPV_YL({ title: '挂号订单支付', e });
 			monitor._lgPV({page: '预约挂号订单', url:'pages/registrationConfirmation/registrationConfirmation'})
-			this.jiazai()
-		},
-		async onShow() {
-			await this.$onLaunched
-			this.getPatientInfo();
-			this.jiazai()
-		},
-		mounted() {
-			//this.getPatientInfo();
-			//获取vuex中的科室名称
 			this.keshiname = store.state.keshiname;
-			this.jiazai()
 			console.log(this.doctorInfo, this.registrationDate, this.noonName, this.seeDateInfo)
+		},
+		onShow(e){
+			console.log();
+			// reportCmPV_YL({ title: '挂号订单支付', e });
+			monitor._lgPV({page: '预约挂号订单', url:'pages/registrationConfirmation/registrationConfirmation'})
+			this.jiazai()
+			this.getPatientInfo();///获取vuex中的科室名称
+		},
+		
+		mounted() {
+			
+			
 		},
 	};
 </script>

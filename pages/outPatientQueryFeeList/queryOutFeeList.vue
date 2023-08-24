@@ -14,15 +14,20 @@
 							<span>{{ processingName(currentPatient.patientName) }}</span>
 
 						</div>
-						<view :span="12" class="change-patient-name" v-if="currentPatient.cardNumber">
+						<view :span="12" class="change-patient-name" v-if="token&&currentPatient.cardNumber">
 							<button class="change-patient-name-btn"
 								style="transform: scale(1.0);line-height: .5rem;border-radius: 20px 20px;"
 								@click="switchPatient">切换就诊人</button>
 						</view>
-						<view :span="12" class="change-patient-name" v-if="!currentPatient.cardNumber">
+						<view :span="12" class="change-patient-name" v-if="token&&!currentPatient.cardNumber">
 							<button class="change-patient-name-btn"
 								style="transform: scale(1.0);line-height: .5rem;border-radius: 20px 20px;"
 								@click="getPatientInfo()">点击注册</button>
+						</view>
+						<view :span="12" class="change-patient-name" v-if="!token&&!currentPatient.cardNumber">
+							<button class="change-patient-name-btn"
+								style="transform: scale(1.0);line-height: .5rem;border-radius: 20px 20px;"
+								@click="getPatientInfo()">点击授权</button>
 						</view>
 						
 					</div>
@@ -127,9 +132,9 @@
 				<p>暂未获取到您的缴费信息</p>
 			</div>
 			<view class="neiwaibianju" v-if="paymentList.length > 0">
-				<uni-card>
+				<uni-card v-for="item in paymentList" v-bind:key="item.count">
 					<div v-if="paymentList.length > 0">
-						<div class="bg-white payment-container" v-for="item in paymentList" v-bind:key="item.count">
+						<div class="bg-white payment-container">
 							<uni-row class="payment-row">
 								<view style="display: flex;">
 									<view style="width: 5%;">
@@ -303,6 +308,7 @@
 				selectPaymentList: [],
 				selectPaymentMoOrderList: [],
 				totalMoney: 0,
+				token:'',
 			}
 		},
 		methods: {
@@ -311,9 +317,23 @@
 			switchPatient() {
 				this.showSwitchPatient = true;
 			},
+			addUser(){
+					uni.navigateTo({
+						url: '/pages/empower/empower'  
+					})
+			},
 			//就诊人信息的数据
 			//就诊人信息的数据
 			getPatientInfo() {
+				let token = my.getStorageSync({
+					key: 'token',
+				}).data
+				if(!token){
+					uni.navigateTo({
+						url: '/pages/empower/empower'  
+					})
+					return
+				}
 				const _this = this
 				this.$myRequest({
 					url: "/wechat/user/patientcard/info",
@@ -422,12 +442,19 @@
 					data: params,
 				}).then(data => {
 					this.paymentList = data.data;
+					if(this.paymentList){
+						this.paymentList.forEach(item => {
+							item.isOpen = true;
+							item.totalMoney = 0
+						});
+					}
 					this.loading = false;
 				}).catch(err => {
 					this.loading = false;
 				})
 				this.paymentList.forEach((item) => {
-					item.isOpen = true;
+					// item.isOpen = true;
+					// this.openList(item);
 					item.totalMoney = 0;
 				});
 			},
@@ -599,10 +626,16 @@
 				})
 			},
 		},
-		async onShow() {
-			await this.$onLaunched
-			this.getPatientInfo();
-			//this.jiazai()
+		onShow() {
+			this.token = my.getStorageSync({
+				key: 'token'
+			}).data
+			// this.jiazai()
+			if(this.token){
+				this.getPatientInfo();
+			}else{
+				this.loading = false;
+			}
 		},
 	};
 </script>

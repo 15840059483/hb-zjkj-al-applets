@@ -176,6 +176,7 @@
 				        patientSeq: this.patientInfo.inpatientNo,
 				        payMount: this.moneyNum || this.selectMoney,
 				        totCost:this.patientInfo.totCost,
+						patientNo:this.patient.admissionNumber,
 						pay_type:'AL'
 				      }
 					  
@@ -214,6 +215,16 @@
 				})
 			},
 			openAddPatient() {
+				let token = my.getStorageSync({
+					key: 'token'
+				}).data
+				// this.jiazai()
+				if(!token){
+					uni.navigateTo({
+						url: '/pages/empower/empower'  
+					})
+					return
+				}
 				this.showAddPatient = true;
 				this.patient={
 					name: '',

@@ -1,7 +1,7 @@
 (my["webpackJsonp"] = my["webpackJsonp"] || []).push([["common/main"],[
 /* 0 */
 /*!**************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/main.js ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/main.js ***!
   \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -61,7 +61,7 @@ createApp(app).$mount();
 /* 5 */,
 /* 6 */
 /*!**************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/App.vue ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/App.vue ***!
   \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -100,7 +100,7 @@ component.options.__file = "App.vue"
 /***/ }),
 /* 7 */
 /*!***************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/App.vue?vue&type=script&lang=js& ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/App.vue?vue&type=script&lang=js& ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -115,20 +115,20 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 /* 8 */
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/App.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/App.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 var _alipayLogger = _interopRequireDefault(__webpack_require__(/*! ./utils/alipayLogger.js */ 9));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 var _default = {
   onLaunch: function onLaunch(options) {
 
     _alipayLogger.default.init({
-      pid: "sw0ofef26ujt2l9epxxcva==",
+      pid: "uljo8abfxlitwx4h9sd+wa==",
       options: options,
       sample: 1,
       autoReportApi: true,
@@ -137,7 +137,8 @@ var _default = {
       code: ["code"],
       // Http返回数据中的error message字段名称
       msg: ["msg"],
-      miniVersion: '0.0.7' });
+      miniVersion: '0.0.1' });
+
 
     console.log('App Launch', options);
     if (options && options.query && options.query.orderDetail) {
@@ -160,130 +161,29 @@ var _default = {
         data: options.query.deptName });
 
     }
-  },
-  onShow: function onShow() {
-    console.log('App Show');
+
     var _this = this;
 
-    my.getStorage({
-      key: 'token',
-      success: function success(res) {var _this2 = this;
-        console.log(res);
-        if (!res.data) {
-          uni.showLoading({
-            title: '加载中' });
-
-          // this.isToken = false
-          my.getAuthCode({
-            scopes: 'auth_user',
-            success: function success(res) {
-              console.log(res);
-              console.log(_this2);
-              _this.$myRequest({
-                url: "/al/auth/login?code=".concat(res.authCode),
-                method: 'get' }).
-
-              then(function (data) {
-                // this.alUserInfo = data.data.aliUserInfo;
-                my.setStorageSync({
-                  key: 'alUserInfo',
-                  data: data.data.aliUserInfo });
-
-                my.setStorageSync({
-                  key: 'user_id',
-                  data: data.data.aliUserId });
-
-                my.removeStorage({
-                  key: 'token' });
-
-                console.log(data.data.reg);
-                if (!data.data.reg) {
-                  console.log(_this2.alUserInfo);
-                  var aliUser = my.getStorageSync({
-                    key: 'alUserInfo' }).
-                  data;
-                  console.log(aliUser);
-                  var params = {
-                    realname: aliUser.userName,
-                    //mobile: userInfo.mobile,
-                    mobile: aliUser.mobile,
-                    userIdCard: aliUser.certNo,
-                    /* 两个userid 从缓存中取 */
-                    aliUserId: my.getStorageSync({
-                      key: 'user_id' }).
-                    data,
-                    alipayUserId: '',
-                    /* M男 F女 */
-                    gender: Number(aliUser.certNo.
-                    substring(16, 17)) & 2 != 1 ?
-                    2 : 1,
-                    birthday: '2022-02-03' };
-
-
-                  _this.$myRequest({
-                    url: "/wechat/register/normal",
-                    data: params }).
-                  then(function (data) {
-                    console.log(data);
-                    if (data.code !== 200) {
-                      uni.showToast({
-                        title: data.msg,
-                        icon: 'none',
-                        duration: 2000 });
-
-                    } else {
-
-                      uni.showToast({
-                        title: '注册成功',
-                        icon: 'none',
-                        duration: 2000 });
-
-                      my.setStorageSync({
-                        key: 'token',
-                        data: data.data });
-
-
-                      _this.$isResolve();
-                      // this.isToken = true;
-
-                      // this.getDfltPtCardInfo();
-                    }
-                    // this.loading = false;
-                  }).catch(function (err) {
-                    // this.loading = false;
-                  });
-                  uni.hideLoading();
-                } else {
-                  my.setStorageSync({
-                    key: 'token',
-                    data: data.data.token });
-
-                  uni.hideLoading();
-                  _this.$isResolve();
-
-                }
-
-              });
-            } });
-
-        } else {
-
-          _this.$isResolve();
-        }
-
-      } });
-
   },
-  onHide: function onHide() {
-    console.log('App Hide');
+  onShow: function onShow(e) {
+    console.log('App Show', e);
+
+    if (e && e.query && e.query.resultCode) {
+      my.setStorageSync({
+        key: 'query',
+        data: e.query });
+
+    }
+  },
+  onHide: function onHide(e) {
+    console.log('App Hide', e);
   } };exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-alipay/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 9 */,
 /* 10 */
 /*!***********************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/App.vue?vue&type=style&index=0&lang=css& ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/App.vue?vue&type=style&index=0&lang=css& ***!
   \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -298,7 +198,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 /* 11 */
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/App.vue?vue&type=style&index=0&lang=css& ***!
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/App.vue?vue&type=style&index=0&lang=css& ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {

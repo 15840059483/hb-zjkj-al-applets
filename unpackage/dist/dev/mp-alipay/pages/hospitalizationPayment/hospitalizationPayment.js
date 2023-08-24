@@ -2,7 +2,7 @@
 
 /***/ 402:
 /*!*********************************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/main.js?{"page":"pages%2FhospitalizationPayment%2FhospitalizationPayment"} ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/main.js?{"page":"pages%2FhospitalizationPayment%2FhospitalizationPayment"} ***!
   \*********************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -20,7 +20,7 @@ my.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;createPage(_hospitali
 
 /***/ 403:
 /*!**************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/hospitalizationPayment/hospitalizationPayment.vue ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/hospitalizationPayment/hospitalizationPayment.vue ***!
   \**************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -61,7 +61,7 @@ component.options.__file = "pages/hospitalizationPayment/hospitalizationPayment.
 
 /***/ 404:
 /*!*********************************************************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/hospitalizationPayment/hospitalizationPayment.vue?vue&type=template&id=07360046&scoped=true& ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/hospitalizationPayment/hospitalizationPayment.vue?vue&type=template&id=07360046&scoped=true& ***!
   \*********************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -83,7 +83,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 405:
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/hospitalizationPayment/hospitalizationPayment.vue?vue&type=template&id=07360046&scoped=true& ***!
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/hospitalizationPayment/hospitalizationPayment.vue?vue&type=template&id=07360046&scoped=true& ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -98,10 +98,10 @@ var components
 try {
   components = {
     uniCard: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-card/components/uni-card/uni-card */ "uni_modules/uni-card/components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-card/components/uni-card/uni-card.vue */ 444))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-card/components/uni-card/uni-card */ "uni_modules/uni-card/components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-card/components/uni-card/uni-card.vue */ 468))
     },
     uniEasyinput: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 486))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput */ "uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-easyinput/components/uni-easyinput/uni-easyinput.vue */ 510))
     }
   }
 } catch (e) {
@@ -125,7 +125,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var m0 = _vm.patientInfo.name ? __webpack_require__(/*! ../../static/replacement.png */ 88) : null
+  var m0 = _vm.patientInfo.name ? __webpack_require__(/*! ../../static/replacement.png */ 85) : null
   var g0 = _vm.patientInfo.name ? _vm.patientInfo.inDate.substr(0, 10) : null
 
   if (!_vm._isMounted) {
@@ -154,7 +154,7 @@ render._withStripped = true
 
 /***/ 406:
 /*!***************************************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/hospitalizationPayment/hospitalizationPayment.vue?vue&type=script&lang=js& ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/hospitalizationPayment/hospitalizationPayment.vue?vue&type=script&lang=js& ***!
   \***************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -170,7 +170,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 407:
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/hospitalizationPayment/hospitalizationPayment.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/hospitalizationPayment/hospitalizationPayment.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -283,119 +283,130 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-__webpack_require__(/*! ./hospitalizationPayment.scss */ 408); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// 引入scss组件
-var _default = { components: {}, // 计算属性
-  computed: {}, data: function data() {return { selectMoney: "", moneyNum: undefined, paymentMoney: 0, showAddPatient: false, patient: { name: '', admissionNumber: undefined }, patientInfo: {} };}, methods: { moneyChange: function moneyChange() {if (this.moneyNum) {this.selectMoney = null;}}, clickMoney: function clickMoney(num) {this.selectMoney = num;this.moneyNum = null;}, onRechargeBtn: function onRechargeBtn() {var _this = this;if (!this.patientInfo.inpatientNo) {uni.showToast({ title: '请绑定住院人', icon: 'none', duration: 2000 }); // this.$message.error('请绑定住院人')
-        return;}if (!this.moneyNum && !this.selectMoney) {uni.showToast({ title: '请选择或输入充值金额', icon: 'none', duration: 2000 }); // this.$message.error('请选择或输入充值金额')
-        return;}if (this.moneyNum && (this.moneyNum < 1000 || this.moneyNum % 100 !== 0)) {uni.showToast({ title: '请输入大于一千元的整百金额', icon: 'none', duration: 2000 }); // this.$message.error('请输入大于一千元的整百金额')
-        return;}var params = { deptId: this.patientInfo.deptCode, deptName: this.patientInfo.deptName, doctorName: this.patientInfo.chargeDocName, patientName: this.patientInfo.name, patientNo: this.patientInfo.patientNo, patientSeq: this.patientInfo.inpatientNo, payMount: this.moneyNum || this.selectMoney, totCost: this.patientInfo.totCost, pay_type: 'AL' };this.$myRequest({ url: "/wechat/pay/hosp", data: params }).then(function (data) {if (data.code == 0) {my.tradePay({ // 调用统一收单交易创建接口（alipay.trade.create），获得返回字段支付宝交易号trade_no
-            tradeNO: data.data.tradeNO, success: function success(res) {if (res.resultCode == '9000') {// this.$refs.popo.close();
-                uni.navigateTo({ url: '/pages/paymentPage/paymentPage?orderNo=' + data.data.orderNo });} else {uni.showToast({ title: '支付失败', icon: 'none', duration: 2000 });}}, fail: function fail(res) {my.alert({ content: '已取消支付' });} });}}).catch(function (err) {_this.loading = false;});}, openAddPatient: function openAddPatient() {this.showAddPatient = true;this.patient = { name: '', admissionNumber: '' };
+__webpack_require__(/*! ./hospitalizationPayment.scss */ 408);function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+{
+
+  components: {},
+
+
+  // 计算属性
+  computed: {},
+
+
+  data: function data() {
+    return {
+      selectMoney: "",
+      moneyNum: undefined,
+      paymentMoney: 0,
+      showAddPatient: false,
+      patient: {
+        name: '',
+        admissionNumber: undefined },
+
+      patientInfo: {} };
+
+  },
+  methods: {
+    moneyChange: function moneyChange() {
+      if (this.moneyNum) {
+        this.selectMoney = null;
+      }
+    },
+    clickMoney: function clickMoney(num) {
+      this.selectMoney = num;
+      this.moneyNum = null;
+    },
+    onRechargeBtn: function onRechargeBtn() {var _params,_this = this;
+      if (!this.patientInfo.inpatientNo) {
+        uni.showToast({
+          title: '请绑定住院人',
+          icon: 'none',
+          duration: 2000 });
+
+        // this.$message.error('请绑定住院人')
+        return;
+      }
+      if (!this.moneyNum && !this.selectMoney) {
+        uni.showToast({
+          title: '请选择或输入充值金额',
+          icon: 'none',
+          duration: 2000 });
+
+        // this.$message.error('请选择或输入充值金额')
+        return;
+      }
+      if (this.moneyNum && (this.moneyNum < 1000 || this.moneyNum % 100 !== 0)) {
+        uni.showToast({
+          title: '请输入大于一千元的整百金额',
+          icon: 'none',
+          duration: 2000 });
+
+        // this.$message.error('请输入大于一千元的整百金额')
+        return;
+      }
+
+      var params = (_params = {
+        deptId: this.patientInfo.deptCode,
+        deptName: this.patientInfo.deptName,
+        doctorName: this.patientInfo.chargeDocName,
+        patientName: this.patientInfo.name,
+        patientNo: this.patientInfo.patientNo,
+        patientSeq: this.patientInfo.inpatientNo,
+        payMount: this.moneyNum || this.selectMoney,
+        totCost: this.patientInfo.totCost }, _defineProperty(_params, "patientNo",
+      this.patient.admissionNumber), _defineProperty(_params, "pay_type",
+      'AL'), _params);
+
+
+      this.$myRequest({
+        url: "/wechat/pay/hosp",
+        data: params }).
+      then(function (data) {
+        if (data.code == 0) {
+          my.tradePay({
+            // 调用统一收单交易创建接口（alipay.trade.create），获得返回字段支付宝交易号trade_no
+            tradeNO: data.data.tradeNO,
+            success: function success(res) {
+              if (res.resultCode == '9000') {
+                // this.$refs.popo.close();
+                uni.navigateTo({
+                  url: '/pages/paymentPage/paymentPage?orderNo=' + data.
+                  data.orderNo });
+
+              } else {
+                uni.showToast({
+                  title: '支付失败',
+                  icon: 'none',
+                  duration: 2000 });
+
+              }
+            },
+            fail: function fail(res) {
+              my.alert({
+                content: '已取消支付' });
+
+            } });
+
+        }
+      }).catch(function (err) {
+        _this.loading = false;
+      });
+    },
+    openAddPatient: function openAddPatient() {
+      var token = my.getStorageSync({
+        key: 'token' }).
+      data;
+      // this.jiazai()
+      if (!token) {
+        uni.navigateTo({
+          url: '/pages/empower/empower' });
+
+        return;
+      }
+      this.showAddPatient = true;
+      this.patient = {
+        name: '',
+        admissionNumber: '' };
 
     },
     confirmBinding: function confirmBinding() {var _this2 = this;
@@ -457,7 +468,7 @@ var _default = { components: {}, // 计算属性
 
 /***/ 409:
 /*!***********************************************************************************************************************************************************************************!*\
-  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/hospitalizationPayment/hospitalizationPayment.vue?vue&type=style&index=0&id=07360046&scoped=true&lang=css& ***!
+  !*** /Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/hospitalizationPayment/hospitalizationPayment.vue?vue&type=style&index=0&id=07360046&scoped=true&lang=css& ***!
   \***********************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -473,7 +484,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ 410:
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/cr/cr-zjkj-al-applets/pages/hospitalizationPayment/hospitalizationPayment.vue?vue&type=style&index=0&id=07360046&scoped=true&lang=css& ***!
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!/Users/fanyouyi/Downloads/智慧医院支付宝小程序/hb/hb-zjkj-al-applets/pages/hospitalizationPayment/hospitalizationPayment.vue?vue&type=style&index=0&id=07360046&scoped=true&lang=css& ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {

@@ -161,6 +161,16 @@
 
 			},
 			openAddPatient() {
+				let token = my.getStorageSync({
+					key: 'token'
+				}).data
+				// this.jiazai()
+				if(!token){
+					uni.navigateTo({
+						url: '/pages/empower/empower'  
+					})
+					return
+				}
 				this.showAddPatient = true;
 				this.patient={
 					name: '',

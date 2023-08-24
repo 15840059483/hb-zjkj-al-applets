@@ -9,17 +9,19 @@
 				<view class="payment-success-wrapper bg-white" style="padding: 10px 0.5rem;">
 					<view style="width: 100%; display: flex;">
 						<view style="width: 25%;text-align: center;">
-							<img style="width: 70px;height: 70px;" src="https://s1.ax1x.com/2022/09/23/xkliHH.png" />
+							<img v-if="orderDetail.paymentstatusId=='3010'" style="width: 70px;height: 70px;" src="https://s1.ax1x.com/2022/09/23/xkliHH.png" />
+							<img class="icon-success" style="width: 70px;height: 70px;" v-else src="../../static/yes-yi.png">
 						</view>
 						<view style="width: 75%;padding: 9px .3rem 9px .3rem;">
-							<div style="font-size: 16px;" class="payment-success">{{ "缴费成功" }}</div>
+							<div style="font-size: 16px;" class="payment-success">{{ orderDetail.paymentstatusName }}</div>
 							<div>{{ formatDate("YY-MM-DD hh:mm:ss") }}</div>
 						</view>
 					</view>
 
 					<view style="width: 100%;text-align: left;font-size: 14px;line-height: 1rem;margin-top: 10px;"
 						class="payment-tip">
-						<span>缴费成功，请在当天提前15分钟前往医院候诊</span>
+						<span v-if="orderDetail.paymentstatusId=='3010'">缴费成功，请在当天提前15分钟前往医院候诊</span>
+						<span v-else>很抱歉您的订单并未支付</span>
 					</view>
 				</view>
 				<div class="payment-list-item bg-white">
@@ -30,29 +32,29 @@
 				</div>
 			</uni-card>
 			<uni-card>
-				<div class="payment-list-item bg-white margin-top biankuang">
+				<div class="payment-list-item bg-white margin-top biankuang" v-if="orderDetail.costName">
 					<div :span="12">费用类型</div>
 					<div :span="12" class="text-right">{{ orderDetail.costName }}</div>
 				</div>
-				<div class="payment-list-item bg-white biankuang">
+				<div class="payment-list-item bg-white biankuang" v-if="orderDetail.hospitalName">
 					<div :span="12">医院名称</div>
-					<div :span="12" class="text-right">{{ orderDetail.hospitalName || '-' }}</div>
+					<div :span="12" class="text-right">{{ '南共市人民医院' || '-' }}</div>
 				</div>
-				<div class="payment-list-item bg-white biankuang">
+				<div class="payment-list-item bg-white biankuang" v-if="orderDetail.deptName"> 
 					<div :span="12">就诊科室</div>
 					<div :span="12" class="text-right">{{ orderDetail.deptName || '-' }}</div>
 				</div>
-				<div class="payment-list-item bg-white biankuang">
+				<!-- <div class="payment-list-item bg-white biankuang" v-if="orderDetail.deptlocation">
 					<div :span="12">科室位置</div>
-					<div :span="12" class="text-right">{{ orderDetail.hospitalName || '-' }}</div>
-				</div>
-				<div class="payment-list-item bg-white biankuang">
-					<div :span="12">医生名称</div>
 					<div :span="12" class="text-right">{{ orderDetail.deptlocation || '-' }}</div>
-				</div>
-				<div class="payment-list-item bg-white biankuang">
-					<div :span="12">医生职称</div>
+				</div> -->
+				<div class="payment-list-item bg-white biankuang" v-if="orderDetail.doctorName">
+					<div :span="12">医生名称</div>
 					<div :span="12" class="text-right">{{ orderDetail.doctorName || '-' }}</div>
+				</div>
+				<div class="payment-list-item bg-white biankuang" v-if="orderDetail.doctorTitle">
+					<div :span="12">医生职称</div>
+					<div :span="12" class="text-right">{{ orderDetail.doctorTitle || '-' }}</div>
 				</div>
 			</uni-card>
 			<uni-card>
@@ -64,7 +66,7 @@
 					<div :span="12">平台单号</div>
 					<div :span="12" class="text-right">{{ orderDetail.orderNo || '-' }}</div>
 				</div>
-				<div class="payment-list-item bg-white biankuang" style="color: #5daf34">
+				<div class="payment-list-item bg-white biankuang" style="color: #5daf34" v-if="orderDetail.invoiceNo">
 					<div :span="12">发票号</div>
 					<div :span="12" class="text-right">{{ orderDetail.invoiceNo || '-' }}</div>
 				</div>
@@ -73,7 +75,7 @@
 					<div :span="12" class="text-right">{{ orderDetail.patientSeq || '-' }}</div>
 				</div>
 				<div class="payment-list-item bg-white biankuang" style="color: #ff4d51">
-					<div :span="12">诊查费</div>
+					<div :span="12">总金额</div>
 					<div :span="12" class="text-right">￥{{ orderDetail.payMount }}</div>
 				</div>
 				<!--    <div class="payment-list-item bg-white" v-if="orderDetail.costType != 4011">-->
@@ -81,16 +83,16 @@
 				<!--      <div :span="12" class="text-right">￥1.00</div>-->
 				<!--    </div>-->
 				<div class="payment-list-item bg-white biankuang" style="color: #ff4d51">
-					<div :span="12">合计金额</div>
-					<div :span="12" class="text-right">￥{{ orderDetail.balanceFee || 0 }}</div>
+					<div :span="12">现金金额</div>
+					<div :span="12" class="text-right">￥{{ orderDetail.ownPayAmt || 0 }}</div>
 				</div>
 				<div class="payment-list-item bg-white biankuang" style="color: #ff4d51">
-					<div :span="12">总金额</div>
-					<div :span="12" class="text-right">￥{{ orderDetail.payMount || 0 }}</div>
+					<div :span="12">个人账户金额</div>
+					<div :span="12" class="text-right">￥{{ orderDetail.psnAcctPay || 0 }}</div>
 				</div>
 				<div class="payment-list-item bg-white biankuang" style="color: #ff4d51">
-					<div :span="12">退费金额</div>
-					<div :span="12" class="text-right">￥{{ orderDetail.refundFee || 0 }}</div>
+					<div :span="12">医保基金金额</div>
+					<div :span="12" class="text-right">￥{{ orderDetail.fundPay || 0 }}</div>
 				</div>
 				<div class="payment-list-item bg-white biankuang"
 					style="flex-wrap: wrap; height: auto;margin-bottom: 30px;">
@@ -113,7 +115,7 @@
 
 		</view>
 
-		<view class="nav_tab" v-if="home===true">
+		<view class="nav_tab">
 			<view class="buttom_height"></view>
 			<view class="tab_button" @click="zhuye()">
 				<view style="width: 100%;text-align: center;line-height: 110rpx;font-size: 20px;">
@@ -217,19 +219,19 @@
 					},
 				});
 			}
-			this.timer = setTimeout(() => {
-				//设置延迟10秒执行弹出提示框
-				this.open();
-			}, 10000);
+			// this.timer = setTimeout(() => {
+			// 	//设置延迟10秒执行弹出提示框
+			// 	this.open();
+			// }, 10000);
 		},
 		onShow() {
 			clearTimeout(this.timer); //清除延迟执行
 
 
-			this.timer = setTimeout(() => {
-				//设置延迟10秒执行弹出提示框
-				this.open();
-			}, 10000);
+			// this.timer = setTimeout(() => {
+			// 	//设置延迟10秒执行弹出提示框
+			// 	this.open();
+			// }, 10000);
 		},
 		methods: {
 			// 返回主页

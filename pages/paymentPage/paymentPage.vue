@@ -95,13 +95,28 @@
 											res.data[0]))
 								})
 							}, 1000)
-						} else if (!paymentstatusId == 3010 && !this.isTime) {
+						} else if (!this.isTime) {
 							this.isShowResult = true;
 							this.isSuccess = false
-
-							setTimeout(() => {
-								uni.navigateBack()
-							}, 2000)
+							clearInterval(this.time);
+							const orderResult = res.data;
+							console.log(orderResult)
+							uni.showModal({
+								title: "提示",
+								content: "缴费失败，是否饭后继续支付?",
+								success: function(res) {
+									if (res.confirm) {
+										uni.navigateBack()
+									} else {
+										uni.navigateTo({
+											url: '/pages/register-success/register-success?type=门诊' +
+												'&orderDetail=' + encodeURIComponent(JSON.stringify(
+													orderResult[0]))
+										})
+									}
+								}
+							}); 
+							return
 						} else {
 							setTimeout(() => {
 								this.getOrderDetail();
@@ -125,7 +140,7 @@
 				this.second--;
 				if (this.second === 0) {
 					this.isTime = false;
-					this.getOrderDetail();
+					//this.getOrderDetail();
 					clearInterval(this.time);
 				}
 			}, 1000);

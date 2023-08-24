@@ -259,6 +259,16 @@
 			},
 
 			openAddPatient() {
+				// let token = my.getStorageSync({
+				// 	key: 'token'
+				// }).data
+				// // this.jiazai()
+				// if(!token){
+				// 	uni.navigateTo({
+				// 		url: '/pages/empower/empower'  
+				// 	})
+				// 	return
+				// }
 				this.showAddPatient = true;
 				this.patient = {
 					// name: '',
@@ -313,6 +323,9 @@
 				_this.currentPatient = data[0];
 			},
 			getZjkjList(item) {
+				if(!this.patient.name&&!this.patient.admissionNumber){
+					return
+				}
 				let parans = {
 					name: this.patient.name,
 					patientId: this.patient.admissionNumber
@@ -328,33 +341,33 @@
 					this.jiazai();
 					if (res && res.data && res.data.length > 0&&res.data[0].resultList.length) {
 						this.list = res.data;
-						my.getAuthCode({
-						  scopes: 'mfrstre',
-						  success: item => {
-							  if(item.authCode){
-								  let datas = {
-								  	code: item.authCode,
-								  	scene: 'hoinquire'
-								    }
+						// my.getAuthCode({
+						//   scopes: 'mfrstre',
+						//   success: item => {
+						// 	  if(item.authCode){
+						// 		  let datas = {
+						// 		  	code: item.authCode,
+						// 		  	scene: 'hoinquire'
+						// 		    }
 								    
-								  this.$myRequest({
-								  	url: "/al/auth/al/sendCity",
-								  	method: "GET",
-								  	data: datas,
-								  }).then(data => {
-								  	this.toastMessage = '本次查询报告得到能量为'
-								  	this.energyNum = Number(data.data.totalEnergy)
-								  	this.showToast = true
+						// 		  this.$myRequest({
+						// 		  	url: "/al/auth/al/sendCity",
+						// 		  	method: "GET",
+						// 		  	data: datas,
+						// 		  }).then(data => {
+						// 		  	this.toastMessage = '本次查询报告得到能量为'
+						// 		  	this.energyNum = Number(data.data.totalEnergy)
+						// 		  	this.showToast = true
 								  	
-								  	setTimeout(() => {
-								  		this.showToast = false
-								  	}, 3000)
+						// 		  	setTimeout(() => {
+						// 		  		this.showToast = false
+						// 		  	}, 3000)
 									
-								  });
-							  }
+						// 		  });
+						// 	  }
 						    
-						  },
-						});
+						//   },
+						// });
 						
 						console.log(this.list)
 					}

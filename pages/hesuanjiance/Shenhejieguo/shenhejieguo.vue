@@ -496,6 +496,7 @@
 				// this.Add_huanzhejibenxinxi(item);
 				// 让huanzhexinxi等于就诊人信息
 				this.huanzhexinxi = item;
+				this.showSwitchPatient = false;
 				console.log(this.huanzhejibenxinxi);
 			},
 			// 添加就诊人

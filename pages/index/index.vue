@@ -3,7 +3,7 @@
 		<!-- loading加载动画，type默认值是原子，love爱心，mask属性是遮罩 -->
 		<zero-loading v-if="loading" type="pulse" mask></zero-loading>
 		<!-- 使用悬浮球组件 -->
-		<Levitation></Levitation>
+		<!-- <Levitation></Levitation> -->
 		<!-- 使用组件的时候首字母要大写！！！！ -->
 		<!-- 顶部导航栏 -->
 		<!-- <view class="header" style="width: 100%;height: 150rpx;">
@@ -11,14 +11,14 @@
 		</view> -->
 		<div style="padding: .2rem;">
 
-			<uni-card shadow="never" v-if="dfltPatientInfo.cardNumber">
+			 <uni-card shadow="never" v-if="dfltPatientInfo.cardNumber">
 				<view class="jiuzhenren">
 					<view :span="12" class="patient-name">
 						<span>{{ dfltPatientInfo.patientName | processingName }}</span>
 					</view>
 					<view :span="12" class="change-patient-name">
 						<button class="change-patient-name-btn" style="border-radius: 20px 20px;"
-							@click="switchPatient">切换就诊人</button>
+							@click="goPage()">切换就诊人</button>
 					</view>
 				</view>
 				<uni-row class="card-row">
@@ -39,12 +39,14 @@
 			</uni-card>
 
 			<uni-card shadow="never" v-else>
-				<uni-row class="card-row">
+				<uni-row class="card-row" v-if="token">
 					<div v-if="isToken" class="patient-wrapper-button" @click="addCardNumber">请点击注册卡号</div>
 					<div v-if="!isToken" class="patient-wrapper-button" @click="goToPage('/pages/patient-management/add-patient/add-patient',true)">请点击添加就诊人</div>
-					<!-- <div v-if="!isToken" class="patient-wrapper-button" @click="onAuthBtn">点击授权</div> -->
 				</uni-row>
-			</uni-card>
+				<uni-row class="card-row" v-else>
+					<div v-if="isToken" class="patient-wrapper-button" @click="addUser">请点击授权</div>
+				</uni-row>
+			</uni-card> 
 
 			<div class="image-container">
 				<image src="https://s1.ax1x.com/2022/09/02/vImkjK.jpg">
@@ -55,11 +57,11 @@
 					<view class="card-title">快速办理</view>
 				</view>
 				<view class="card-row fast-row" v-for="item in menuList" v-bind:key="item.id"
-					@click.native="goToPage(item.routLink,item.meta)"
+					@click.native="goToPage(item.routLink,true)"
 					style="border-bottom: 1px solid rgb(224, 224, 224);">
 					<view :span="4" style="position: relative;">
 						<image :src="item.imageUrl" class="menu-image">
-							<image v-if="item.energy" class="menu_icon" src="https://s1.ax1x.com/2022/10/11/xt5C6g.png">
+							<!-- <image v-if="item.energy" class="menu_icon" src="https://s1.ax1x.com/2022/10/11/xt5C6g.png"> -->
 							</image>
 					</view>
 					<view style="width: 78%;margin-left: 7%;height: 40px;">
@@ -99,7 +101,7 @@
 					<view style="float: left;width: 100%;">
 						<view style="width: 24%;margin-left:1%;float: left;" :span="6"
 							v-for="item in inpatientFunctionList" v-bind:key="item.id"
-							@click.native="goToPage(item.routLink,item.meta)">
+							@click.native="goToPage(item.routLink,true)">
 							<div class="always-icon">
 								<image :src="item.imageUrl">
 							</div>
@@ -166,6 +168,8 @@
 				loading: false, // 加载动画
 				alUserInfo: {},
 				isToken: true,
+				token:'',
+				resultCode:'',
 			}
 		},
 		filters: {
@@ -204,6 +208,109 @@
 			},
 		},
 		methods: {
+			addUser(){
+					uni.showLoading({
+						title:'加载中'
+					}); 
+					const _this = this;
+					// this.isToken = false
+					my.getAuthCode({
+						scopes: 'auth_user',
+						success: res => {
+							console.log(res)
+							console.log(this)
+							_this.$myRequest({
+									url: `/al/auth/login?code=${res.authCode}`,
+									method: 'get'
+								})
+								.then((data) => {
+									// this.alUserInfo = data.data.aliUserInfo;
+									my.setStorageSync({
+										key: 'alUserInfo',
+										data: data.data.aliUserInfo
+									})
+									my.setStorageSync({
+										key: 'user_id',
+										data: data.data.aliUserId
+									})
+									my.removeStorage({
+										key: 'token'
+									})
+									console.log(data.data.reg)
+									if (!data.data.reg) {
+										console.log(this.alUserInfo)
+										let aliUser = my.getStorageSync({
+											key: 'alUserInfo'
+										}).data
+										console.log(aliUser)
+										const params = {
+											realname: aliUser.userName,
+											//mobile: userInfo.mobile,
+											mobile: aliUser.mobile,
+											userIdCard: aliUser.certNo,
+											/* 两个userid 从缓存中取 */
+											aliUserId: my.getStorageSync({
+												key: 'user_id'
+											}).data,
+											alipayUserId: '',
+											/* M男 F女 */
+											gender: Number(aliUser.certNo
+													.substring(16, 17)) & 2 != 1 ?
+												2 : 1,
+											birthday: '2022-02-03',
+										}
+				
+										_this.$myRequest({
+											url: "/wechat/register/normal",
+											data: params,
+										}).then(data => {
+											console.log(data)
+											if (data.code !== 200) {
+												uni.showToast({
+													title: data.msg,
+													icon: 'none',
+													duration: 2000
+												});
+											} else {
+												
+												uni.showToast({
+													title: '注册成功',
+													icon: 'none',
+													duration: 2000
+												});
+												my.setStorageSync({
+													key: 'token',
+													data: data.data
+												})
+												this.token = data.data
+												uni.navigateBack()
+												_this.$isResolve()
+												// this.isToken = true;
+				
+												// this.getDfltPtCardInfo();
+											}
+											// this.loading = false;
+										}).catch(err => {
+											// this.loading = false;
+										})
+										uni.hideLoading();
+									} else {
+										my.setStorageSync({
+											key: 'token',
+											data: data.data.token
+										})
+										this.token = data.data
+										this.getDfltPtCardInfo();
+										uni.navigateBack()
+										uni.hideLoading();
+										_this.$isResolve()
+										
+									}
+									
+								})
+						}
+					});
+			},
 			// 加载框
 			jiazai() {
 				this.loading = true;
@@ -213,8 +320,44 @@
 					//console.log(this.loading);
 				}, 500)
 			},
-
+			goPage(){
+				let url_1 = '';
+				my.getAuthCode({
+				  scopes: ['nhsamp','auth_user'] ,
+				  success: item => {
+					  if(item.authCode){
+						  const params = {
+						  	authCode: item.authCode,
+						  	//mobile: userInfo.mobile,
+						  	url: '',
+						  }
+						  this.$myRequest({
+						  	url: "/al/auth/authinfo",
+						  	data: params,
+						  }).then(data => {
+						  	console.log(data)
+							url_1 = data.data.data.authUrl
+							console.log(data.data.data.authUrl)
+							my.ap.openURL({
+							  url: encodeURI(url_1), // 请将 url 替换为有效的页面地址
+							  success: (res) => {
+							    console.log('openURL success', res)
+							  },
+							  fail: (err) => {
+							    console.log('openURL success', err)
+							  }
+							});
+						  }).catch(err => {
+							  console.log(err)
+						  	// this.loading = false;
+						  })
+					  }
+				    
+				  },
+				});
+			},
 			getDfltPtCardInfo() {
+				
 				this.$myRequest({
 					url: "/wechat/user/dfltPtCard/info",
 				}).then(data => {
@@ -249,6 +392,7 @@
 							duration: 2000
 						});
 						this.loading = false;
+						
 					}).catch(err => {
 						this.loading = false;
 					})
@@ -331,13 +475,32 @@
 			this.item_index = 0; // 单页面id
 		},
 		// 这是uni的生命周期
-		onLoad() {
-			// this.jiazai()
+		onLoad(e) {
+			//console.log('路由参数',e);
 		},
-		async onShow() {
-			await this.$onLaunched
+		onShow(e) {
+			console.log('路由参数',e);
+			//await this.$onLaunched
+			this.token = my.getStorageSync({
+				key: 'token'
+			}).data
+			this.resultCode = my.getStorageSync({
+				key: 'resultCode'
+			}).data;
 			// this.jiazai()
-			this.getDfltPtCardInfo();
+			if(this.token){
+				this.getDfltPtCardInfo();
+			}
+			if(this.resultCode!=null&&this.resultCode!='SUCCESS'){
+				my.removeStorage({
+					key: 'resultCode'
+				})
+				uni.showToast({
+					title: '授权失败！',
+					icon: 'none',
+					duration: 2000
+				});
+			}
 		},
 		mounted() {
 			// const item = JSON.parse(JSON.stringify(localStorage.getItem('selectPatient')));
@@ -354,7 +517,7 @@
 					twoTitle: '实时查看医生情况',
 					routerUrl: '',
 					imageUrl: ('https://s1.ax1x.com/2022/09/02/vIm4v6.jpg'),
-					routLink: '/pages/departmentList/departmentList',
+					//routLink: '/pages/departmentList/departmentList',
 					meta: true,
 					energy: true,
 				},
@@ -371,7 +534,7 @@
 					id: 3,
 					menuName: '住院缴费',
 					twoTitle: '快速查询不排队',
-					routerUrl: '',
+					//routerUrl: '',
 					imageUrl: ('https://s1.ax1x.com/2022/09/02/vIrX7D.jpg'),
 					routLink: '/pages/hospitalizationPayment/hospitalizationPayment',
 					meta: false
@@ -394,6 +557,15 @@
 					meta: false,
 					energy: true,
 				},
+				// {
+				// 	id: 6,
+				// 	menuName: '授权',
+				// 	twoTitle: '快速缴费不排队',
+				// 	routerUrl: '',
+				// 	imageUrl: ('https://s1.ax1x.com/2022/09/02/vIr711.jpg'),
+				// 	routLink: '/pages/empower/empower',
+				// 	meta: true
+				// },
 				/*{
 					id: 6,
 					menuName: '智能导诊',
@@ -505,14 +677,14 @@
 					twoTitle: '快速缴费不排队',
 					routerUrl: '',
 					imageUrl: ('https://s1.ax1x.com/2022/09/02/vIrLnK.jpg'),
-					routLink: '/pages/registration-record/registration-record',
+					//routLink: '/pages/registration-record/registration-record',
 					meta: true
 				},
 				{
 					id: 5,
 					menuName: '门诊缴费记录',
 					twoTitle: '快速缴费不排队',
-					routerUrl: '',
+					//routerUrl: '',
 					imageUrl: ('https://s1.ax1x.com/2022/09/02/vIrxtH.jpg'),
 					routLink: '/pages/outPatientQueryFeeList/queryOutFeeList',
 					meta: true
@@ -554,7 +726,7 @@
 					id: 8,
 					menuName: '住院缴费记录',
 					twoTitle: '快速查询不排队',
-					routerUrl: '',
+					//routerUrl: '',
 					imageUrl: ('https://s1.ax1x.com/2022/09/02/vIsAHS.png'),
 					routLink: '/pages/hospitalizationPayment/hospitalization-payment-records/hospitalization-payment-records',
 					meta: false

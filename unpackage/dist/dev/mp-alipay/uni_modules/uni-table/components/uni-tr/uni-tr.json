@@ -1,5 +1,6 @@
 {
   "component": true,
+  "styleIsolation": "apply-shared",
   "usingComponents": {
     "table-checkbox": "/uni_modules/uni-table/components/uni-tr/table-checkbox"
   }

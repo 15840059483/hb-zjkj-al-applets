@@ -1,6 +1,3 @@
 {
-  "disableRemoteDebugSourcePanel": true,
-  "ignoreHttpDomainCheck": true,
-  "enableLegacyRemoteDebug": false,
-  "enableCloudBuild": false
+  "enableLegacyRemoteDebug": false
 }

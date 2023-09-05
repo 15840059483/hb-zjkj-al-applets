@@ -1,5 +1,6 @@
 {
   "component": true,
+  "styleIsolation": "apply-shared",
   "usingComponents": {
     "loading0": "/uni_modules/zero-loading/components/zero-loading/static/loading-circle",
     "loading1": "/uni_modules/zero-loading/components/zero-loading/static/loading-pulse",
